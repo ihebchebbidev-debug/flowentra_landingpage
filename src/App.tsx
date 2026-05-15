@@ -4,7 +4,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import AdminToolbar from "./components/landing/AdminToolbar";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AdminOverlayProvider } from "@/contexts/AdminOverlayContext";
 import { CmsContentProvider } from "@/contexts/CmsContentContext";
@@ -56,15 +55,11 @@ const PasswordProtectGate = () => {
 };
 
 const AppRoutes = () => {
-  const location = useLocation();
-  const isAdminRoute = location.pathname === "/admin";
-
   return (
   <>
     <ScrollToTop />
     <AnalyticsTracker />
     <ChatAssistant />
-    {!isAdminRoute && <AdminToolbar />}
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/about" element={<About />} />
@@ -83,7 +78,11 @@ const AppRoutes = () => {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/p/:slug" element={<CustomPage />} />
-      <Route path="/admin" element={<Admin />} />
+      <Route path="/admin" element={
+        <AdminOverlayProvider>
+          <Admin />
+        </AdminOverlayProvider>
+      } />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </>
@@ -95,15 +94,13 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <CmsContentProvider>
-          <AdminOverlayProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner />
-              <BrowserRouter>
-                <PasswordProtectGate />
-              </BrowserRouter>
-            </TooltipProvider>
-          </AdminOverlayProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <PasswordProtectGate />
+            </BrowserRouter>
+          </TooltipProvider>
         </CmsContentProvider>
       </LanguageProvider>
     </QueryClientProvider>
