@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated documentation files
+flowentra-documentation.html
+flowentra-documentation.pdf
+src/assets/docs/
+blur-screenshots.mjs
+extract-screenshots.mjs
