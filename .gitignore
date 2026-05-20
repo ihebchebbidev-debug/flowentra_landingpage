@@ -26,6 +26,7 @@ dist-ssr
 # Generated documentation files
 flowentra-documentation.html
 flowentra-documentation.pdf
-src/assets/docs/
+src/assets/docs/*.png
+src/assets/docs/*.json
 blur-screenshots.mjs
 extract-screenshots.mjs
