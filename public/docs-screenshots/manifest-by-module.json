@@ -1,0 +1,1838 @@
+[
+  {
+    "moduleId": "module-login",
+    "slug": "login",
+    "screenshots": [
+      {
+        "module": 1,
+        "moduleId": "module-login",
+        "screenshot": 1,
+        "caption": "Login page — Flowentra sign-in screen",
+        "details": [
+          "Email and password fields",
+          "Branded with company logo",
+          "Tenant-aware routing on success"
+        ],
+        "file": "/docs-screenshots/01-login-01-login-page-flowentra-sign-in-screen.png",
+        "importVar": "img_login_1"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-dashboard",
+    "slug": "dashboard",
+    "screenshots": [
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 1,
+        "caption": "Dashboard Home — default landing view",
+        "details": [
+          "Top bar with company switcher and notifications",
+          "Sidebar navigation with all modules",
+          "KPI tiles and chart widgets"
+        ],
+        "file": "/docs-screenshots/02-dashboard-01-dashboard-home-default-landing-view.png",
+        "importVar": "img_dashboard_1"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 2,
+        "caption": "First-time user product tour — welcome modal (Step 0 of 28)",
+        "details": [
+          "Modal: 'Welcome to Flowentra! 👋'",
+          "Two actions: Skip tour or Next (Step 1 of 28)",
+          "Tour can be replayed from the user profile menu"
+        ],
+        "file": "/docs-screenshots/02-dashboard-02-first-time-user-product-tour-welcom.png",
+        "importVar": "img_dashboard_2"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 3,
+        "caption": "Tour Step 2 — Navigation Sidebar callout",
+        "details": [
+          "Anchored callout points at the left sidebar with arrow",
+          "Explains section grouping: Workspace, CRM, Service, System",
+          "Footer controls: Skip tour, Back, Next"
+        ],
+        "file": "/docs-screenshots/02-dashboard-03-tour-step-2-navigation-sidebar-call.png",
+        "importVar": "img_dashboard_3"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 4,
+        "caption": "Product tour in action — highlights UI regions step by step",
+        "details": [],
+        "file": "/docs-screenshots/02-dashboard-04-product-tour-in-action-highlights-u.png",
+        "importVar": "img_dashboard_4"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 5,
+        "caption": "Default Service dashboard — KPIs, charts, map and trends in one view",
+        "details": [
+          "Service Orders by Status — bar chart",
+          "Tasks by Status — donut chart",
+          "Dispatch Locations — geo widget on map",
+          "Monthly Trend — area sparkline"
+        ],
+        "file": "/docs-screenshots/02-dashboard-05-default-service-dashboard-kpis-char.png",
+        "importVar": "img_dashboard_5"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 6,
+        "caption": "Dashboard switcher dropdown — flip between built-in dashboards or create a new one",
+        "details": [
+          "Lists every dashboard available to the current user",
+          "Active dashboard highlighted in brand orange",
+          "+ Create New Dashboard at the bottom"
+        ],
+        "file": "/docs-screenshots/02-dashboard-06-dashboard-switcher-dropdown-flip-be.png",
+        "importVar": "img_dashboard_6"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 7,
+        "caption": "Custom Dashboard Manager — empty state",
+        "details": [
+          "Empty state: 'No dashboards yet. Create one to get started.'",
+          "15 widget types available: KPI, Bar, Line, Area, Pie, Donut, Funnel, Gauge, Heatmap, Map, Radar, Sparkline, Table, Background"
+        ],
+        "file": "/docs-screenshots/02-dashboard-07-custom-dashboard-manager-empty-stat.png",
+        "importVar": "img_dashboard_7"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 8,
+        "caption": "Dashboard Edit mode — drag, resize and reorder widgets",
+        "details": [
+          "Toolbar: Rename, + Add Widget, Period selector, Auto-refresh, Grid settings, Cancel, Save",
+          "Each widget shows drag handle, swap-data-source icon, × remove button"
+        ],
+        "file": "/docs-screenshots/02-dashboard-08-dashboard-edit-mode-drag-resize-and.png",
+        "importVar": "img_dashboard_8"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 9,
+        "caption": "Rename Dashboard modal — change the dashboard title in place",
+        "details": [
+          "Single 'Dashboard Name' text input pre-filled with current name",
+          "Cancel / Save actions"
+        ],
+        "file": "/docs-screenshots/02-dashboard-09-rename-dashboard-modal-change-the-d.png",
+        "importVar": "img_dashboard_9"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 10,
+        "caption": "Add Widget — pick from 14 widget types",
+        "details": [
+          "Tabs: Add Widget (raw types) and Templates (preset widget + data source)",
+          "Types: KPI Card, Sparkline, Bar Chart, Pie Chart, Donut, Line, Area, Funnel, Radar, Stacked Bar, Heatmap, Data Table, Map, Gauge"
+        ],
+        "file": "/docs-screenshots/02-dashboard-10-add-widget-pick-from-14-widget-type.png",
+        "importVar": "img_dashboard_10"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 11,
+        "caption": "Templates tab — ready-made widgets bound to a data source",
+        "details": [
+          "One-click presets: Sales Revenue, Total Contacts, Sales by Status, Offers Pipeline, Conversion Rate, Sales Trend, Tasks by Status, Service Orders by Status",
+          "Clicking a template adds the widget instantly"
+        ],
+        "file": "/docs-screenshots/02-dashboard-11-templates-tab-ready-made-widgets-bo.png",
+        "importVar": "img_dashboard_11"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 12,
+        "caption": "Configure Widget — set title, data source and metric",
+        "details": [
+          "Widget Title, Data Source dropdown, Metric dropdown (Count, Sum, Average, Min, Max)",
+          "+ Add Widget finalises and drops onto the grid"
+        ],
+        "file": "/docs-screenshots/02-dashboard-12-configure-widget-set-title-data-sou.png",
+        "importVar": "img_dashboard_12"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 13,
+        "caption": "Grid Settings — fine-tune spacing, density and animation",
+        "details": [
+          "Preset: Compact / Comfortable / Spacious",
+          "Sliders: Spacing, Row Height, Corner Radius",
+          "Card Style: Default / Flat / Elevated / Bordered",
+          "Widget Entrance animation: None / Fade / Slide / Scale / Bounce"
+        ],
+        "file": "/docs-screenshots/02-dashboard-13-grid-settings-fine-tune-spacing-den.png",
+        "importVar": "img_dashboard_13"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 14,
+        "caption": "Global period selector — applies to every widget at once",
+        "details": [
+          "Options: All Time, Last 7/30/90 Days, Last 6 Months, Last Year, Custom Range",
+          "Custom Range opens a date-range picker; selection is persisted"
+        ],
+        "file": "/docs-screenshots/02-dashboard-14-global-period-selector-applies-to-e.png",
+        "importVar": "img_dashboard_14"
+      },
+      {
+        "module": 2,
+        "moduleId": "module-dashboard",
+        "screenshot": 15,
+        "caption": "Save confirmation — dashboard returns to view mode",
+        "details": [
+          "Toast 'Dashboard saved successfully' appears bottom-right",
+          "Layout, period, auto-refresh, grid settings and widget configurations are all persisted"
+        ],
+        "file": "/docs-screenshots/02-dashboard-15-save-confirmation-dashboard-returns.png",
+        "importVar": "img_dashboard_15"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-contacts",
+    "slug": "contacts",
+    "screenshots": [
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 1,
+        "caption": "Contacts list — Persons + Companies + Suppliers with KPIs, Search, Filters, Map toggle, Import &amp; Add Contact",
+        "details": [
+          "KPI tiles: Total / Persons / Companies",
+          "Search bar: full-text across name, email, phone, company",
+          "Toolbar: + Add Contact, Bulk Import, Map / List toggle, Filters, Column picker, CSV export"
+        ],
+        "file": "/docs-screenshots/03-contacts-01-contacts-list-persons-companies-sup.png",
+        "importVar": "img_contacts_1"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 2,
+        "caption": "Contacts list — compact table view with row actions",
+        "details": [],
+        "file": "/docs-screenshots/03-contacts-02-contacts-list-compact-table-view-wi.png",
+        "importVar": "img_contacts_2"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 3,
+        "caption": "Add Contact (Person)",
+        "details": [
+          "Identity: First / Last name, Position, Email, Phone, Mobile",
+          "Address: Street, City, Country, Postal code + map preview",
+          "Fiscal: CIN, Tax ID (Matricule Fiscale)",
+          "Work info: Department, Hire date, Status, Tags"
+        ],
+        "file": "/docs-screenshots/03-contacts-03-add-contact-person-.png",
+        "importVar": "img_contacts_3"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 4,
+        "caption": "Person detail — 360° tabs",
+        "details": [
+          "Tabs: Overview / Installations / Offers / Sales / Service Orders / Purchases / Notes",
+          "Header card: avatar, name, status, type, favorite toggle",
+          "Overview: contact info, address with embedded map, recent activity feed"
+        ],
+        "file": "/docs-screenshots/03-contacts-04-person-detail-360-tabs.png",
+        "importVar": "img_contacts_4"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 5,
+        "caption": "Company detail",
+        "details": [
+          "Company-specific fields: Legal name, Tax ID, Industry, Size, Website",
+          "Linked installations / offers / sales / service orders / purchases tabs"
+        ],
+        "file": "/docs-screenshots/03-contacts-05-company-detail.png",
+        "importVar": "img_contacts_5"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 6,
+        "caption": "Supplier detail",
+        "details": [
+          "Supplier-only fields: payment terms, RS rate category, bank account",
+          "Purchases tab: PO history, receipts, invoices, outstanding balance",
+          "Performance: on-time delivery %, avg lead time, total spend YTD"
+        ],
+        "file": "/docs-screenshots/03-contacts-06-supplier-detail.png",
+        "importVar": "img_contacts_6"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 7,
+        "caption": "Edit Contact modal",
+        "details": [
+          "Switch type Person ↔ Company ↔ Supplier",
+          "Address with interactive map: click to drop pin or 'Use My Location'",
+          "Unsaved-changes guard if you try to close"
+        ],
+        "file": "/docs-screenshots/03-contacts-07-edit-contact-modal.png",
+        "importVar": "img_contacts_7"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 8,
+        "caption": "Suppliers list (/dashboard/suppliers)",
+        "details": [
+          "Same UX as Contacts list, scoped to type=Supplier",
+          "Extra columns: RS category, Outstanding balance, Last PO date"
+        ],
+        "file": "/docs-screenshots/03-contacts-08-suppliers-list-dashboard-suppliers-.png",
+        "importVar": "img_contacts_8"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 9,
+        "caption": "Add Supplier",
+        "details": [
+          "Supplier Type radio: Person / Company",
+          "Supplier-specific: RS category, default payment terms, bank IBAN"
+        ],
+        "file": "/docs-screenshots/03-contacts-09-add-supplier.png",
+        "importVar": "img_contacts_9"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 10,
+        "caption": "Bulk Import Contacts",
+        "details": [
+          "Two modes: Dynamic Import (any Excel headers) or Structured Import (fixed template)",
+          "Drag-and-drop file zone with size + row count preview"
+        ],
+        "file": "/docs-screenshots/03-contacts-10-bulk-import-contacts.png",
+        "importVar": "img_contacts_10"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 11,
+        "caption": "Advanced Filters drawer",
+        "details": [
+          "Status: Active / Inactive; Type: Person / Company / Supplier",
+          "Multi-select Tags filter with color chips",
+          "Boolean filters: Favorites only, Has email, Has phone, Has geolocation"
+        ],
+        "file": "/docs-screenshots/03-contacts-11-advanced-filters-drawer.png",
+        "importVar": "img_contacts_11"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 12,
+        "caption": "Contacts Map view",
+        "details": [
+          "Markers clustered by zoom level; click marker to open mini-card",
+          "Filter by type directly on the map toolbar"
+        ],
+        "file": "/docs-screenshots/03-contacts-12-contacts-map-view.png",
+        "importVar": "img_contacts_12"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 13,
+        "caption": "Contact Notes modal",
+        "details": [
+          "Rich-text note body, author + timestamps",
+          "Inline edit, soft-delete with undo toast"
+        ],
+        "file": "/docs-screenshots/03-contacts-13-contact-notes-modal.png",
+        "importVar": "img_contacts_13"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 14,
+        "caption": "Tags manager",
+        "details": [
+          "Color picker (10 preset palette + custom hex)",
+          "Delete cascades to remove the tag from all contacts"
+        ],
+        "file": "/docs-screenshots/03-contacts-14-tags-manager.png",
+        "importVar": "img_contacts_14"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 15,
+        "caption": "Delete Contact confirmation",
+        "details": [
+          "Soft-delete by default (contact archived, restorable)",
+          "Lists linked records that keep the historical reference"
+        ],
+        "file": "/docs-screenshots/03-contacts-15-delete-contact-confirmation.png",
+        "importVar": "img_contacts_15"
+      },
+      {
+        "module": 3,
+        "moduleId": "module-contacts",
+        "screenshot": 16,
+        "caption": "Dynamic Import — column mapping",
+        "details": [
+          "Auto-detected headers from the uploaded .xlsx",
+          "Drag headers onto target fields",
+          "Preview first 10 rows after mapping; errors highlighted",
+          "Duplicate strategy: Skip / Update by email / Create anyway"
+        ],
+        "file": "/docs-screenshots/03-contacts-16-dynamic-import-column-mapping.png",
+        "importVar": "img_contacts_16"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-articles",
+    "slug": "articles",
+    "screenshots": [
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 1,
+        "caption": "Articles &amp; Materials — unified catalogue with KPI cards, filters and pagination",
+        "details": [
+          "KPI strip: Materials, Services, Low Stock, Total Items",
+          "Columns: Type icon, Name, Reference/Category, Status, Stock, Price, Location, Actions",
+          "Pagination with selectable page size"
+        ],
+        "file": "/docs-screenshots/04-articles-01-articles-amp-materials-unified-cata.png",
+        "importVar": "img_articles_1"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 2,
+        "caption": "Article Detail — overview with stock levels, pricing and audit info",
+        "details": [
+          "Article Information: Reference, Category, Group, Description",
+          "Stock Levels: Current Stock, Minimum Stock, Cost/Sell Price, Location, Supplier",
+          "Audit Information: Created/Modified Date and By"
+        ],
+        "file": "/docs-screenshots/04-articles-02-article-detail-overview-with-stock-.png",
+        "importVar": "img_articles_2"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 3,
+        "caption": "Edit Article modal — Material/Service toggle with full property form",
+        "details": [
+          "Article Type tabs: Material / Service",
+          "Required fields: Name, Category, Status",
+          "Inventory Details: Current Stock, Minimum Stock Level, Cost Price, Sell Price",
+          "Sourcing: Supplier, Location, Group, Sub-Location, Notes"
+        ],
+        "file": "/docs-screenshots/04-articles-03-edit-article-modal-material-service.png",
+        "importVar": "img_articles_3"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 4,
+        "caption": "Edit Article — expanded form view with all fields",
+        "details": [],
+        "file": "/docs-screenshots/04-articles-04-edit-article-expanded-form-view-wit.png",
+        "importVar": "img_articles_4"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 5,
+        "caption": "Record Inventory Transaction — stock in / out / transfer dialog",
+        "details": [
+          "Transaction Type: Stock In, Stock Out, Transfer, Adjustment, Damaged, Lost, Return",
+          "Quantity, To Location, Reason (required for audit trail)",
+          "Reference field for PO / SO / invoice numbers"
+        ],
+        "file": "/docs-screenshots/04-articles-05-record-inventory-transaction-stock-.png",
+        "importVar": "img_articles_5"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 6,
+        "caption": "Record Inventory Transaction — Stock In / Out / Transfer / Adjustment detail",
+        "details": [
+          "Ties to reference documents (PO, SO)",
+          "All transactions feed the Articles audit log and Stock Management history"
+        ],
+        "file": "/docs-screenshots/04-articles-06-record-inventory-transaction-stock-.png",
+        "importVar": "img_articles_6"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 7,
+        "caption": "Inventory &amp; Services — unified view with Filters and grid/list toggle",
+        "details": [
+          "KPI strip: Total Items, Materials, Services, Low Stock",
+          "Multi-select checkboxes for bulk actions",
+          "Service rows show duration instead of stock"
+        ],
+        "file": "/docs-screenshots/04-articles-07-inventory-amp-services-unified-view.png",
+        "importVar": "img_articles_7"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 8,
+        "caption": "Stock Management — gauge cards per material with quick actions",
+        "details": [
+          "Circular gauge showing % of capacity per material",
+          "Card actions: Add Stock, Remove Stock, View History",
+          "Status: Good (≥ min), Low (&lt; min), Critical (= 0)"
+        ],
+        "file": "/docs-screenshots/04-articles-08-stock-management-gauge-cards-per-ma.png",
+        "importVar": "img_articles_8"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 9,
+        "caption": "Import Articles — Dynamic Import (map your own columns)",
+        "details": [
+          "Upload an Excel file with custom headers and map them after upload",
+          "Supported formats: Excel (.xlsx, .xls)"
+        ],
+        "file": "/docs-screenshots/04-articles-09-import-articles-dynamic-import-map-.png",
+        "importVar": "img_articles_9"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 10,
+        "caption": "Import Articles — Structured Import with templates",
+        "details": [
+          "Download Empty Template or Template with Examples",
+          "Drop the filled template to bulk-create or update articles"
+        ],
+        "file": "/docs-screenshots/04-articles-10-import-articles-structured-import-w.png",
+        "importVar": "img_articles_10"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 11,
+        "caption": "Inventory &amp; Services — Filters drawer expanded",
+        "details": [
+          "Filter by Type (All / Material / Service) and Location",
+          "Combine with Search and pagination for fast lookup"
+        ],
+        "file": "/docs-screenshots/04-articles-11-inventory-amp-services-filters-draw.png",
+        "importVar": "img_articles_11"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 12,
+        "caption": "Delete confirmation — irreversible action guard",
+        "details": [
+          "'This action cannot be undone. This will permanently delete the article.'",
+          "Cancel (secondary) and Delete (destructive primary)"
+        ],
+        "file": "/docs-screenshots/04-articles-12-delete-confirmation-irreversible-ac.png",
+        "importVar": "img_articles_12"
+      },
+      {
+        "module": 4,
+        "moduleId": "module-articles",
+        "screenshot": 13,
+        "caption": "Error boundary — graceful fallback when a page crashes",
+        "details": [
+          "'We hit an unexpected snag' centered card",
+          "Go back (primary) and Return home actions",
+          "Reference ID shown for support traceability"
+        ],
+        "file": "/docs-screenshots/04-articles-13-error-boundary-graceful-fallback-wh.png",
+        "importVar": "img_articles_13"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-stock-management",
+    "slug": "stock-management",
+    "screenshots": [
+      {
+        "module": 5,
+        "moduleId": "module-stock-management",
+        "screenshot": 1,
+        "caption": "Stock Management — at-a-glance grid with current levels",
+        "details": [
+          "Top KPI strip: Total Materials, Critical, Low Stock and Healthy Stock counts",
+          "Each card: name, group, fill-level gauge, current quantity, status badge",
+          "Per-card actions: Add Stock, Remove Stock, View History"
+        ],
+        "file": "/docs-screenshots/05-stock-management-01-stock-management-at-a-glance-grid-w.png",
+        "importVar": "img_stock_management_1"
+      },
+      {
+        "module": 5,
+        "moduleId": "module-stock-management",
+        "screenshot": 2,
+        "caption": "Filters bar — narrow the grid by Status and Location",
+        "details": [
+          "Status: All / Critical / Low Stock / Healthy",
+          "Location: filter by warehouse, vehicle or any configured stock location"
+        ],
+        "file": "/docs-screenshots/05-stock-management-02-filters-bar-narrow-the-grid-by-stat.png",
+        "importVar": "img_stock_management_2"
+      },
+      {
+        "module": 5,
+        "moduleId": "module-stock-management",
+        "screenshot": 3,
+        "caption": "Replenish Stock dialog — Add or Remove with optional notes",
+        "details": [
+          "Toggle between Add Stock and Remove Stock",
+          "Shows current quantity, asks for delta and optional notes",
+          "Submitting writes a fully-audited row to the Stock Transactions log"
+        ],
+        "file": "/docs-screenshots/05-stock-management-03-replenish-stock-dialog-add-or-remov.png",
+        "importVar": "img_stock_management_3"
+      },
+      {
+        "module": 5,
+        "moduleId": "module-stock-management",
+        "screenshot": 4,
+        "caption": "Stock Transaction History — full audit log per material",
+        "details": [
+          "Lists every add, remove, sale deduction, transfer and adjustment",
+          "Each entry records previous → new stock, reason, reference, performer and timestamp"
+        ],
+        "file": "/docs-screenshots/05-stock-management-04-stock-transaction-history-full-audi.png",
+        "importVar": "img_stock_management_4"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-purchases",
+    "slug": "purchases",
+    "screenshots": [
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 1,
+        "caption": "Purchases hub — KPIs + recent activity",
+        "details": [
+          "KPI tiles: Open POs, Pending receipts, Unpaid invoices, This-month spend",
+          "Quick links: New PO, New Receipt, New Invoice, Compliance, Reports, Audit Log",
+          "Compliance widget: RS YTD, Facture en Ligne pending, TEJ sync status"
+        ],
+        "file": "/docs-screenshots/06-purchases-01-purchases-hub-kpis-recent-activity.png",
+        "importVar": "img_purchases_1"
+      },
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 2,
+        "caption": "Purchase Orders list",
+        "details": [
+          "Columns: PO #, Supplier, Order date, Expected delivery, Status, Total HT, TVA, Total TTC",
+          "Status pipeline as colored chips (Draft / Pending / Approved / Sent / Partially Received / Received / Closed / Cancelled)",
+          "Row actions: View, Edit, Duplicate, Cancel, Generate Receipt, Generate Invoice, Download PDF"
+        ],
+        "file": "/docs-screenshots/06-purchases-02-purchase-orders-list.png",
+        "importVar": "img_purchases_2"
+      },
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 3,
+        "caption": "Create Purchase Order",
+        "details": [
+          "Header: Supplier, PO #, Order date, Expected delivery, Currency, Payment terms",
+          "Line items: Article, Supplier ref, Description, Qty, Unit, Unit price, Discount %, Tax %",
+          "Auto totals: Subtotal HT, Discount, Tax breakdown, Fiscal stamp, Grand Total TTC",
+          "Save as Draft, Submit for approval, or Approve &amp; Send"
+        ],
+        "file": "/docs-screenshots/06-purchases-03-create-purchase-order.png",
+        "importVar": "img_purchases_3"
+      },
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 4,
+        "caption": "Goods Receipts",
+        "details": [
+          "Match against PO: select open POs, receive partial or full quantities per line",
+          "Auto-creates stock movements (IN) for each received line",
+          "Status: Draft / Posted / Cancelled; PDF export"
+        ],
+        "file": "/docs-screenshots/06-purchases-04-goods-receipts.png",
+        "importVar": "img_purchases_4"
+      },
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 5,
+        "caption": "Supplier Invoices",
+        "details": [
+          "Three-way match: invoice ↔ PO ↔ receipt; mismatches highlighted in red",
+          "Retenue à la Source (RS): rate auto-picked per supplier category; withheld + net to pay computed",
+          "Payment status: Unpaid / Partially paid / Paid; record payments with date, method, reference"
+        ],
+        "file": "/docs-screenshots/06-purchases-05-supplier-invoices.png",
+        "importVar": "img_purchases_5"
+      },
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 6,
+        "caption": "Fiscal Compliance dashboard",
+        "details": [
+          "Retenue à la Source: YTD total withheld, breakdown by supplier and rate",
+          "Facture en Ligne: counts of Pending / Sent / Validated invoices",
+          "TEJ Integration: connection status, last sync timestamp, queued items"
+        ],
+        "file": "/docs-screenshots/06-purchases-06-fiscal-compliance-dashboard.png",
+        "importVar": "img_purchases_6"
+      },
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 7,
+        "caption": "Reports hub",
+        "details": [
+          "Supplier Performance: on-time delivery %, avg lead time, total spend",
+          "Price Evolution: per article + supplier price history line chart",
+          "Supplier Invoice Aging: outstanding amounts grouped by buckets (Current / 1-30 / 31-60 / 61-90 / 90+ days)"
+        ],
+        "file": "/docs-screenshots/06-purchases-07-reports-hub.png",
+        "importVar": "img_purchases_7"
+      },
+      {
+        "module": 6,
+        "moduleId": "module-purchases",
+        "screenshot": 8,
+        "caption": "Purchases Audit Log",
+        "details": [
+          "Columns: Date/time, User, Entity, Entity #, Action, Description",
+          "Filters: User, Entity type, Action, Date range",
+          "Click row to open the diff (before/after JSON) for full traceability"
+        ],
+        "file": "/docs-screenshots/06-purchases-08-purchases-audit-log.png",
+        "importVar": "img_purchases_8"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-service-orders",
+    "slug": "service-orders",
+    "screenshots": [
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 1,
+        "caption": "Service Orders — Table view",
+        "details": [
+          "KPI strip: Total Orders, Active, Completed, Total Value",
+          "Columns: Order #, Company, Customer, Status badge, Related Sale, Created date",
+          "Toolbar: search, Filters, three view modes (Cards / Table / Map), Create"
+        ],
+        "file": "/docs-screenshots/07-service-orders-01-service-orders-table-view.png",
+        "importVar": "img_service_orders_1"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 2,
+        "caption": "Inline filters",
+        "details": [
+          "Filter by Status, Priority, Technician, and time range (Any / Today / Week / Month / Custom)",
+          "Clear button resets all filters"
+        ],
+        "file": "/docs-screenshots/07-service-orders-02-inline-filters.png",
+        "importVar": "img_service_orders_2"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 3,
+        "caption": "Cards view",
+        "details": [
+          "Each card: order number, status badge, customer, technician count, created date, total amount",
+          "Quick actions: View, Generate report, Delete"
+        ],
+        "file": "/docs-screenshots/07-service-orders-03-cards-view.png",
+        "importVar": "img_service_orders_3"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 4,
+        "caption": "Map view",
+        "details": [
+          "Geo-located service orders pinned on the map",
+          "Click markers for details; 'Open in Maps' link for navigation",
+          "Below the map: same card list"
+        ],
+        "file": "/docs-screenshots/07-service-orders-04-map-view.png",
+        "importVar": "img_service_orders_4"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 5,
+        "caption": "Row actions menu",
+        "details": [
+          "Per-row: View Details, Delete Order"
+        ],
+        "file": "/docs-screenshots/07-service-orders-05-row-actions-menu.png",
+        "importVar": "img_service_orders_5"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 6,
+        "caption": "Create Service Order",
+        "details": [
+          "Pick the Target Company (multi-tenant)",
+          "Optionally link to an existing Offer or Sale",
+          "Choose a customer (Person or Company) from contacts"
+        ],
+        "file": "/docs-screenshots/07-service-orders-06-create-service-order.png",
+        "importVar": "img_service_orders_6"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 7,
+        "caption": "Detail — Overview tab",
+        "details": [
+          "Header: order #, status flow stepper, header actions (PDF report, email, share, convert to invoice)",
+          "Service Order Details: ID, related sale, description, priority, contact, service type, estimated cost, target completion date"
+        ],
+        "file": "/docs-screenshots/07-service-orders-07-detail-overview-tab.png",
+        "importVar": "img_service_orders_7"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 8,
+        "caption": "Detail — Jobs tab",
+        "details": [
+          "Jobs grouped by Installation (or 'No installation')",
+          "Per-job: title, code, Status (Dispatched / Unscheduled / In Progress / Completed), Work Type"
+        ],
+        "file": "/docs-screenshots/07-service-orders-08-detail-jobs-tab.png",
+        "importVar": "img_service_orders_8"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 9,
+        "caption": "Detail — Dispatches tab",
+        "details": [
+          "Each dispatch row: dispatch #, status, priority, assigned technician, scheduled date and time window",
+          "View Schedules to see all dispatches on the planner"
+        ],
+        "file": "/docs-screenshots/07-service-orders-09-detail-dispatches-tab.png",
+        "importVar": "img_service_orders_9"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 10,
+        "caption": "Detail — Time &amp; Expenses tab",
+        "details": [
+          "Two parallel logs: Time Tracking (start/end, technician, duration) and Expense Tracking",
+          "Each entry linked back to its source dispatch",
+          "Add Time / Add Expense buttons; per-row edit and delete"
+        ],
+        "file": "/docs-screenshots/07-service-orders-10-detail-time-amp-expenses-tab.png",
+        "importVar": "img_service_orders_10"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 11,
+        "caption": "Detail — Materials tab",
+        "details": [
+          "Materials Used table: Material, Installation, Qty, Unit Cost, Total",
+          "Add Material picks from the catalog and deducts from stock"
+        ],
+        "file": "/docs-screenshots/07-service-orders-11-detail-materials-tab.png",
+        "importVar": "img_service_orders_11"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 12,
+        "caption": "Detail — Attachments tab",
+        "details": [
+          "Drag &amp; drop documents (photos, PDFs, signed forms) or click Add Document"
+        ],
+        "file": "/docs-screenshots/07-service-orders-12-detail-attachments-tab.png",
+        "importVar": "img_service_orders_12"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 13,
+        "caption": "Detail — Checklists tab",
+        "details": [
+          "Attach a Dynamic Form as a checklist; technicians fill it from the field app"
+        ],
+        "file": "/docs-screenshots/07-service-orders-13-detail-checklists-tab.png",
+        "importVar": "img_service_orders_13"
+      },
+      {
+        "module": 7,
+        "moduleId": "module-service-orders",
+        "screenshot": 14,
+        "caption": "Detail — Activity tab",
+        "details": [
+          "Full audit trail: every status change, expense, time entry, dispatch action and user note",
+          "Add Note action to leave manual annotations"
+        ],
+        "file": "/docs-screenshots/07-service-orders-14-detail-activity-tab.png",
+        "importVar": "img_service_orders_14"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-hr",
+    "slug": "hr",
+    "screenshots": [
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 1,
+        "caption": "HR dashboard — KPIs and shortcuts to every HR sub-module",
+        "details": [
+          "KPI tiles: Active employees, Pending leaves, Attendance today (%), Estimated monthly payroll (TND)",
+          "Quick actions: Add employee, Run payroll, Approve leaves, Export CNSS",
+          "Charts: Headcount evolution, Absences by type, Payroll cost trend"
+        ],
+        "file": "/docs-screenshots/08-hr-01-hr-dashboard-kpis-and-shortcuts-to-.png",
+        "importVar": "img_hr_1"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 2,
+        "caption": "Employees list with payroll-readiness segmentation",
+        "details": [
+          "Columns: Employee (avatar + name), Position, Department, Contract type, Salary, CNSS #, Status",
+          "Tabs: All / Payroll-ready / Incomplete / On leave / Terminated",
+          "Row actions: Open detail, Edit, Generate payslip, Add bonus/deduction, Mark as terminated"
+        ],
+        "file": "/docs-screenshots/08-hr-02-employees-list-with-payroll-readine.png",
+        "importVar": "img_hr_2"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 3,
+        "caption": "Employee detail — multi-tab file (Profile / Salary / CNSS / Bonuses / Leaves / Documents)",
+        "details": [
+          "Profile: identity, CIN, contact, address, hire date, contract end date, manager, department",
+          "Salary: base gross, allowances (transport, meal, housing), abattements",
+          "CNSS: CNSS number, affiliation date, employee + employer rate snapshot"
+        ],
+        "file": "/docs-screenshots/08-hr-03-employee-detail-multi-tab-file-prof.png",
+        "importVar": "img_hr_3"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 4,
+        "caption": "Monthly attendance — List &amp; Matrix views",
+        "details": [
+          "Matrix view: rows = employees, columns = days; color-coded statuses (present / absent / late / remote / leave)",
+          "Period picker (month/year), department filter, employee search",
+          "Auto-computed totals: worked hours, overtime, late count, absences"
+        ],
+        "file": "/docs-screenshots/08-hr-04-monthly-attendance-list-amp-matrix-.png",
+        "importVar": "img_hr_4"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 5,
+        "caption": "Add Attendance Entry modal",
+        "details": [
+          "Fields: Employee, Date, Check-in, Check-out, Break (min), Status (present/absent/late/remote)",
+          "Optional: Notes, Overtime hours (auto-feeds payroll)",
+          "Prevents overlapping entries on the same day"
+        ],
+        "file": "/docs-screenshots/08-hr-05-add-attendance-entry-modal.png",
+        "importVar": "img_hr_5"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 6,
+        "caption": "Leaves — Calendar / List / Balances / Approvals",
+        "details": [
+          "Calendar tab: team calendar with overlap detection (max simultaneous absences per dept)",
+          "List tab: every request with type, period, days, status (Pending / Approved / Rejected)",
+          "Balances tab: per leave type — entitled, taken, remaining",
+          "Approvals tab: manager queue with one-click approve/reject + comment"
+        ],
+        "file": "/docs-screenshots/08-hr-06-leaves-calendar-list-balances-appro.png",
+        "importVar": "img_hr_6"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 7,
+        "caption": "Payroll runs — Tunisian 2025 law (CNSS / IRPP / CSS)",
+        "details": [
+          "Period selector, generate Draft pulling Employees + Attendance + Bonuses + Leaves",
+          "Per-employee: Gross, Overtime, CNSS, Taxable gross, Abattement, IRPP, CSS, Net",
+          "Workflow: Draft → Confirmed (locks values) → Paid"
+        ],
+        "file": "/docs-screenshots/08-hr-07-payroll-runs-tunisian-2025-law-cnss.png",
+        "importVar": "img_hr_7"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 8,
+        "caption": "Bonuses, allowances, deductions, reimbursements",
+        "details": [
+          "Entry types: Bonus / Allowance / Deduction / Reimbursement (taxable flag per type)",
+          "Running totals row: Bonuses, Deductions, Net effect — feeds the next payroll run"
+        ],
+        "file": "/docs-screenshots/08-hr-08-bonuses-allowances-deductions-reimb.png",
+        "importVar": "img_hr_8"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 9,
+        "caption": "CNSS rates &amp; monthly declaration",
+        "details": [
+          "Rate config: employee % + employer % with effective-from date and history table",
+          "Monthly declaration table: per CNSS number — gross, base, employee share, employer share, total",
+          "Export CSV in the format expected by the CNSS portal"
+        ],
+        "file": "/docs-screenshots/08-hr-09-cnss-rates-amp-monthly-declaration.png",
+        "importVar": "img_hr_9"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 10,
+        "caption": "Departments &amp; org chart",
+        "details": [
+          "List: Code, Name, Manager, Employee count, Created at",
+          "Org chart view: hierarchical tree with manager avatars",
+          "CRUD: add / edit / delete department; reassign employees on delete"
+        ],
+        "file": "/docs-screenshots/08-hr-10-departments-amp-org-chart.png",
+        "importVar": "img_hr_10"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 11,
+        "caption": "Performance Management — Goals / Cycles / Reviews",
+        "details": [
+          "Goals: per employee, weighted, with target date, progress %, status (On track / At risk / Done)",
+          "Review Cycles: define a period, include departments, set template",
+          "Reviews: self-review + manager review, rating per competency, free-text feedback, sign-off"
+        ],
+        "file": "/docs-screenshots/08-hr-11-performance-management-goals-cycles.png",
+        "importVar": "img_hr_11"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 12,
+        "caption": "Recruitment pipeline",
+        "details": [
+          "Job openings: title, department, location, contract type, status (Open / On hold / Closed)",
+          "Applicants per job with stage: Applied → Screening → Interview → Offer → Hired / Rejected",
+          "Drag-and-drop kanban to move applicants across stages"
+        ],
+        "file": "/docs-screenshots/08-hr-12-recruitment-pipeline.png",
+        "importVar": "img_hr_12"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 13,
+        "caption": "HR reports with CSV + Excel export",
+        "details": [
+          "Employee cost: Gross + Bonuses − Deductions + Employer CNSS = Total cost",
+          "Payroll report: aggregate per period",
+          "CNSS report: monthly contributions, year-to-date, by employee",
+          "Absences report: count + days per leave type, per department"
+        ],
+        "file": "/docs-screenshots/08-hr-13-hr-reports-with-csv-excel-export.png",
+        "importVar": "img_hr_13"
+      },
+      {
+        "module": 8,
+        "moduleId": "module-hr",
+        "screenshot": 14,
+        "caption": "HR settings",
+        "details": [
+          "CNSS rates: timeline of (employee %, employer %, effective date)",
+          "Public holidays: Tunisian calendar pre-seeded, add custom company days off",
+          "General: currency (TND), locale (fr-TN), fiscal year, default working week, overtime multiplier"
+        ],
+        "file": "/docs-screenshots/08-hr-14-hr-settings.png",
+        "importVar": "img_hr_14"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-dynamic-forms",
+    "slug": "dynamic-forms",
+    "screenshots": [
+      {
+        "module": 9,
+        "moduleId": "module-dynamic-forms",
+        "screenshot": 1,
+        "caption": "Dynamic Forms — list of all forms with status, field count and last updated",
+        "details": [
+          "Columns: Name, Status (Draft / Released / Archived), Fields count, Last Updated, Share, Actions",
+          "Toolbar: Search, Status filter, + Create Form",
+          "Click a row to open the form preview"
+        ],
+        "file": "/docs-screenshots/09-dynamic-forms-01-dynamic-forms-list-of-all-forms-wit.png",
+        "importVar": "img_dynamic_forms_1"
+      },
+      {
+        "module": 9,
+        "moduleId": "module-dynamic-forms",
+        "screenshot": 2,
+        "caption": "Row actions menu — Preview, Edit, Duplicate, View Responses, Make Public, Archive, Delete",
+        "details": [
+          "Edit is blocked on Released forms — restore to Draft first",
+          "Make Public exposes the form at /public/forms/:slug for unauthenticated submission",
+          "Delete is a soft delete (form goes to Archived state)"
+        ],
+        "file": "/docs-screenshots/09-dynamic-forms-02-row-actions-menu-preview-edit-dupli.png",
+        "importVar": "img_dynamic_forms_2"
+      },
+      {
+        "module": 9,
+        "moduleId": "module-dynamic-forms",
+        "screenshot": 3,
+        "caption": "Create New Form — bilingual basic info (EN/FR) and category",
+        "details": [
+          "Side-by-side English &amp; French content blocks: Name (required) and Description",
+          "Category picker driven by Lookups with inline 'Manage' shortcut",
+          "Save button creates a Draft form, then opens the full builder"
+        ],
+        "file": "/docs-screenshots/09-dynamic-forms-03-create-new-form-bilingual-basic-inf.png",
+        "importVar": "img_dynamic_forms_3"
+      },
+      {
+        "module": 9,
+        "moduleId": "module-dynamic-forms",
+        "screenshot": 4,
+        "caption": "Form Builder — Field Palette with all available field types",
+        "details": [
+          "Basic Fields: Text Input, Text Area, Number, Email, Phone",
+          "Choice Fields: Checkbox (Yes/No), Radio Buttons (single), Dropdown Select",
+          "Advanced Fields: Date Picker, Section Header, Signature, Star Rating, Content Block",
+          "Layout &amp; Structure: Page Break (split into multi-step forms)",
+          "Right pane: live Form Preview with Preview / Structure toggle"
+        ],
+        "file": "/docs-screenshots/09-dynamic-forms-04-form-builder-field-palette-with-all.png",
+        "importVar": "img_dynamic_forms_4"
+      },
+      {
+        "module": 9,
+        "moduleId": "module-dynamic-forms",
+        "screenshot": 5,
+        "caption": "Form Preview — branded rendering used for sharing and PDF export",
+        "details": [
+          "Header: company logo, 'Completed on' date, EN/FR language toggle",
+          "Body: title, description, then each field with its label and input",
+          "Footer: form name, copyright, page count",
+          "Top-right: Save Response and Download PDF"
+        ],
+        "file": "/docs-screenshots/09-dynamic-forms-05-form-preview-branded-rendering-used.png",
+        "importVar": "img_dynamic_forms_5"
+      },
+      {
+        "module": 9,
+        "moduleId": "module-dynamic-forms",
+        "screenshot": 6,
+        "caption": "Form Responses — every submission with submitter, timestamp and linked entity",
+        "details": [
+          "Columns: #, Submitted By, Submitted At, Linked Entity, Actions (view / export PDF)",
+          "Top-right actions: Export to Entity and Export Responses (CSV / Excel)"
+        ],
+        "file": "/docs-screenshots/09-dynamic-forms-06-form-responses-every-submission-wit.png",
+        "importVar": "img_dynamic_forms_6"
+      },
+      {
+        "module": 9,
+        "moduleId": "module-dynamic-forms",
+        "screenshot": 7,
+        "caption": "Response detail modal — read-only view of one submission with PDF export",
+        "details": [
+          "Header: Submitted By, Submitted At",
+          "One card per field showing the answered value (or 'Not answered')",
+          "Export as PDF button generates a branded PDF of that single response"
+        ],
+        "file": "/docs-screenshots/09-dynamic-forms-07-response-detail-modal-read-only-vie.png",
+        "importVar": "img_dynamic_forms_7"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-workflow",
+    "slug": "workflow",
+    "screenshots": [
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 1,
+        "caption": "Workflow Builder — three-pane layout (Node Palette / Canvas / Toolbar)",
+        "details": [
+          "Top-right toolbar: Build with AI, Debug, Duplicate, Export, Import, Save, Edit, Stop",
+          "Left palette: Triggers (6), Entities (5), Actions (8), Conditions, Integrations",
+          "Canvas: React-Flow nodes color-coded by type with smart edges",
+          "Pre-built default business workflow: Offer Accepted → Create Sale → ... → Sale Closed"
+        ],
+        "file": "/docs-screenshots/10-workflow-01-workflow-builder-three-pane-layout-.png",
+        "importVar": "img_workflow_1"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 2,
+        "caption": "Live canvas — full default business workflow with palette open",
+        "details": [
+          "Shows the canonical 'order-to-cash + service' flow",
+          "Triggers in orange, Conditions in yellow, Actions in green/blue",
+          "Each node displays its type chip, FROM/TO statuses and 1-line summary"
+        ],
+        "file": "/docs-screenshots/10-workflow-02-live-canvas-full-default-business-w.png",
+        "importVar": "img_workflow_2"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 3,
+        "caption": "Build with AI — natural-language to graph",
+        "details": [
+          "4 starter prompts: confirmed-sale email, offer follow-up after 3 days, dispatch-completed notification, daily 9am summary",
+          "Free-text 'Describe your workflow…' input",
+          "Apply to Canvas commits the generated nodes/edges in one click"
+        ],
+        "file": "/docs-screenshots/10-workflow-03-build-with-ai-natural-language-to-g.png",
+        "importVar": "img_workflow_3"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 4,
+        "caption": "Build with AI — full modal with starter prompts",
+        "details": [
+          "Header 'Build with AI' with branded hex icon",
+          "4 starter cards with pre-written prompts",
+          "Free-text textarea + send button; Reset and Apply to Canvas footer actions"
+        ],
+        "file": "/docs-screenshots/10-workflow-04-build-with-ai-full-modal-with-start.png",
+        "importVar": "img_workflow_4"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 5,
+        "caption": "Edit mode — protected canvas with explicit Save / Cancel",
+        "details": [
+          "Yellow 'Editing' badge while edit mode is on",
+          "Cancel discards changes (with unsaved-changes guard)",
+          "Save bumps the workflow version",
+          "All edits gated behind the Edit button"
+        ],
+        "file": "/docs-screenshots/10-workflow-05-edit-mode-protected-canvas-with-exp.png",
+        "importVar": "img_workflow_5"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 6,
+        "caption": "Version History — restore, compare, fork prior versions",
+        "details": [
+          "Lists every version with author, date, status and short diff summary",
+          "Restore promotes an old version to active; Compare opens side-by-side graph diff",
+          "Fork creates a new Draft from any prior version"
+        ],
+        "file": "/docs-screenshots/10-workflow-06-version-history-restore-compare-for.png",
+        "importVar": "img_workflow_6"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 7,
+        "caption": "Version History tooltip on the clock icon",
+        "details": [
+          "Hovering the clock icon shows 'Version History — Current Workflow'",
+          "Click opens the full version history popover"
+        ],
+        "file": "/docs-screenshots/10-workflow-07-version-history-tooltip-on-the-cloc.png",
+        "importVar": "img_workflow_7"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 8,
+        "caption": "Node palette — Conditions, Communication, AI and Integration categories",
+        "details": [
+          "Conditions: If/Else, Switch, Loop",
+          "Communication: Send Notification, Email, Request Approval, Delay, Human Input Form, Wait for Event",
+          "AI: AI Email, AI Analyzer, AI Agent, Custom LLM",
+          "Integration: Dynamic Form, Data Transfer, HTTP Request, Code (JavaScript)"
+        ],
+        "file": "/docs-screenshots/10-workflow-08-node-palette-conditions-communicati.png",
+        "importVar": "img_workflow_8"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 9,
+        "caption": "Workflow Calendar — Mois / Semaine / Jour / Tableau of interventions",
+        "details": [
+          "Period switcher + alternative table view",
+          "Planifier intervention CTA opens the dispatch creation dialog",
+          "Drag-and-drop reschedule; conflict highlighting; intelligent planning hints"
+        ],
+        "file": "/docs-screenshots/10-workflow-09-workflow-calendar-mois-semaine-jour.png",
+        "importVar": "img_workflow_9"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 10,
+        "caption": "Workflow Calendar — empty state before interventions are planned",
+        "details": [],
+        "file": "/docs-screenshots/10-workflow-10-workflow-calendar-empty-state-befor.png",
+        "importVar": "img_workflow_10"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 11,
+        "caption": "Dispatch Board — Kanban by status with Calendar / Map views",
+        "details": [
+          "Columns: Scheduled, En route, In progress, Finished, Cancelled",
+          "Drag a card to change status; writes to /api/dispatches",
+          "Inventory search; Calendar view &amp; Map view (Mapbox/Leaflet) toggles"
+        ],
+        "file": "/docs-screenshots/10-workflow-11-dispatch-board-kanban-by-status-wit.png",
+        "importVar": "img_workflow_11"
+      },
+      {
+        "module": 10,
+        "moduleId": "module-workflow",
+        "screenshot": 12,
+        "caption": "Dispatch Board — empty state before any dispatches are created",
+        "details": [],
+        "file": "/docs-screenshots/10-workflow-12-dispatch-board-empty-state-before-a.png",
+        "importVar": "img_workflow_12"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-external",
+    "slug": "external",
+    "screenshots": [
+      {
+        "module": 11,
+        "moduleId": "module-external",
+        "screenshot": 1,
+        "caption": "External Endpoints list",
+        "details": [
+          "KPIs: Total Endpoints, Active, Received Today, Total Received",
+          "Table: Name, Slug URL, Status (Active/Inactive toggle), Methods, Received count, Last received",
+          "Search + filter; quick actions: View, Edit, Copy URL, Test, Delete"
+        ],
+        "file": "/docs-screenshots/11-external-01-external-endpoints-list.png",
+        "importVar": "img_external_1"
+      },
+      {
+        "module": 11,
+        "moduleId": "module-external",
+        "screenshot": 2,
+        "caption": "Create Endpoint — templates + custom",
+        "details": [
+          "Quick-start templates: Landing page, Generic contact form, B2B Lead capture, Webhook passthrough",
+          "Custom mode: name, description, allowed HTTP methods, Active toggle, optional JSON Schema",
+          "Auto-generated slug + API key on save"
+        ],
+        "file": "/docs-screenshots/11-external-02-create-endpoint-templates-custom.png",
+        "importVar": "img_external_2"
+      },
+      {
+        "module": 11,
+        "moduleId": "module-external",
+        "screenshot": 3,
+        "caption": "Endpoint detail — Public URL, API key, inbound log",
+        "details": [
+          "Public URL: full https:// slug URL, one-click copy, QR code for mobile testing",
+          "API key: hidden by default, Reveal / Copy / Rotate actions",
+          "Inbound log: Date/time, Method, Source IP, Status code, Payload preview",
+          "Bulk: Mark all as read, Clear all logs, Export CSV"
+        ],
+        "file": "/docs-screenshots/11-external-03-endpoint-detail-public-url-api-key-.png",
+        "importVar": "img_external_3"
+      },
+      {
+        "module": 11,
+        "moduleId": "module-external",
+        "screenshot": 4,
+        "caption": "Edit Endpoint",
+        "details": [
+          "Editable: name, description, allowed methods, Active toggle, schema",
+          "Slug is read-only after creation",
+          "Rotate API key with confirmation (old key invalidated immediately)",
+          "Danger zone: Delete endpoint (cascade deletes inbound log)"
+        ],
+        "file": "/docs-screenshots/11-external-04-edit-endpoint.png",
+        "importVar": "img_external_4"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-lookups",
+    "slug": "lookups",
+    "screenshots": [
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 1,
+        "caption": "Lookups — category browser (left) with empty detail pane",
+        "details": [
+          "Two-pane layout: left list of all lookup categories, right detail pane",
+          "Each category row shows name and item count",
+          "Sidebar entry 'Lookups' under SYSTEM group"
+        ],
+        "file": "/docs-screenshots/12-lookups-01-lookups-category-browser-left-with-.png",
+        "importVar": "img_lookups_1"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 2,
+        "caption": "Task Status Types — values table",
+        "details": [
+          "Columns: Default (star toggle), Name, Completed, Status (Active/Inactive), Actions",
+          "Star = mark default value (one per category)",
+          "Status badge: Active values are pickable in the app"
+        ],
+        "file": "/docs-screenshots/12-lookups-02-task-status-types-values-table.png",
+        "importVar": "img_lookups_2"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 3,
+        "caption": "Priorities — with default value highlighted",
+        "details": [
+          "Used by Tasks, Offers, Service Orders, Dispatches and Deals priority pickers"
+        ],
+        "file": "/docs-screenshots/12-lookups-03-priorities-with-default-value-highl.png",
+        "importVar": "img_lookups_3"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 4,
+        "caption": "Article Categories — taxonomy used by Articles &amp; Inventory",
+        "details": [
+          "14 entries (BODY, CLEANING, DETAILING, ELECTRICAL, INSPECTION, MECHANICAL, PAINTING…)",
+          "Drives Articles module filtering and reporting"
+        ],
+        "file": "/docs-screenshots/12-lookups-04-article-categories-taxonomy-used-by.png",
+        "importVar": "img_lookups_4"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 5,
+        "caption": "Article Groups — secondary grouping",
+        "details": [
+          "18 entries; orthogonal to Categories, used for pricing groups and stock segmentation"
+        ],
+        "file": "/docs-screenshots/12-lookups-05-article-groups-secondary-grouping.png",
+        "importVar": "img_lookups_5"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 6,
+        "caption": "Service Categories — applied to service-type articles &amp; service orders",
+        "details": [
+          "10 entries (Electrical &amp; Diagnostics, Inspection &amp; Support, Maintenance &amp; Care, Mechanical, Painting &amp; Body…)"
+        ],
+        "file": "/docs-screenshots/12-lookups-06-service-categories-applied-to-servi.png",
+        "importVar": "img_lookups_6"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 7,
+        "caption": "Leave Types — extra Paid/Unpaid column for HR payroll integration",
+        "details": [
+          "Paid badge: drives whether the leave deducts from salary in payroll runs"
+        ],
+        "file": "/docs-screenshots/12-lookups-07-leave-types-extra-paid-unpaid-colum.png",
+        "importVar": "img_lookups_7"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 8,
+        "caption": "Locations — physical locations / branches used across modules",
+        "details": [
+          "Used by Stock Management, Dispatcher and Service Orders to attach a site"
+        ],
+        "file": "/docs-screenshots/12-lookups-08-locations-physical-locations-branch.png",
+        "importVar": "img_lookups_8"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 9,
+        "caption": "Full category list — all lookup categories visible",
+        "details": [
+          "Scrolled view showing remaining categories: Offer Sources, Installation Categories, Work Types, Expense Types, Project Types, Form Categories, Document Types"
+        ],
+        "file": "/docs-screenshots/12-lookups-09-full-category-list-all-lookup-categ.png",
+        "importVar": "img_lookups_9"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 10,
+        "caption": "Create New Item dialog",
+        "details": [
+          "Name (required), Active toggle, Sort Order",
+          "Some categories add extra fields (Paid for Leave Types, Completed for Task Statuses)"
+        ],
+        "file": "/docs-screenshots/12-lookups-10-create-new-item-dialog.png",
+        "importVar": "img_lookups_10"
+      },
+      {
+        "module": 12,
+        "moduleId": "module-lookups",
+        "screenshot": 11,
+        "caption": "Edit Item dialog — same shape as Create, prefilled",
+        "details": [
+          "Renaming a value updates it everywhere it is referenced",
+          "Toggle Active off to retire a value without breaking historical records"
+        ],
+        "file": "/docs-screenshots/12-lookups-11-edit-item-dialog-same-shape-as-crea.png",
+        "importVar": "img_lookups_11"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-scheduling",
+    "slug": "scheduling",
+    "screenshots": [
+      {
+        "module": 13,
+        "moduleId": "module-scheduling",
+        "screenshot": 1,
+        "caption": "Planner — 3-day timeline view with technician swimlanes",
+        "details": [
+          "Toolbar: Today shortcut, navigation, date-range picker, Range tabs (1d/3d/5d/7d/14d/30d), Zoom in/out, Status filter",
+          "Left column: technician roster — avatar, name, availability",
+          "Grid: hours 08–17 per day, vertical orange line marks the current time",
+          "Job pills: colored bar with priority dot + label anchored to hour slot",
+          "Right rail: Service Orders panel with toggle 'Service Orders / Per Installation'"
+        ],
+        "file": "/docs-screenshots/13-scheduling-01-planner-3-day-timeline-view-with-te.png",
+        "importVar": "img_scheduling_1"
+      },
+      {
+        "module": 13,
+        "moduleId": "module-scheduling",
+        "screenshot": 2,
+        "caption": "7-day view — full week with weekend Day Off highlighting",
+        "details": [
+          "Same swimlane grid expanded across 7 days (Wed → Tue)",
+          "Weekends rendered with a soft red overlay and a 'Day Off' chip per technician row"
+        ],
+        "file": "/docs-screenshots/13-scheduling-02-7-day-view-full-week-with-weekend-d.png",
+        "importVar": "img_scheduling_2"
+      },
+      {
+        "module": 13,
+        "moduleId": "module-scheduling",
+        "screenshot": 3,
+        "caption": "30-day overview — monthly calendar with technician avatars per day",
+        "details": [
+          "Monthly grid (Sun → Sat) showing the full 30-day window",
+          "Each day cell stacks the avatars of technicians with at least one dispatch",
+          "Today highlighted with brand orange in the day number badge",
+          "Click any day cell to drill back into the daily / 3-day timeline"
+        ],
+        "file": "/docs-screenshots/13-scheduling-03-30-day-overview-monthly-calendar-wi.png",
+        "importVar": "img_scheduling_3"
+      }
+    ]
+  },
+  {
+    "moduleId": "module-settings",
+    "slug": "settings",
+    "screenshots": [
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 1,
+        "caption": "Profile section — avatar, identity &amp; contact",
+        "details": [
+          "Avatar upload (PNG/JPG, &lt; 2 MB)",
+          "First name, Last name, Email, Phone, Job title (required fields marked)",
+          "Language (EN/FR) and Timezone selectors",
+          "Save changes / Cancel actions"
+        ],
+        "file": "/docs-screenshots/14-settings-01-profile-section-avatar-identity-amp.png",
+        "importVar": "img_settings_1"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 2,
+        "caption": "Company branding &amp; identity",
+        "details": [
+          "Company logo (used on PDFs, sidebar, login screen)",
+          "Company name, Website, Phone, Industry, Default currency",
+          "Appears in invoices and emails"
+        ],
+        "file": "/docs-screenshots/14-settings-02-company-branding-amp-identity.png",
+        "importVar": "img_settings_2"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 3,
+        "caption": "Password change form",
+        "details": [
+          "Current password, New password (min 8 chars, strength meter), Confirm new password",
+          "Update password re-authenticates and rotates the JWT; other sessions invalidated"
+        ],
+        "file": "/docs-screenshots/14-settings-03-password-change-form.png",
+        "importVar": "img_settings_3"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 4,
+        "caption": "Theme, accent color &amp; layout density",
+        "details": [
+          "Theme: Light · Dark · System (follows OS)",
+          "Primary color: choose accent — updates CSS variables live",
+          "Layout style: Compact · Comfortable",
+          "Sidebar collapsed toggle persisted in localStorage"
+        ],
+        "file": "/docs-screenshots/14-settings-04-theme-accent-color-amp-layout-densi.png",
+        "importVar": "img_settings_4"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 5,
+        "caption": "Per-module offline cache toggles",
+        "details": [
+          "Per-module toggles: Contacts, Articles, Offers, Sales, Service Orders, HR",
+          "Last cache refresh timestamp",
+          "Refresh now (forces re-pull) and Clear cache buttons"
+        ],
+        "file": "/docs-screenshots/14-settings-05-per-module-offline-cache-toggles.png",
+        "importVar": "img_settings_5"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 6,
+        "caption": "Companies list with pinned &amp; target indicators",
+        "details": [
+          "Multi-tenant company manager",
+          "Pin icon to set as default Target Company on next login",
+          "Edit, Delete (soft-deletes, data retained 30 days)"
+        ],
+        "file": "/docs-screenshots/14-settings-06-companies-list-with-pinned-amp-targ.png",
+        "importVar": "img_settings_6"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 7,
+        "caption": "New Company modal",
+        "details": [
+          "Company name, Legal name, Tax ID, Country, Default currency, Logo (optional)",
+          "Create provisions the company and switches the Target Company picker to it"
+        ],
+        "file": "/docs-screenshots/14-settings-07-new-company-modal.png",
+        "importVar": "img_settings_7"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 8,
+        "caption": "Users table — search, filters, status",
+        "details": [
+          "Full-text search on name + email",
+          "Filter by role and active/inactive status",
+          "Row: Edit (update profile, role, status), Deactivate (revokes access, preserves history)"
+        ],
+        "file": "/docs-screenshots/14-settings-08-users-table-search-filters-status.png",
+        "importVar": "img_settings_8"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 9,
+        "caption": "Create User modal",
+        "details": [
+          "First name, Last name, Email, Role (drives permissions), Initial password, Send invite email toggle",
+          "If blank password: sends invitation email with sign-in link"
+        ],
+        "file": "/docs-screenshots/14-settings-09-create-user-modal.png",
+        "importVar": "img_settings_9"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 10,
+        "caption": "Roles — RBAC role list",
+        "details": [
+          "Each role defines what its members can view, create, edit and delete across all modules",
+          "Built-in roles: Admin, Manager, User, Technician (read-only for field operations)"
+        ],
+        "file": "/docs-screenshots/14-settings-10-roles-rbac-role-list.png",
+        "importVar": "img_settings_10"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 11,
+        "caption": "Create Role modal",
+        "details": [
+          "Role name, description, and permission template picker",
+          "Permissions can be fine-tuned per module after creation"
+        ],
+        "file": "/docs-screenshots/14-settings-11-create-role-modal.png",
+        "importVar": "img_settings_11"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 12,
+        "caption": "Role row actions menu",
+        "details": [
+          "View, Edit General Info, Edit Permissions, Duplicate, Delete"
+        ],
+        "file": "/docs-screenshots/14-settings-12-role-row-actions-menu.png",
+        "importVar": "img_settings_12"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 13,
+        "caption": "Edit Role — General Info tab",
+        "details": [
+          "Name, description, color tag, default dashboard override"
+        ],
+        "file": "/docs-screenshots/14-settings-13-edit-role-general-info-tab.png",
+        "importVar": "img_settings_13"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 14,
+        "caption": "Edit Role — Permissions matrix",
+        "details": [
+          "Per-module permission rows: View / Create / Edit / Delete toggles",
+          "Modules: Dashboard, Contacts, Offers, Sales, Service Orders, Articles, Purchases, HR, Workflow, Dynamic Forms, Lookups, Settings…",
+          "Save persists the RBAC matrix and immediately affects all users in this role"
+        ],
+        "file": "/docs-screenshots/14-settings-14-edit-role-permissions-matrix.png",
+        "importVar": "img_settings_14"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 15,
+        "caption": "Integrations — connected apps and API keys",
+        "details": [
+          "List of connected integrations (Google, Microsoft, TEJ, etc.)",
+          "API Key management for external integrations"
+        ],
+        "file": "/docs-screenshots/14-settings-15-integrations-connected-apps-and-api.png",
+        "importVar": "img_settings_15"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 16,
+        "caption": "Subscription — plan details, billing and usage",
+        "details": [
+          "Current plan, billing cycle, usage vs limits",
+          "Upgrade / Downgrade / Cancel actions"
+        ],
+        "file": "/docs-screenshots/14-settings-16-subscription-plan-details-billing-a.png",
+        "importVar": "img_settings_16"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 17,
+        "caption": "System Config — application-wide toggles",
+        "details": [
+          "Application-wide settings and feature toggles",
+          "Numbering settings for documents (offers, sales, purchase orders)"
+        ],
+        "file": "/docs-screenshots/14-settings-17-system-config-application-wide-togg.png",
+        "importVar": "img_settings_17"
+      },
+      {
+        "module": 14,
+        "moduleId": "module-settings",
+        "screenshot": 18,
+        "caption": "Sync History — audit of data sync operations",
+        "details": [
+          "Chronological log of sync operations with status, duration and record counts"
+        ],
+        "file": "/docs-screenshots/14-settings-18-sync-history-audit-of-data-sync-ope.png",
+        "importVar": "img_settings_18"
+      }
+    ]
+  }
+]
