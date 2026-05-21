@@ -29,7 +29,6 @@ const productDefaults = (lang: Lang): MegaConfig => {
           { label: fr ? "Gestion de la finance" : "Finance Management", desc: fr ? "Contrôlez vos devis, factures, paiements et indicateurs financiers." : "Control your quotes, invoices, payments and financial KPIs.", icon: "Banknote", href: "/features", isRoute: true },
           { label: fr ? "Gestion de la ressource humaine" : "Human Resource Management", desc: fr ? "Gérez vos employés, la paie, les congés et les performances RH." : "Manage your employees, payroll, leaves and HR performance.", icon: "UserCheck", href: "/features", isRoute: true },
         ],
-        footer: { label: fr ? "Découvrir toutes les fonctionnalités →" : "Discover all features →", href: "/features" },
       },
       {
         id: "features",
@@ -43,6 +42,7 @@ const productDefaults = (lang: Lang): MegaConfig => {
           { label: fr ? "Exécution des Services & Documentation Digitale" : "Service Execution & Digital Documentation", desc: fr ? "Checklists, photos, signatures électroniques et rapports terrain." : "Checklists, photos, e-signatures and automated field reports.", icon: "ClipboardCheck", href: "/features", isRoute: true },
           { label: fr ? "Facturation, Analyse, IA & Automatisation" : "Invoicing, Analytics, AI & Automation", desc: fr ? "Facturation automatisée, KPI, tableaux de bord IA et workflows." : "Automated invoicing, KPIs, AI dashboards and business workflows.", icon: "BarChart3", href: "/features", isRoute: true },
         ],
+        footer: { label: fr ? "Découvrir toutes les fonctionnalités →" : "Discover all features →", href: "/features" },
       },
       {
         id: "interfaces",
