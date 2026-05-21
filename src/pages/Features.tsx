@@ -29,7 +29,7 @@ const sections: Section[] = [
     subtitleEn: "Get a real-time picture of your business with configurable KPI dashboards, drag-and-drop widget builder and 14 chart types.",
     subtitleFr: "Obtenez une vue en temps réel de votre activité avec des tableaux de bord KPI configurables, un constructeur de widgets par glisser-déposer et 14 types de graphiques.",
     image: "/docs-screenshots/02-dashboard-05-default-service-dashboard-kpis-char.png",
-    color: "from-blue-500/20 to-blue-500/5",
+    color: "bg-blue-500",
     features: [
       { titleEn: "Drag & Drop Builder", titleFr: "Constructeur glisser-déposer", descEn: "Build custom dashboards with 14 widget types — KPI, bar, line, pie, gauge, heatmap, map and more.", descFr: "Construisez des tableaux de bord avec 14 types de widgets — KPI, barres, lignes, camembert, jauge, carte thermique et plus." },
       { titleEn: "Built-in Dashboards", titleFr: "Tableaux de bord intégrés", descEn: "Ready-to-use dashboards for Service, Sales, HR, Finance and Executive views switchable from the top bar.", descFr: "Tableaux de bord prêts à l'emploi pour Service, Ventes, RH, Finance et direction, accessibles depuis la barre supérieure." },
@@ -46,7 +46,7 @@ const sections: Section[] = [
     subtitleEn: "Unified directory of persons, companies and suppliers with Tunisian fiscal IDs, geolocation and a 360° activity history.",
     subtitleFr: "Répertoire unifié de personnes, entreprises et fournisseurs avec identifiants fiscaux tunisiens, géolocalisation et historique d'activité 360°.",
     image: "/docs-screenshots/03-contacts-04-person-detail-360-tabs.png",
-    color: "from-violet-500/20 to-violet-500/5",
+    color: "bg-green-600",
     features: [
       { titleEn: "Persons, Companies & Suppliers", titleFr: "Personnes, Entreprises & Fournisseurs", descEn: "Three contact types in one place with dedicated fields, fiscal IDs (CIN, Matricule Fiscale) and geolocation.", descFr: "Trois types de contacts en un seul endroit avec champs dédiés, identifiants fiscaux et géolocalisation." },
       { titleEn: "360° Activity History", titleFr: "Historique d'activité 360°", descEn: "Full history of Offers, Sales, Service Orders, Purchases, Installations and Notes per contact.", descFr: "Historique complet des Offres, Ventes, Ordres de service, Achats, Installations et Notes par contact." },
@@ -63,7 +63,7 @@ const sections: Section[] = [
     subtitleEn: "End-to-end sales pipeline from quote to invoice with full Tunisian fiscal compliance, custom branding and PDF generation.",
     subtitleFr: "Pipeline de ventes de bout en bout, du devis à la facture, avec conformité fiscale tunisienne, branding personnalisé et génération PDF.",
     image: "/docs-screenshots/06-purchases-01-purchases-hub-kpis-recent-activity.png",
-    color: "from-orange-500/20 to-orange-500/5",
+    color: "bg-blue-600",
     features: [
       { titleEn: "Quotes & Orders", titleFr: "Offres & Commandes", descEn: "Multi-line quotes with auto totals, discount, VAT and fiscal stamp — convert to order in one click.", descFr: "Devis multi-lignes avec totaux automatiques, remise, TVA et timbre fiscal — convertis en commande en un clic." },
       { titleEn: "Invoicing", titleFr: "Facturation", descEn: "Generate compliant invoices with payment terms, installment schedules and retenue à la source.", descFr: "Générez des factures conformes avec conditions de paiement, échéanciers et retenue à la source." },
@@ -80,7 +80,7 @@ const sections: Section[] = [
     subtitleEn: "Multi-warehouse stock control with full movement history, low-stock alerts and automatic replenishment proposals.",
     subtitleFr: "Contrôle des stocks multi-entrepôts avec historique complet des mouvements, alertes de stock bas et propositions de réapprovisionnement automatiques.",
     image: "/docs-screenshots/05-stock-management-01-stock-management-at-a-glance-grid-w.png",
-    color: "from-amber-500/20 to-amber-500/5",
+    color: "bg-green-500",
     features: [
       { titleEn: "Multi-warehouse", titleFr: "Multi-entrepôts", descEn: "Manage multiple physical or logical warehouse locations per company with per-warehouse stock quantities.", descFr: "Gérez plusieurs emplacements d'entrepôts physiques ou logiques par entreprise avec quantités par entrepôt." },
       { titleEn: "Movement Types", titleFr: "Types de mouvements", descEn: "Stock In, Stock Out, Transfer, Adjustment, Damaged, Lost and Return — all logged with source document.", descFr: "Entrée, Sortie, Transfert, Ajustement, Endommagé, Perdu et Retour — tous tracés avec le document source." },
@@ -97,7 +97,7 @@ const sections: Section[] = [
     subtitleEn: "Complete field-service lifecycle from creation to invoicing — jobs, dispatches, time tracking, materials, checklists and PDF reports.",
     subtitleFr: "Cycle de vie complet des interventions terrain de la création à la facturation — jobs, dispatches, temps, matériaux, checklists et rapports PDF.",
     image: "/docs-screenshots/07-service-orders-09-detail-dispatches-tab.png",
-    color: "from-green-500/20 to-green-500/5",
+    color: "bg-blue-700",
     features: [
       { titleEn: "Full Lifecycle", titleFr: "Cycle de vie complet", descEn: "Pending → Scheduled → In Progress → Technically Completed → Ready for Invoice → Invoiced → Closed.", descFr: "En attente → Planifié → En cours → Techniquement terminé → Prêt pour facturation → Facturé → Clôturé." },
       { titleEn: "Jobs & Dispatches", titleFr: "Jobs & Dispatches", descEn: "Group jobs by installation with assigned technicians, priorities and scheduled date/time per dispatch.", descFr: "Regroupez les jobs par installation avec techniciens assignés, priorités et date/heure planifiée par dispatch." },
@@ -114,7 +114,7 @@ const sections: Section[] = [
     subtitleEn: "Interactive swimlane planner for technician dispatch — drag and drop jobs, detect conflicts and optimise routes with AI.",
     subtitleFr: "Planificateur swimlane interactif pour le dispatch technicien — glissez-déposez les jobs, détectez les conflits et optimisez les tournées avec l'IA.",
     image: "/docs-screenshots/13-scheduling-01-planner-3-day-timeline-view-with-te.png",
-    color: "from-teal-500/20 to-teal-500/5",
+    color: "bg-green-700",
     features: [
       { titleEn: "Swimlane Timeline", titleFr: "Chronologie swimlane", descEn: "Technician rows × hour columns with 1-day to 30-day horizons and a real-time current-time indicator.", descFr: "Lignes techniciens × colonnes heures avec horizons de 1 à 30 jours et indicateur de l'heure actuelle." },
       { titleEn: "Drag & Drop Rescheduling", titleFr: "Replanification par glisser-déposer", descEn: "Move or resize job pills to reschedule or reassign — conflicts highlighted instantly.", descFr: "Déplacez ou redimensionnez les pastilles de job pour replanifier ou réassigner — conflits mis en évidence instantanément." },
@@ -131,7 +131,7 @@ const sections: Section[] = [
     subtitleEn: "Complete HR suite tuned for Tunisian law — payroll, CNSS, attendance, leaves, org chart, performance and recruitment.",
     subtitleFr: "Suite RH complète adaptée à la législation tunisienne — paie, CNSS, présences, congés, organigramme, performance et recrutement.",
     image: "/docs-screenshots/08-hr-07-payroll-runs-tunisian-2025-law-cnss.png",
-    color: "from-pink-500/20 to-pink-500/5",
+    color: "bg-blue-500",
     features: [
       { titleEn: "Payroll & CNSS", titleFr: "Paie & CNSS", descEn: "Automated payroll runs with CNSS, CSS and IRPP progressive brackets — PDF payslips and monthly CNSS declaration.", descFr: "Exécution automatisée de la paie avec barèmes CNSS, CSS et IRPP — bulletins de salaire PDF et déclaration CNSS mensuelle." },
       { titleEn: "Attendance Tracking", titleFr: "Suivi des présences", descEn: "List and matrix views of monthly attendance with worked hours, overtime and late counts per employee.", descFr: "Vues liste et matrice des présences mensuelles avec heures travaillées, heures sup et retards par employé." },
@@ -148,7 +148,7 @@ const sections: Section[] = [
     subtitleEn: "Visual no-code automation engine with AI-assisted graph generation, live debugger and version history.",
     subtitleFr: "Moteur d'automatisation visuel no-code avec génération de graphe assistée par IA, débogueur en direct et historique des versions.",
     image: "/docs-screenshots/10-workflow-02-live-canvas-full-default-business-w.png",
-    color: "from-cyan-500/20 to-cyan-500/5",
+    color: "bg-green-600",
     features: [
       { titleEn: "React-Flow Canvas", titleFr: "Canevas React-Flow", descEn: "Pan, zoom, snap-to-grid, multi-select and undo/redo on an infinite canvas with mini-map.", descFr: "Panoramique, zoom, magnétisme grille, sélection multiple et annuler/rétablir sur un canevas infini avec mini-carte." },
       { titleEn: "Triggers & Actions", titleFr: "Déclencheurs & Actions", descEn: "Webhook, Scheduled CRON, Status-change and Entity-created triggers — plus 10+ action node types.", descFr: "Déclencheurs Webhook, CRON planifié, Changement de statut et Entité créée — plus de 10 types de nœuds d'action." },
@@ -165,7 +165,7 @@ const sections: Section[] = [
     subtitleEn: "Full procure-to-pay cycle adapted to the Tunisian fiscal context — PO, receipt, supplier invoice and payment in one flow.",
     subtitleFr: "Cycle d'approvisionnement complet adapté au contexte fiscal tunisien — BC, réception, facture fournisseur et paiement en un seul flux.",
     image: "/docs-screenshots/06-purchases-02-purchase-orders-list.png",
-    color: "from-indigo-500/20 to-indigo-500/5",
+    color: "bg-blue-600",
     features: [
       { titleEn: "Purchase Orders", titleFr: "Bons de commande", descEn: "Multi-line POs with payment terms, fiscal stamp and auto totals — full status flow from Draft to Closed.", descFr: "BC multi-lignes avec conditions de paiement, timbre fiscal et totaux automatiques — flux de statut complet de Brouillon à Clôturé." },
       { titleEn: "Goods Receipts", titleFr: "Bons de réception", descEn: "Full or partial reception per line — automatic stock movement created on confirmation.", descFr: "Réception totale ou partielle par ligne — mouvement de stock créé automatiquement à la confirmation." },
@@ -182,7 +182,7 @@ const sections: Section[] = [
     subtitleEn: "Enterprise-grade access control, multi-tenancy, SSO and full audit logs — built in from day one.",
     subtitleFr: "Contrôle d'accès de niveau entreprise, multi-tenants, SSO et journaux d'audit complets — intégrés dès le premier jour.",
     image: "/docs-screenshots/14-settings-14-edit-role-permissions-matrix.png",
-    color: "from-slate-500/20 to-slate-500/5",
+    color: "bg-green-800",
     features: [
       { titleEn: "RBAC Permissions", titleFr: "Permissions RBAC", descEn: "Fine-grained role-based access control with a permission matrix per module — view, create, edit, delete.", descFr: "Contrôle d'accès basé sur les rôles avec matrice de permissions par module — voir, créer, modifier, supprimer." },
       { titleEn: "Multi-Company", titleFr: "Multi-entreprises", descEn: "Manage multiple companies and tenants from a single account — pin your default company.", descFr: "Gérez plusieurs entreprises et tenants depuis un seul compte — épinglez votre entreprise par défaut." },
@@ -220,7 +220,7 @@ const ui = {
 };
 
 const FeatureCard = ({ titleEn, titleFr, descEn, descFr, isFr }: Feature & { isFr: boolean }) => (
-  <div className="bg-background rounded-xl border border-border p-5 hover:border-primary/30 hover:shadow-sm transition-all">
+  <div className="bg-white dark:bg-card rounded-xl border border-slate-200 dark:border-border p-5 shadow-sm hover:shadow-md hover:border-primary/40 transition-all">
     <h4 className="font-bold text-sm mb-1.5 text-foreground">{isFr ? titleFr : titleEn}</h4>
     <p className="text-xs text-muted-foreground leading-relaxed">{isFr ? descFr : descEn}</p>
   </div>
@@ -265,9 +265,8 @@ const FeaturesPage = () => {
         </div>
       </div>
 
-      <div className="py-12 space-y-10 container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl">
+      <div className="py-12 space-y-6 container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl">
         {sections.map((section, i) => {
-          const flip = i % 2 !== 0;
           const cat = isFr ? section.categoryFr : section.categoryEn;
           return (
             <motion.div
@@ -276,26 +275,27 @@ const FeaturesPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: 0.05 }}
-              className="rounded-2xl border border-border bg-muted/20 overflow-hidden"
+              className="rounded-2xl overflow-hidden bg-white dark:bg-card border border-slate-200 dark:border-border shadow-md"
             >
-              <div className={`flex flex-col ${flip ? "lg:flex-row-reverse" : "lg:flex-row"}`}>
+              <div className="flex flex-col lg:flex-row">
 
-                {/* Left / Right: Image + heading */}
-                <div className="lg:w-[42%] shrink-0 flex flex-col">
-                  <div className="relative overflow-hidden bg-muted flex-1 min-h-[220px]">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${section.color} opacity-60`} />
-                    <img
-                      src={section.image}
-                      alt={isFr ? section.titleFr : section.titleEn}
-                      className="w-full h-full object-cover object-top"
-                      loading="lazy"
-                    />
+                {/* Left: neutral image panel */}
+                <div className="lg:w-[42%] shrink-0 flex flex-col bg-slate-100 dark:bg-slate-800/60">
+                  <div className="flex-1 min-h-[220px] flex items-center justify-center p-6 overflow-hidden">
+                    <div className="rotate-3 rounded-xl overflow-hidden shadow-2xl border-4 border-slate-300/60 dark:border-white/10 w-[93%] max-h-[210px]">
+                      <img
+                        src={section.image}
+                        alt={isFr ? section.titleFr : section.titleEn}
+                        className="w-full h-full object-cover object-top"
+                        loading="lazy"
+                      />
+                    </div>
                   </div>
-                  <div className="p-6 border-t border-border bg-muted/30">
+                  <div className="p-6 border-t border-slate-200 dark:border-slate-700">
                     <span className={`inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full mb-3 ${categoryColors[cat] || "bg-primary/10 text-primary"}`}>
                       {cat}
                     </span>
-                    <h2 className="text-xl font-extrabold tracking-tight mb-2">
+                    <h2 className="text-xl font-extrabold tracking-tight mb-2 text-foreground">
                       {isFr ? section.titleFr : section.titleEn}
                     </h2>
                     <p className="text-sm text-muted-foreground leading-relaxed">
@@ -304,8 +304,8 @@ const FeaturesPage = () => {
                   </div>
                 </div>
 
-                {/* Right / Left: Feature grid */}
-                <div className="lg:flex-1 p-6 lg:p-8">
+                {/* Right: Feature grid on visible gray */}
+                <div className="lg:flex-1 bg-slate-100 dark:bg-slate-800/50 p-6 lg:p-8">
                   <div className="grid sm:grid-cols-2 gap-3 h-full content-start">
                     {section.features.map((f, fi) => (
                       <FeatureCard key={fi} {...f} isFr={isFr} />

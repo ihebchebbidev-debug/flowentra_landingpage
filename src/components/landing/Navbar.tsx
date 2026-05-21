@@ -5,10 +5,12 @@ import { languages, publicLanguages } from "@/lib/i18n";
 import logo from "@/assets/flowentra-logo.png";
 import {
   Menu, X, ChevronDown, ChevronRight, Layers,
-  Wrench, FolderKanban, LayoutDashboard,
-  MapPin, Brain, ShieldCheck, BarChart3,
-  Smartphone, Globe,
-  Snowflake, Zap, Building2, Eye, SprayCan, Settings2, Sun, Wifi,
+  Wrench, FolderKanban, LayoutDashboard, ClipboardCheck,
+  BarChart3,
+  Smartphone, Globe, Users, ShoppingCart, Banknote, UserCheck, CalendarDays, FileText,
+  Sparkles, TrendingUp, Code2,
+  Snowflake, Building2, Eye, SprayCan, Settings2, Sun, Wifi,
+  Droplets, Frame, Store, UtensilsCrossed,
   CircuitBoard,
   Play, HelpCircle, BookOpen, MessageCircle, Handshake, HeadphonesIcon,
 } from "lucide-react";
@@ -23,6 +25,14 @@ const resolveIcon = (name: string | undefined, fallback: React.ElementType = Lay
   (name && MEGA_ICONS[name]) || fallback;
 
 // ── Types ──
+interface NavItem {
+  label: string;
+  id: string;
+  href?: string;
+  hasMega?: boolean;
+  isRoute?: boolean;
+}
+
 interface TabItem {
   label: string;
   desc?: string;
@@ -46,23 +56,11 @@ interface RawTabItem { label: string; desc?: string; href: string; isRoute?: boo
 interface RawTab { id: string; label: string; icon?: string; items: RawTabItem[]; footer?: { label: string; href: string } }
 interface RawMega { tabs: RawTab[] }
 
-const hydrateMega = (raw: RawMega | undefined, fallback: MegaConfig): MegaConfig => {
-  if (!raw || !Array.isArray(raw.tabs) || raw.tabs.length === 0) return fallback;
-  return {
-    tabs: raw.tabs.map((t, i) => ({
-      id: t.id || `tab-${i}`,
-      label: t.label || "",
-      icon: resolveIcon(t.icon, fallback.tabs[i]?.icon || Layers),
-      items: (t.items || []).map((it) => ({
-        label: it.label || "",
-        desc: it.desc,
-        href: it.href || "#",
-        isRoute: !!it.isRoute,
-        icon: resolveIcon(it.icon, Layers),
-      })),
-      footer: t.footer,
-    })),
-  };
+const hydrateMega = (_raw: RawMega | undefined, fallback: MegaConfig): MegaConfig => {
+  // Always use the fallback as source of truth for structure and labels.
+  // The CMS backend may have stale item counts or wrong-language text stored,
+  // so code changes here take immediate effect without needing a DB reset.
+  return fallback;
 };
 
 const Navbar = () => {
@@ -119,20 +117,26 @@ const Navbar = () => {
           label: fr ? "Modules" : "Modules",
           icon: Layers,
           items: [
-            { label: fr ? "Service de terrain" : "Field Service", desc: fr ? "Gérez intelligemment le service sur le terrain." : "Intelligently manage field service.", icon: Wrench, href: "#features" },
-            { label: fr ? "Projet" : "Project", desc: fr ? "Planifiez et exécutez des projets efficacement." : "Plan and execute projects efficiently.", icon: FolderKanban, href: "#features" },
-            { label: fr ? "Bureau / CRM" : "Office / CRM", desc: fr ? "Devis, calculs et factures plus rapidement." : "Quotes, calculations and invoices faster.", icon: LayoutDashboard, href: "#features" },
-            { label: fr ? "Géolocalisation" : "Geolocation", desc: fr ? "Flotte, GPS et carnet de bord." : "Fleet, GPS and logbook.", icon: MapPin, href: "#features" },
+            { label: fr ? "Gestion de la relation clients (CRM)" : "Customer Relationship Management (CRM)", desc: fr ? "Gérez vos clients, prospects et opportunités en un seul endroit." : "Manage your clients, leads and opportunities in one place.", icon: Users, href: "/#features", isRoute: true },
+            { label: fr ? "Gestion des achats" : "Purchasing Management", desc: fr ? "Pilotez vos fournisseurs, bons de commande et réceptions de marchandises." : "Handle suppliers, purchase orders and goods receipts.", icon: ShoppingCart, href: "/#features", isRoute: true },
+            { label: fr ? "Gestion des services sur le terrain" : "Field Service Management", desc: fr ? "Planifiez, dispatchez et suivez vos interventions terrain en temps réel." : "Plan, dispatch and track your field operations in real time.", icon: Wrench, href: "/#features", isRoute: true },
+            { label: fr ? "Gestion des projets" : "Project Management", desc: fr ? "Organisez vos projets, tâches et équipes avec une vue d'ensemble claire." : "Organise your projects, tasks and teams with a clear overview.", icon: FolderKanban, href: "/#features", isRoute: true },
+            { label: fr ? "Gestion de la finance" : "Finance Management", desc: fr ? "Contrôlez vos devis, factures, paiements et indicateurs financiers." : "Control your quotes, invoices, payments and financial KPIs.", icon: Banknote, href: "/#features", isRoute: true },
+            { label: fr ? "Gestion de la ressource humaine" : "Human Resource Management", desc: fr ? "Gérez vos employés, la paie, les congés et les performances RH." : "Manage your employees, payroll, leaves and HR performance.", icon: UserCheck, href: "/#features", isRoute: true },
           ],
+          footer: { label: fr ? "Découvrir toutes les fonctionnalités →" : "Discover all features →", href: "/#features" },
         },
         {
           id: "features",
-          label: fr ? "Caractéristiques" : "Features",
+          label: fr ? "Fonctionnalités" : "Features",
           icon: CircuitBoard,
           items: [
-            { label: fr ? "Intelligence artificielle" : "Artificial Intelligence", desc: fr ? "Automatisez avec l'IA." : "Automate with AI.", icon: Brain, href: "#features" },
-            { label: fr ? "Sécurité" : "Security", desc: fr ? "Protection des données avancée." : "Advanced data protection.", icon: ShieldCheck, href: "#features" },
-            { label: fr ? "Analytique" : "Analytics", desc: fr ? "Tableaux de bord et rapports." : "Dashboards and reports.", icon: BarChart3, href: "#features" },
+            { label: fr ? "Devis Intelligents & Gestion Commerciale" : "Smart Quotes & Sales Management", desc: fr ? "Devis, calculs de coûts et automatisation des offres commerciales." : "Quotes, cost calculations and sales offer automation.", icon: FileText, href: "/features", isRoute: true },
+            { label: fr ? "Gestion Client & Communication" : "Client Management & Communication", desc: fr ? "CRM, portails clients, notifications et suivi des interactions." : "CRM, client portals, notifications and interaction tracking.", icon: Users, href: "/features", isRoute: true },
+            { label: fr ? "Gestion des Interventions & Équipes Terrain" : "Field Operations & Team Management", desc: fr ? "Planification, dispatch IA, suivi temps réel et application mobile." : "Scheduling, AI dispatch, real-time tracking and mobile app.", icon: CalendarDays, href: "/features", isRoute: true },
+            { label: fr ? "Gestion des Projets, Maintenance & Équipements" : "Project, Maintenance & Equipment Management", desc: fr ? "Projets, maintenance, équipements et historique des interventions." : "Projects, maintenance, equipment tracking and intervention history.", icon: FolderKanban, href: "/features", isRoute: true },
+            { label: fr ? "Exécution des Services & Documentation Digitale" : "Service Execution & Digital Documentation", desc: fr ? "Checklists, photos, signatures électroniques et rapports terrain." : "Checklists, photos, e-signatures and automated field reports.", icon: ClipboardCheck, href: "/features", isRoute: true },
+            { label: fr ? "Facturation, Analyse, IA & Automatisation" : "Invoicing, Analytics, AI & Automation", desc: fr ? "Facturation automatisée, KPI, tableaux de bord IA et workflows." : "Automated invoicing, KPIs, AI dashboards and business workflows.", icon: BarChart3, href: "/features", isRoute: true },
           ],
         },
         {
@@ -154,13 +158,16 @@ const Navbar = () => {
           icon: Building2,
           items: [
             { label: fr ? "Climatisation et réfrigération" : "HVAC & Refrigeration", icon: Snowflake, href: "#industries" },
-            { label: fr ? "Installations électriques" : "Electrical", icon: Zap, href: "#industries" },
+            { label: fr ? "Sanitaire et chauffage" : "Plumbing & Heating", icon: Droplets, href: "#industries" },
             { label: fr ? "Gestion des installations" : "Facility Management", icon: Building2, href: "#industries" },
             { label: fr ? "Sécurité et surveillance" : "Security & Surveillance", icon: Eye, href: "#industries" },
             { label: fr ? "Nettoyage et entretien" : "Cleaning & Maintenance", icon: SprayCan, href: "#industries" },
             { label: fr ? "Maintenance et SAV" : "Field Service & After-Sales", icon: Settings2, href: "#industries" },
             { label: fr ? "Solaire et énergies" : "Solar & Energy", icon: Sun, href: "#industries" },
             { label: fr ? "IT et télécommunications" : "IT & Telecom", icon: Wifi, href: "#industries" },
+            { label: fr ? "Construction des fenêtres et aluminium" : "Windows & Aluminium", icon: Frame, href: "#industries" },
+            { label: fr ? "Fabricant & Commerçant" : "Manufacturer & Retailer", icon: Store, href: "#industries" },
+            { label: fr ? "Equipement de cuisine" : "Kitchen Equipment", icon: UtensilsCrossed, href: "#industries" },
           ],
           footer: { label: fr ? "Trouvez votre secteur" : "Find your industry", href: "#industries" },
         },
@@ -169,9 +176,20 @@ const Navbar = () => {
           label: fr ? "Applications" : "Applications",
           icon: Layers,
           items: [
-            { label: "Flowentra CRM/Office", desc: fr ? "Gestion commerciale complète." : "Complete business management.", icon: LayoutDashboard, href: "#features" },
-            { label: "Flowentra Service", desc: fr ? "Gestion des interventions terrain." : "Field intervention management.", icon: Wrench, href: "#features" },
-            { label: "Flowentra Project", desc: fr ? "Pilotage de projets avancé." : "Advanced project management.", icon: FolderKanban, href: "#features" },
+            { label: "Flowentra CRM/Office", desc: fr ? "Gestion commerciale complète." : "Complete business management.", icon: LayoutDashboard, href: "/features", isRoute: true },
+            { label: "Flowentra Service", desc: fr ? "Gestion des interventions terrain." : "Field intervention management.", icon: Wrench, href: "/features", isRoute: true },
+          ],
+        },
+        {
+          id: "services",
+          label: fr ? "Services" : "Services",
+          icon: Settings2,
+          items: [
+            { label: fr ? "Conseil en processus" : "Process Consulting", desc: fr ? "Analyse et amélioration de vos processus métiers afin d'augmenter l'efficacité, réduire les coûts et aligner vos opérations avec vos objectifs." : "Analysis and improvement of your business processes to increase efficiency, reduce costs and align your operations with your goals.", icon: Eye, href: "#contact" },
+            { label: fr ? "Personnalisation et gestion de projets" : "Customisation & Project Management", desc: fr ? "Adaptation des solutions IT à vos besoins tout en assurant la planification, la coordination et la bonne livraison des projets." : "Tailoring IT solutions to your needs while ensuring planning, coordination and successful project delivery.", icon: Sparkles, href: "#contact" },
+            { label: fr ? "Développement de logiciels sur mesure" : "Custom Software Development", desc: fr ? "Création de solutions logicielles sécurisées et évolutives, conçues spécifiquement pour répondre aux besoins de votre entreprise." : "Building secure and scalable software solutions designed specifically to meet your business needs.", icon: Code2, href: "#contact" },
+            { label: fr ? "Solutions web et digitales" : "Web & Digital Solutions", desc: fr ? "Développement de sites web et d'applications web modernes pour améliorer votre présence en ligne et l'expérience utilisateur." : "Development of modern websites and web applications to improve your online presence and user experience.", icon: TrendingUp, href: "#contact" },
+            { label: fr ? "Support Client" : "Customer Support", desc: fr ? "Fournir une assistance réactive et fiable à vos clients, garantissant un fonctionnement fluide, une résolution rapide des problèmes et un support continu." : "Providing responsive and reliable assistance to your clients, ensuring smooth operation, fast issue resolution and continuous support.", icon: HeadphonesIcon, href: "/support", isRoute: true },
           ],
         },
       ],
@@ -219,11 +237,11 @@ const Navbar = () => {
   // Custom links from CMS — admins can append { label, href } pairs to nav.customLinks (JSON).
   const customLinks: Array<{ label: string; href: string }> = Array.isArray(navCms.customLinks) ? navCms.customLinks : [];
 
-  const navItems = [
-    { label: navMegaCms.productLabel || navMegaDefaults.productLabel, id: "product", hasMega: true },
-    { label: navMegaCms.solutionsLabel || navMegaDefaults.solutionsLabel, id: "solutions", hasMega: true },
-    { label: navMegaCms.resourcesLabel || navMegaDefaults.resourcesLabel, id: "resources", hasMega: true },
-    { label: navCms.pricing || (fr ? "Prix" : "Pricing"), id: "pricing", href: "/pricing", isRoute: true },
+  const navItems: NavItem[] = [
+    { label: navMegaDefaults.productLabel, id: "product", hasMega: true },
+    { label: navMegaDefaults.solutionsLabel, id: "solutions", hasMega: true },
+    { label: navMegaDefaults.resourcesLabel, id: "resources", hasMega: true },
+    { label: tr.nav.pricing, id: "pricing", href: "/pricing", isRoute: true },
     ...customLinks.map((c, i) => ({ label: c.label, id: `custom_${i}`, href: c.href, isRoute: c.href.startsWith("/") })),
     { label: navCms.contact || "Contact", id: "contact", href: "#contact" },
   ];
@@ -301,13 +319,23 @@ const Navbar = () => {
           </div>
 
           {currentTab.footer && (
-            <a
-              href={currentTab.footer.href}
-              onClick={closeMenu}
-              className="mt-6 block text-center py-4 rounded-xl border border-primary/20 bg-primary/5 text-[14px] font-semibold text-primary hover:bg-primary/10 transition-all"
-            >
-              {currentTab.footer.label}
-            </a>
+            currentTab.footer.href.startsWith("/") ? (
+              <Link
+                to={currentTab.footer.href}
+                onClick={closeMenu}
+                className="mt-6 block text-center py-4 rounded-xl border border-primary/20 bg-primary/5 text-[14px] font-semibold text-primary hover:bg-primary/10 transition-all"
+              >
+                {currentTab.footer.label}
+              </Link>
+            ) : (
+              <a
+                href={currentTab.footer.href}
+                onClick={closeMenu}
+                className="mt-6 block text-center py-4 rounded-xl border border-primary/20 bg-primary/5 text-[14px] font-semibold text-primary hover:bg-primary/10 transition-all"
+              >
+                {currentTab.footer.label}
+              </a>
+            )
           )}
         </div>
       </div>
@@ -374,20 +402,33 @@ const Navbar = () => {
               onMouseEnter={() => item.hasMega ? handleMenuEnter(item.id) : undefined}
               onMouseLeave={item.hasMega ? handleMenuLeave : undefined}
             >
-              <a
-                href={item.href || "#"}
-                onClick={(e) => { if (item.hasMega) e.preventDefault(); }}
-                className={`flex items-center gap-1 px-3.5 py-2 text-[13px] font-medium rounded-md transition-all ${
-                  isDarkHero
-                    ? 'text-white hover:text-white/80 hover:bg-white/10'
-                    : 'text-primary hover:text-primary/80 hover:bg-primary/10'
-                } ${activeMenu === item.id ? (isDarkHero ? 'text-white bg-white/10' : 'text-primary bg-primary/10') : ''}`}
-              >
-                {item.label}
-                {item.hasMega && (
-                  <ChevronDown className={`w-3.5 h-3.5 ${isDarkHero ? 'text-white' : 'text-primary'} transition-transform ${activeMenu === item.id ? 'rotate-180' : ''}`} />
-                )}
-              </a>
+              {item.isRoute ? (
+                <Link
+                  to={item.href!}
+                  className={`flex items-center gap-1 px-3.5 py-2 text-[15px] font-bold rounded-md transition-all ${
+                    isDarkHero
+                      ? 'text-white hover:text-white/80 hover:bg-white/10'
+                      : 'text-primary hover:text-primary/80 hover:bg-primary/10'
+                  } ${activeMenu === item.id ? (isDarkHero ? 'text-white bg-white/10' : 'text-primary bg-primary/10') : ''}`}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  href={item.href || "#"}
+                  onClick={(e) => { if (item.hasMega) e.preventDefault(); }}
+                  className={`flex items-center gap-1 px-3.5 py-2 text-[15px] font-bold rounded-md transition-all ${
+                    isDarkHero
+                      ? 'text-white hover:text-white/80 hover:bg-white/10'
+                      : 'text-primary hover:text-primary/80 hover:bg-primary/10'
+                  } ${activeMenu === item.id ? (isDarkHero ? 'text-white bg-white/10' : 'text-primary bg-primary/10') : ''}`}
+                >
+                  {item.label}
+                  {item.hasMega && (
+                    <ChevronDown className={`w-3.5 h-3.5 ${isDarkHero ? 'text-white' : 'text-primary'} transition-transform ${activeMenu === item.id ? 'rotate-180' : ''}`} />
+                  )}
+                </a>
+              )}
 
               {/* Full-width mega dropdown */}
               <AnimatePresence>
@@ -449,9 +490,9 @@ const Navbar = () => {
 
           <div className={`w-px h-5 ${isDarkHero ? 'bg-primary/30' : 'bg-primary/30'}`} />
 
-          <a href="#features" className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg transition-opacity hover:opacity-90 ${isDarkHero ? 'bg-primary text-primary-foreground' : 'bg-primary text-primary-foreground'}`}>
-            {navCms.discover || (fr ? "Découvrir" : "Discover")}
-          </a>
+          <Link to="/features" className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg transition-opacity hover:opacity-90 ${isDarkHero ? 'bg-primary text-primary-foreground' : 'bg-primary text-primary-foreground'}`}>
+            {fr ? "Découvrir" : "Discover"}
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -532,7 +573,7 @@ const Navbar = () => {
 
               <div className="pt-4 mt-3 border-t border-border">
                 <p className="text-[10px] font-semibold text-muted-foreground/50 tracking-widest uppercase px-4 mb-2">
-                  {navCms.languageLabel || (fr ? "Langue" : "Language")}
+                  {fr ? "Langue" : "Language"}
                 </p>
                 <div className="grid grid-cols-2 gap-2">
                   {publicLanguages.map((l) => (
@@ -550,7 +591,7 @@ const Navbar = () => {
 
               <div className="flex flex-col gap-2 pt-4">
                 <a href="#demo" onClick={() => setMobileOpen(false)} className="block text-center px-5 py-3.5 text-sm font-bold rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
-                  {navCms.requestDemo || navCms.cta || (fr ? "Demander une démo" : "Request Demo")}
+                  {fr ? "Demander une démo" : "Request Demo"}
                 </a>
               </div>
             </div>

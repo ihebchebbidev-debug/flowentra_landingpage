@@ -30,6 +30,7 @@ import Releases from "./pages/Releases";
 import Checkout from "./pages/Checkout";
 import Admin from "./pages/Admin";
 import PricingPage from "./pages/Pricing";
+import Features from "./pages/Features";
 import CustomPage from "./pages/CustomPage";
 
 const queryClient = new QueryClient();
@@ -78,6 +79,7 @@ const AppRoutes = () => {
       <Route path="/releases" element={<Releases />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/pricing" element={<PricingPage />} />
+      <Route path="/features" element={<Features />} />
       <Route path="/p/:slug" element={<CustomPage />} />
       <Route path="/admin" element={
         <AdminOverlayProvider>

@@ -10,11 +10,24 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
+const LANG_STORAGE_KEY = "flowentra_lang";
+
+const getInitialLang = (): Lang => {
+  try {
+    const stored = localStorage.getItem(LANG_STORAGE_KEY) as Lang | null;
+    if (stored && ["en", "fr", "de", "ar"].includes(stored)) return stored;
+  } catch {}
+  const browser = navigator.language.slice(0, 2).toLowerCase();
+  if (browser === "fr") return "fr";
+  return "en";
+};
+
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [lang, setLangState] = useState<Lang>("fr");
+  const [lang, setLangState] = useState<Lang>(getInitialLang);
 
   const setLang = useCallback((newLang: Lang) => {
     setLangState(newLang);
+    try { localStorage.setItem(LANG_STORAGE_KEY, newLang); } catch {}
     const langConfig = languages.find((l) => l.code === newLang);
     document.documentElement.dir = langConfig?.dir || "ltr";
     document.documentElement.lang = newLang;

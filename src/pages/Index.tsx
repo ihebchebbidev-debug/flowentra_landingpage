@@ -83,9 +83,7 @@ const Index = () => {
       <EditableSection sectionKey="features" label="Features">
         <Features />
       </EditableSection>
-      <EditableSection sectionKey="productShowcase" label="Showcase">
-        <ProductShowcase />
-      </EditableSection>
+      <ProductShowcase />
       <EditableSection sectionKey="howItWorks" label="Steps">
         <HowItWorks />
       </EditableSection>
