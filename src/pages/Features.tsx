@@ -242,26 +242,15 @@ const FeaturesPage = () => {
         <Navbar />
       </EditableSection>
 
-      <div className="pt-24 pb-4">
-        <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl text-center">
-          <motion.p
-            className="text-xs font-bold tracking-widest uppercase text-primary mb-3"
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+      <div className="pt-24 pb-6 bg-card border-b border-border">
+        <div className="container mx-auto px-5 sm:px-6 lg:px-8 max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
           >
-            {t.sectionLabel}
-          </motion.p>
-          <motion.h1
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4"
-            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }}
-          >
-            {t.title}
-          </motion.h1>
-          <motion.p
-            className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            {t.subtitle}
-          </motion.p>
+            <p className="text-xs font-bold tracking-widest uppercase text-primary mb-1">{t.sectionLabel}</p>
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">{t.title}</h1>
+            <p className="text-sm text-muted-foreground max-w-2xl">{t.subtitle}</p>
+          </motion.div>
         </div>
       </div>
 

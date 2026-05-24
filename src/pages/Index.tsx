@@ -7,9 +7,7 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import Metrics from "@/components/landing/Metrics";
 
 import IntegrationsShowcase from "@/components/landing/IntegrationsShowcase";
-import Testimonials from "@/components/landing/Testimonials";
 import FAQ from "@/components/landing/FAQ";
-import ContactSection from "@/components/landing/ContactSection";
 import CTABanner from "@/components/landing/CTABanner";
 import Footer from "@/components/landing/Footer";
 import EditableSection from "@/components/landing/EditableSection";
@@ -93,14 +91,8 @@ const Index = () => {
       <EditableSection sectionKey="integrations" label="Integrations">
         <IntegrationsShowcase />
       </EditableSection>
-      <EditableSection sectionKey="testimonials" label="Testimonials">
-        <Testimonials />
-      </EditableSection>
-      <EditableSection sectionKey="faq" label="FAQ">
+<EditableSection sectionKey="faq" label="FAQ">
         <FAQ />
-      </EditableSection>
-      <EditableSection sectionKey="contact" label="Contact">
-        <ContactSection />
       </EditableSection>
       <EditableSection sectionKey="ctaBanner" label="CTA">
         <CTABanner />

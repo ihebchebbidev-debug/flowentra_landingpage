@@ -41,7 +41,7 @@ const HowItWorks = () => {
   const items = cms.items || [];
 
   return (
-    <section className="py-20 sm:py-28 lg:py-36 bg-muted/30">
+    <section className="py-12 sm:py-16 lg:py-20 bg-muted/30">
       <div className="container mx-auto px-5 sm:px-4 lg:px-8">
         <motion.h2
           className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-center mb-14 sm:mb-20"

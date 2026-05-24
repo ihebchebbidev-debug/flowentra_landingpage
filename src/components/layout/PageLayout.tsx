@@ -39,16 +39,16 @@ const PageLayout = ({
       noindex={noindex}
     />
     <Navbar />
-    <section className="pt-28 pb-16 bg-card border-b border-border">
+    <section className="pt-24 pb-6 bg-card border-b border-border">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
           className="max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <h1 className="text-3xl lg:text-5xl font-extrabold tracking-tight mb-4">{title}</h1>
-          {subtitle && <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl">{subtitle}</p>}
+          <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight mb-2">{title}</h1>
+          {subtitle && <p className="text-sm text-muted-foreground leading-relaxed max-w-2xl">{subtitle}</p>}
         </motion.div>
       </div>
     </section>

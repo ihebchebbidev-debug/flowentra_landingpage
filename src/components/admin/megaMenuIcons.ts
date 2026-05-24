@@ -12,7 +12,7 @@ import {
   Headphones, HeadphonesIcon, Mic, Video, Camera,
   // Tech & Devices
   Smartphone, Tablet, Laptop, Monitor, Server, Database, HardDrive, Cpu,
-  CircuitBoard, Cable, Wifi, Bluetooth, Router, Cloud, CloudUpload, CloudDownload,
+  CircuitBoard, Cable, Wifi, Bluetooth, Router, Cloud, CloudUpload, CloudDownload, Plug,
   Code, Code2, Terminal, GitBranch, GitMerge, Bug, Wrench as WrenchIcon,
   // Data & Analytics
   BarChart, BarChart2, BarChart3, BarChart4, LineChart, PieChart, TrendingUp,
@@ -76,7 +76,7 @@ export const ICON_CATEGORIES: { id: string; label: string; icons: IconMap }[] = 
     label: "Tech",
     icons: {
       Smartphone, Tablet, Laptop, Monitor, Server, Database, HardDrive, Cpu,
-      CircuitBoard, Cable, Wifi, Bluetooth, Router, Cloud, CloudUpload, CloudDownload,
+      CircuitBoard, Cable, Wifi, Bluetooth, Router, Cloud, CloudUpload, CloudDownload, Plug,
       Code, Code2, Terminal, GitBranch, GitMerge, Bug,
     },
   },

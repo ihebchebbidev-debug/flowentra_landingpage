@@ -7,18 +7,24 @@ import {
   Menu, X, ChevronDown, ChevronRight, Layers,
   Wrench, FolderKanban, LayoutDashboard, ClipboardCheck,
   BarChart3,
-  Smartphone, Globe, Users, ShoppingCart, Banknote, UserCheck, CalendarDays, FileText,
+  Globe, Users, ShoppingCart, Banknote, UserCheck, CalendarDays, FileText,
   Sparkles, TrendingUp, Code2,
   Snowflake, Building2, Eye, SprayCan, Settings2, Sun, Wifi,
-  Droplets, Frame, Store, UtensilsCrossed,
-  CircuitBoard,
-  Play, HelpCircle, BookOpen, MessageCircle, Handshake, HeadphonesIcon,
+  Droplets, Frame, Store, UtensilsCrossed, Zap, TreePine, Shield, Flower2, Waves, Factory,
+  CircuitBoard, Plug, Mail, Inbox, Send, CreditCard, Phone, Brain,
+  Play, HelpCircle, BookOpen, Handshake, HeadphonesIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import FlagIcon from "@/components/FlagIcon";
 import { Link, useLocation } from "react-router-dom";
 import { MEGA_ICONS } from "@/components/admin/megaMenuIcons";
 import ImageEditOverlay from "./ImageEditOverlay";
+import gmailLogo from "@/assets/integrations/gmail.svg";
+import outlookLogo from "@/assets/integrations/outlook.svg";
+import telegramLogo from "@/assets/integrations/telegram.svg";
+import stripeLogo from "@/assets/integrations/stripe.svg";
+import konnektLogo from "@/assets/integrations/konnekt.png";
+import openrouterLogo from "@/assets/integrations/openrouter.svg";
 
 // ── Icon registry: maps a string name (from CMS JSON) to a Lucide component ──
 const resolveIcon = (name: string | undefined, fallback: React.ElementType = Layers): React.ElementType =>
@@ -39,6 +45,7 @@ interface TabItem {
   href: string;
   isRoute?: boolean;
   icon: React.ElementType;
+  image?: string;
 }
 interface Tab {
   id: string;
@@ -141,12 +148,17 @@ const Navbar = () => {
         },
         {
           id: "interfaces",
-          label: fr ? "Interfaces" : "Interfaces",
-          icon: Smartphone,
+          label: fr ? "Intégrations" : "Integrations",
+          icon: Plug,
           items: [
-            { label: fr ? "Application mobile" : "Mobile App", desc: fr ? "Accès terrain en mobilité." : "Field access on the go.", icon: Smartphone, href: "#demo" },
-            { label: fr ? "Portail client" : "Client Portal", desc: fr ? "Espace client en libre-service." : "Self-service client portal.", icon: Globe, href: "#demo" },
+            { label: "Gmail", icon: Mail, image: gmailLogo, href: "/integrations" },
+            { label: "Outlook", icon: Inbox, image: outlookLogo, href: "/integrations" },
+            { label: "Telegram", icon: Send, image: telegramLogo, href: "/integrations" },
+            { label: "Stripe", icon: CreditCard, image: stripeLogo, href: "/integrations" },
+            { label: "Konnekt", icon: Phone, image: konnektLogo, href: "/integrations" },
+            { label: "OpenRouter", icon: Brain, image: openrouterLogo, href: "/integrations" },
           ],
+          footer: { label: fr ? "Découvrir toutes les intégrations →" : "Discover all integrations →", href: "/integrations" },
         },
       ],
     },
@@ -157,19 +169,23 @@ const Navbar = () => {
           label: fr ? "Industries" : "Industries",
           icon: Building2,
           items: [
-            { label: fr ? "Climatisation et réfrigération" : "HVAC & Refrigeration", icon: Snowflake, href: "#industries" },
-            { label: fr ? "Sanitaire et chauffage" : "Plumbing & Heating", icon: Droplets, href: "#industries" },
-            { label: fr ? "Gestion des installations" : "Facility Management", icon: Building2, href: "#industries" },
-            { label: fr ? "Sécurité et surveillance" : "Security & Surveillance", icon: Eye, href: "#industries" },
-            { label: fr ? "Nettoyage et entretien" : "Cleaning & Maintenance", icon: SprayCan, href: "#industries" },
-            { label: fr ? "Maintenance et SAV" : "Field Service & After-Sales", icon: Settings2, href: "#industries" },
-            { label: fr ? "Solaire et énergies" : "Solar & Energy", icon: Sun, href: "#industries" },
-            { label: fr ? "IT et télécommunications" : "IT & Telecom", icon: Wifi, href: "#industries" },
-            { label: fr ? "Construction des fenêtres et aluminium" : "Windows & Aluminium", icon: Frame, href: "#industries" },
-            { label: fr ? "Fabricant & Commerçant" : "Manufacturer & Retailer", icon: Store, href: "#industries" },
-            { label: fr ? "Equipement de cuisine" : "Kitchen Equipment", icon: UtensilsCrossed, href: "#industries" },
+            { label: fr ? "Réfrigération & Climatisation" : "HVAC & Refrigeration", icon: Snowflake, href: "/industries" },
+            { label: fr ? "Sanitaire & Chauffage" : "Plumbing & Heating", icon: Droplets, href: "/industries" },
+            { label: fr ? "Electrique" : "Electrical", icon: Zap, href: "/industries" },
+            { label: fr ? "Equipement de cuisine" : "Kitchen Equipment", icon: UtensilsCrossed, href: "/industries" },
+            { label: fr ? "Gestion des installations" : "Facility Management", icon: Building2, href: "/industries" },
+            { label: fr ? "Construction en bois" : "Timber Construction", icon: TreePine, href: "/industries" },
+            { label: fr ? "Fenêtres & Aluminium" : "Windows & Aluminium", icon: Frame, href: "/industries" },
+            { label: fr ? "Sécurité" : "Security", icon: Shield, href: "/industries" },
+            { label: fr ? "Nettoyage" : "Cleaning", icon: SprayCan, href: "/industries" },
+            { label: fr ? "Jardinage" : "Gardening", icon: Flower2, href: "/industries" },
+            { label: fr ? "Solaire" : "Solar", icon: Sun, href: "/industries" },
+            { label: fr ? "Eau & Energie" : "Water & Energy", icon: Waves, href: "/industries" },
+            { label: fr ? "IT & Telecom" : "IT & Telecom", icon: Wifi, href: "/industries" },
+            { label: fr ? "Fabricant" : "Manufacturer", icon: Factory, href: "/industries" },
+            { label: fr ? "Commerçant" : "Retailer", icon: Store, href: "/industries" },
           ],
-          footer: { label: fr ? "Trouvez votre secteur" : "Find your industry", href: "#industries" },
+          footer: { label: fr ? "Trouvez votre secteur" : "Find your industry", href: "/industries" },
         },
         {
           id: "applications",
@@ -211,7 +227,6 @@ const Navbar = () => {
           label: fr ? "Communauté" : "Community",
           icon: Handshake,
           items: [
-            { label: fr ? "Témoignages" : "Testimonials", desc: fr ? "Ce que nos clients disent." : "What our customers say.", icon: MessageCircle, href: "#testimonials" },
             { label: fr ? "Partenaires" : "Partners", desc: fr ? "Notre réseau de partenaires." : "Our partner network.", icon: Handshake, href: "/partners", isRoute: true },
             { label: fr ? "Support client" : "Customer Support", desc: fr ? "Nous sommes là pour vous." : "We're here for you.", icon: HeadphonesIcon, href: "/support", isRoute: true },
           ],
@@ -243,7 +258,7 @@ const Navbar = () => {
     { label: navMegaDefaults.resourcesLabel, id: "resources", hasMega: true },
     { label: tr.nav.pricing, id: "pricing", href: "/pricing", isRoute: true },
     ...customLinks.map((c, i) => ({ label: c.label, id: `custom_${i}`, href: c.href, isRoute: c.href.startsWith("/") })),
-    { label: navCms.contact || "Contact", id: "contact", href: "#contact" },
+    { label: navCms.contact || "Contact", id: "contact", href: "/contact", isRoute: true },
   ];
 
   const handleMenuEnter = (id: string) => {
@@ -297,14 +312,32 @@ const Navbar = () => {
 
         {/* Right content */}
         <div className="flex-1 p-8">
-          <div className="grid grid-cols-2 gap-x-10 gap-y-2">
+          {/* Logo grid for image-based tabs (e.g. Integrations) */}
+          {currentTab.items.some(it => it.image) ? (
+            <div className="grid grid-cols-3 gap-2">
+              {currentTab.items.map((item, i) => {
+                const inner = (
+                  <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-muted/40 transition-colors group cursor-pointer">
+                    <div className="w-7 h-7 shrink-0 flex items-center justify-center">
+                      <img src={item.image} alt={item.label} className="w-full h-full object-contain" />
+                    </div>
+                    <span className="text-[14px] font-medium text-foreground group-hover:text-primary transition-colors">{item.label}</span>
+                  </div>
+                );
+                return item.isRoute
+                  ? <Link key={i} to={item.href} onClick={closeMenu}>{inner}</Link>
+                  : <a key={i} href={item.href} onClick={closeMenu}>{inner}</a>;
+              })}
+            </div>
+          ) : (
+          <div className={`grid gap-x-6 gap-y-1 ${currentTab.items.length > 8 ? "grid-cols-3" : "grid-cols-2 gap-x-10"}`}>
             {currentTab.items.map((item, i) => {
               const Icon = item.icon;
               const inner = (
-                <div className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-muted/40 transition-colors group cursor-pointer">
-                  <Icon className="w-5 h-5 text-primary shrink-0" strokeWidth={1.8} />
+                <div className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-muted/40 transition-colors group cursor-pointer">
+                  <Icon className="w-4 h-4 text-primary shrink-0" strokeWidth={1.8} />
                   <div className="min-w-0">
-                    <div className="text-[15px] font-medium text-foreground leading-tight">{item.label}</div>
+                    <div className="text-[13px] font-medium text-foreground leading-tight">{item.label}</div>
                     {item.desc && (
                       <div className="text-[12px] text-muted-foreground mt-0.5 leading-snug">{item.desc}</div>
                     )}
@@ -317,6 +350,7 @@ const Navbar = () => {
               return <a key={i} href={item.href} onClick={closeMenu}>{inner}</a>;
             })}
           </div>
+          )}
 
           {currentTab.footer && (
             currentTab.footer.href.startsWith("/") ? (

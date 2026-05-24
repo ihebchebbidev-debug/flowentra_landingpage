@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import ImageEditOverlay from "./ImageEditOverlay";
+import { Link } from "react-router-dom";
 
 import gmailLogo from "@/assets/integrations/gmail.svg";
 import outlookLogo from "@/assets/integrations/outlook.svg";
@@ -22,10 +23,10 @@ const logoMap: Record<string, string> = {
 const defaultIntegrations = ["Gmail", "Outlook", "Telegram", "Stripe", "Konnekt", "OpenRouter"];
 
 const titles = {
-  en: { label: "Integrations", title: "Works With the Tools You Already Use", subtitle: "Native integrations to connect your entire tech stack seamlessly.", comingSoon: "more coming soon" },
-  fr: { label: "Intégrations", title: "Compatible avec vos outils existants", subtitle: "Des intégrations natives pour connecter tout votre écosystème technique.", comingSoon: "d'autres à venir" },
-  de: { label: "Integrationen", title: "Funktioniert mit Ihren bestehenden Tools", subtitle: "Native Integrationen für nahtlose Verbindung Ihres Tech-Stacks.", comingSoon: "weitere folgen" },
-  ar: { label: "التكاملات", title: "يعمل مع الأدوات التي تستخدمها", subtitle: "تكاملات أصلية لربط منظومتك التقنية بسلاسة.", comingSoon: "المزيد قريبًا" },
+  en: { label: "Integrations", title: "Works With the Tools You Already Use", subtitle: "Native integrations to connect your entire tech stack seamlessly.", comingSoon: "more coming soon", discoverAll: "Discover all integrations →" },
+  fr: { label: "Intégrations", title: "Compatible avec vos outils existants", subtitle: "Des intégrations natives pour connecter tout votre écosystème technique.", comingSoon: "d'autres à venir", discoverAll: "Voir toutes les intégrations →" },
+  de: { label: "Integrationen", title: "Funktioniert mit Ihren bestehenden Tools", subtitle: "Native Integrationen für nahtlose Verbindung Ihres Tech-Stacks.", comingSoon: "weitere folgen", discoverAll: "Alle Integrationen entdecken →" },
+  ar: { label: "التكاملات", title: "يعمل مع الأدوات التي تستخدمها", subtitle: "تكاملات أصلية لربط منظومتك التقنية بسلاسة.", comingSoon: "المزيد قريبًا", discoverAll: "اكتشف جميع التكاملات →" },
 };
 
 const IntegrationsShowcase = () => {
@@ -37,7 +38,7 @@ const IntegrationsShowcase = () => {
   const integrations = integrationNames.map((name) => ({ name, logo: logoMap[name] || logoMap.Gmail }));
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 bg-card border-y border-border">
+    <section id="integrations" className="py-16 sm:py-24 lg:py-32 bg-card border-y border-border">
       <div className="container mx-auto px-5 sm:px-4 lg:px-8">
         <motion.div
           className="text-center max-w-2xl mx-auto mb-10 sm:mb-16"
@@ -85,7 +86,7 @@ const IntegrationsShowcase = () => {
         </div>
 
         <motion.div
-          className="text-center mt-8 sm:mt-10"
+          className="text-center mt-8 sm:mt-10 flex flex-col items-center gap-4"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -94,6 +95,12 @@ const IntegrationsShowcase = () => {
           <span className="text-[10px] sm:text-xs font-semibold text-muted-foreground/40 tracking-widest uppercase">
             + {t.comingSoon}
           </span>
+          <Link
+            to="/integrations"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-primary/20 bg-primary/5 text-sm font-semibold text-primary hover:bg-primary/10 transition-all"
+          >
+            {t.discoverAll}
+          </Link>
         </motion.div>
       </div>
     </section>

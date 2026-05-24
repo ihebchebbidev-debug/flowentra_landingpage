@@ -311,7 +311,7 @@ const Privacy = () => {
                   <span className="font-semibold">{fr ? "Adresse" : "Address"}:</span> Lac, Tunis, Tunisia
                 </p>
                 <p>
-                  <span className="font-semibold">{fr ? "Téléphone" : "Phone"}:</span> +216 29 249 512
+                  <span className="font-semibold">{fr ? "Téléphone" : "Phone"}:</span> +216 29 452 650
                 </p>
               </div>
             </div>

@@ -32,16 +32,19 @@ const showcaseData = {
         tag: "Projects",
         title: "Project, Maintenance & Equipment Management",
         desc: "Organise projects, maintenance operations, equipment and asset tracking, tasks and full intervention history from a centralised platform.",
+        image: "/screenshots/showcase-Installation-projects.png",
       },
       {
         tag: "Digital Field",
         title: "Service Execution & Digital Documentation",
         desc: "Enable technicians to carry out interventions digitally with checklists, photos, electronic signatures, automated reports and materials tracking directly in the field.",
+        image: "/screenshots/showcase-digital-field.png",
       },
       {
         tag: "AI & Billing",
         title: "Invoicing, Analytics, AI & Business Automation",
         desc: "Automate invoicing, payment tracking, business workflows and ERP/CRM integrations, while leveraging intelligent dashboards, KPIs and AI-based analytics to improve decision-making and operational performance.",
+        image: "/screenshots/showcase-digital-invoicing.png",
       },
     ],
   },
@@ -71,16 +74,19 @@ const showcaseData = {
         tag: "Projets",
         title: "Gestion des Projets, Maintenance & Équipements",
         desc: "Organisez les projets, les opérations de maintenance, le suivi des équipements et des actifs, les tâches et l'historique complet des interventions depuis une plateforme centralisée.",
+        image: "/screenshots/showcase-Installation-projects.png",
       },
       {
         tag: "Digital",
         title: "Exécution des Services & Documentation Digitale",
         desc: "Permettez aux techniciens de réaliser les interventions de manière digitale avec des checklists, photos, signatures électroniques, rapports automatiques et suivi des matériaux directement sur le terrain.",
+        image: "/screenshots/showcase-digital-field.png",
       },
       {
         tag: "IA & Facturation",
         title: "Facturation, Analyse, IA & Automatisation Métier",
         desc: "Automatisez la facturation, le suivi des paiements, les workflows métiers et les intégrations ERP/CRM, tout en exploitant des tableaux de bord intelligents, KPI et analyses basées sur l'IA pour améliorer la prise de décision et la performance opérationnelle.",
+        image: "/screenshots/showcase-digital-invoicing.png",
       },
     ],
   },
@@ -174,7 +180,7 @@ const ProductShowcase = () => {
   const screenshotPrefix = cms.screenshotPrefix || defaultScreenshotPrefix;
 
   return (
-    <section className="py-24 sm:py-32 lg:py-40">
+    <section className="py-12 sm:py-16 lg:py-20">
       <div className="container mx-auto px-5 sm:px-4 lg:px-8">
         {/* Header */}
         <motion.div

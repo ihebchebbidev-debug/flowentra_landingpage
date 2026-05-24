@@ -19,7 +19,7 @@ const Features = () => {
   const items = cms.items || [];
 
   return (
-    <section id="features" className="py-24 sm:py-32 bg-transparent">
+    <section id="features" className="pt-24 pb-8 sm:pt-32 sm:pb-10 bg-transparent">
       <div className="container mx-auto px-5 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center mb-14 sm:mb-16">
           <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-3">

@@ -29,7 +29,7 @@ const ContactSection = () => {
     send: fr ? "Envoyer" : de ? "Absenden" : ar ? "إرسال" : "Send Message",
     info: [
       { label: fr ? "Email" : de ? "E-Mail" : "Email", value: "contact@flowentra.io" },
-      { label: fr ? "Téléphone" : de ? "Telefon" : ar ? "الهاتف" : "Phone", value: "+216 29 249 512" },
+      { label: fr ? "Téléphone" : de ? "Telefon" : ar ? "الهاتف" : "Phone", value: "+216 29 452 650" },
       { label: fr ? "Siège Social" : de ? "Hauptsitz" : ar ? "المقر الرئيسي" : "Headquarters", value: fr ? "Lac, Tunis, Tunisie" : de ? "Lac, Tunis, Tunesien" : "Lac, Tunis, Tunisia" },
       { label: fr ? "Horaires" : de ? "Öffnungszeiten" : ar ? "ساعات العمل" : "Business Hours", value: fr ? "Lun – Ven, 9h – 18h (CET)" : de ? "Mo – Fr, 9 – 18 Uhr (MEZ)" : "Mon – Fri, 9AM – 6PM (CET)" },
     ],
