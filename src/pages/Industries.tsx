@@ -1,4 +1,4 @@
-import PageLayout from "@/components/layout/PageLayout";
+﻿import PageLayout from "@/components/layout/PageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import {
@@ -135,7 +135,7 @@ const categories: Category[] = [
     title: "Energy, Technology & Commerce",
     titleFr: "Energie, Technologie & Commerce",
     intro:
-      "Whether you are deploying solar panels, managing IT networks, running a production line, or operating a retail business — Flowentra adapts to the unique workflows of every modern industry.",
+      "Whether you are deploying solar panels, managing IT networks, running a production line, or operating a retail business Flowentra adapts to the unique workflows of every modern industry.",
     introFr:
       "Que vous déployiez des panneaux solaires, gériez des réseaux informatiques, pilotiez une ligne de production ou exploitiez un commerce, Flowentra s'adapte aux workflows spécifiques de chaque secteur moderne.",
     illustration: energieSvg,
@@ -186,7 +186,7 @@ const Industries = () => {
 
   return (
     <PageLayout
-      title={fr ? "Secteurs d'activités" : "Industries"}
+      title={fr ? "Secteurs d'activité" : "Business Sectors"}
       subtitle={
         fr
           ? "Flowentra s'adapte à votre secteur. Découvrez comment nous accompagnons chaque métier."
@@ -205,7 +205,7 @@ const Industries = () => {
             >
               <div className="grid lg:grid-cols-[2fr_3fr] gap-6 lg:gap-10 items-start">
 
-                {/* LEFT — illustration + title + intro */}
+                {/* LEFT illustration + title + intro */}
                 <div className="flex flex-col gap-5">
                   {/* Illustration */}
                   <div className="rounded-2xl overflow-hidden border border-border shadow-md">
@@ -228,7 +228,7 @@ const Industries = () => {
                   </div>
                 </div>
 
-                {/* RIGHT — industry cards list */}
+                {/* RIGHT industry cards list */}
                 <div className="flex flex-col gap-3">
                   {cat.industries.map((ind, ii) => (
                     <motion.div

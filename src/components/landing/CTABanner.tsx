@@ -53,7 +53,7 @@ const CTABanner = () => {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
             <a
-              href="#contact"
+              href="/demo"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-sm border border-primary-foreground/15 text-primary-foreground/60 hover:text-primary-foreground hover:border-primary-foreground/30 transition-colors w-full sm:w-auto justify-center"
             >
               {cms.ctaSecondary}

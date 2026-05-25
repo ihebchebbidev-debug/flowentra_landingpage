@@ -1,4 +1,4 @@
-import Navbar from "@/components/landing/Navbar";
+﻿import Navbar from "@/components/landing/Navbar";
 import Hero from "@/components/landing/Hero";
 import TrustedBy from "@/components/landing/TrustedBy";
 import Features from "@/components/landing/Features";
@@ -28,23 +28,23 @@ const Index = () => {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <SEO
-        title="Flowentra — All-in-One Business Management Platform"
+        title="Flowentra All-in-One Business Management Platform"
         description="Unify CRM, workflows, analytics and AI in one platform. Stop juggling tools and focus on growing your business with Flowentra."
         keywords="CRM, business management, workflow automation, analytics, AI, all-in-one platform"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebSite",
           name: "Flowentra",
-          url: "https://flowentra.com/",
+          url: "https://flowentra.io/",
           potentialAction: {
             "@type": "SearchAction",
-            target: "https://flowentra.com/?q={search_term_string}",
+            target: "https://flowentra.io/?q={search_term_string}",
             "query-input": "required name=search_term_string",
           },
         }}
       />
       {showLoader && <LoadingScreen />}
-      {/* Ambient animated brand-color lights — fixed to viewport so they wash
+      {/* Ambient animated brand-color lights fixed to viewport so they wash
           every section as the user scrolls through the page. */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
         <motion.div
@@ -78,23 +78,23 @@ const Index = () => {
       <EditableSection sectionKey="trustedBy" label="Trusted By">
         <TrustedBy />
       </EditableSection>
-      <EditableSection sectionKey="features" label="Features">
+      <EditableSection sectionKey="features" label="Features" id="features">
         <Features />
       </EditableSection>
       <ProductShowcase />
-      <EditableSection sectionKey="howItWorks" label="Steps">
+      <EditableSection sectionKey="howItWorks" label="Steps" id="how-it-works">
         <HowItWorks />
       </EditableSection>
-      <EditableSection sectionKey="metrics" label="Metrics">
+      <EditableSection sectionKey="metrics" label="Metrics" id="metrics">
         <Metrics />
       </EditableSection>
-      <EditableSection sectionKey="integrations" label="Integrations">
+      <EditableSection sectionKey="integrations" label="Integrations" id="integrations">
         <IntegrationsShowcase />
       </EditableSection>
-<EditableSection sectionKey="faq" label="FAQ">
+      <EditableSection sectionKey="faq" label="FAQ" id="faq">
         <FAQ />
       </EditableSection>
-      <EditableSection sectionKey="ctaBanner" label="CTA">
+      <EditableSection sectionKey="ctaBanner" label="CTA" id="cta">
         <CTABanner />
       </EditableSection>
       <EditableSection sectionKey="footer" label="Footer">

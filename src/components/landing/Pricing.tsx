@@ -1,4 +1,4 @@
-import { useLanguage } from "@/contexts/LanguageContext";
+﻿import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -34,13 +34,13 @@ const pricingData = {
         name: "Basic",
         pricePerUser: BASE_PRICE_PER_USER.starter,
         tagline: "CRM essentiel pour les petites équipes.",
-        summary: ["CRM & contacts", "Offres, commandes & facturation", "Application mobile & agenda", "Rapports & saisie des temps"],
+        summary: ["Maximum 5 utilisateurs", "CRM & contacts", "Offres, commandes & facturation", "Application mobile & agenda", "Rapports & saisie des temps"],
         toolsTitle: "FONCTIONNALITÉS INCLUSES",
         tools: [
           "Jusqu'à 5 utilisateurs",
-          "CRM — Contacts (Personnes, Entreprises, Fournisseurs)",
+          "CRM Contacts (Personnes, Entreprises, Fournisseurs)",
           "Champs fiscaux tunisiens (CIN, Matricule Fiscale)",
-          "Pipeline de ventes — Offres, Commandes & Facturation",
+          "Pipeline de ventes Offres, Commandes & Facturation",
           "Catalogue Articles & Services (prix, marge, TVA)",
           "Agenda partagé & Application mobile",
           "Tableau de bord KPI & Rapports de base",
@@ -93,11 +93,11 @@ const pricingData = {
         name: "Basic",
         pricePerUser: BASE_PRICE_SERVICE.basic,
         tagline: "Gestion des interventions pour petites équipes terrain.",
-        summary: ["Ordres de service complets", "Application mobile technicien", "Checklists & signature électronique", "Rapports PDF & suivi équipements"],
+        summary: ["De 3 à 5 techniciens", "Ordres de service complets", "Application mobile technicien", "Checklists & signature électronique", "Rapports PDF & suivi équipements"],
         toolsTitle: "FONCTIONNALITÉS INCLUSES",
         tools: [
           "Jusqu'à 5 techniciens",
-          "Ordres de service — cycle complet (Pending → Clôturé)",
+          "Ordres de service cycle complet (Pending → Clôturé)",
           "Checklists d'intervention (jusqu'à 30 étapes)",
           "Application mobile technicien",
           "Saisie des temps & matériaux sur le terrain",
@@ -116,7 +116,7 @@ const pricingData = {
         toolsTitle: "TOUT LE BASIC +",
         tools: [
           "Techniciens illimités",
-          "Dispatcheur complet — swimlane, drag & drop, vue Carte",
+          "Dispatcheur complet swimlane, drag & drop, vue Carte",
           "Planificateur de maintenance préventive",
           "Checklists illimitées (formulaires dynamiques)",
           "Gestion des stocks terrain & mouvements d'inventaire",
@@ -130,7 +130,7 @@ const pricingData = {
         name: "Entreprise",
         pricePerUser: BASE_PRICE_SERVICE.enterprise,
         tagline: "Service terrain piloté par l'IA, multi-entités.",
-        summary: ["IA — tournées & planification auto", "RH terrain & paie", "Multi-entités & SSO", "API & audit logs"],
+        summary: ["IA tournées & planification auto", "RH terrain & paie", "Multi-entités & SSO", "API & audit logs"],
         toolsTitle: "TOUT LE PROFESSIONAL +",
         tools: [
           "Tout illimité",
@@ -195,13 +195,13 @@ const pricingData = {
         name: "Basic",
         pricePerUser: BASE_PRICE_PER_USER.starter,
         tagline: "Essential CRM for small teams.",
-        summary: ["CRM & contacts", "Quotes, orders & invoicing", "Mobile app & shared calendar", "Reports & time tracking"],
+        summary: ["Up to 5 users", "CRM & contacts", "Quotes, orders & invoicing", "Mobile app & shared calendar", "Reports & time tracking"],
         toolsTitle: "INCLUDED FEATURES",
         tools: [
           "Up to 5 users",
-          "CRM — Contacts (Persons, Companies, Suppliers)",
+          "CRM Contacts (Persons, Companies, Suppliers)",
           "Tunisian fiscal fields (CIN, Tax ID)",
-          "Sales pipeline — Quotes, Orders & Invoicing",
+          "Sales pipeline Quotes, Orders & Invoicing",
           "Articles & Services catalog (price, margin, VAT)",
           "Shared calendar & Mobile app",
           "KPI dashboard & basic reports",
@@ -254,11 +254,11 @@ const pricingData = {
         name: "Basic",
         pricePerUser: BASE_PRICE_SERVICE.basic,
         tagline: "Intervention management for small field teams.",
-        summary: ["Full service orders", "Technician mobile app", "Checklists & e-signature", "PDF reports & equipment tracking"],
+        summary: ["From 3 to 5 technicians", "Full service orders", "Technician mobile app", "Checklists & e-signature", "PDF reports & equipment tracking"],
         toolsTitle: "INCLUDED FEATURES",
         tools: [
           "Up to 5 technicians",
-          "Service orders — full lifecycle (Pending → Closed)",
+          "Service orders full lifecycle (Pending → Closed)",
           "Intervention checklists (up to 30 steps)",
           "Technician mobile app",
           "Time & materials tracking in the field",
@@ -277,7 +277,7 @@ const pricingData = {
         toolsTitle: "EVERYTHING IN BASIC +",
         tools: [
           "Unlimited technicians",
-          "Full dispatcher — swimlane, drag & drop, Map view",
+          "Full dispatcher swimlane, drag & drop, Map view",
           "Preventive maintenance planner",
           "Unlimited checklists (dynamic forms)",
           "Field stock management & inventory movements",
@@ -434,13 +434,18 @@ const Pricing = () => {
   const con = hardcoded.consultancyAddon;
 
   const [crmUsers, setCrmUsers] = useState([5, 5, 5]);
-  const [serviceUsers, setServiceUsers] = useState([5, 5, 5]);
+  const [serviceUsers, setServiceUsers] = useState([3, 5, 5]);
   const [featuresModal, setFeaturesModal] = useState<{ plan: any; section: string } | null>(null);
 
-  const incUsers = (setter: React.Dispatch<React.SetStateAction<number[]>>, i: number) =>
-    setter(prev => { const n = [...prev]; n[i] = Math.min(999, n[i] + 1); return n; });
-  const decUsers = (setter: React.Dispatch<React.SetStateAction<number[]>>, i: number) =>
-    setter(prev => { const n = [...prev]; n[i] = Math.max(1, n[i] - 1); return n; });
+  const crmMax = [5, 999, 999];
+  const crmMin = [1, 1, 1];
+  const serviceMax = [5, 999, 999];
+  const serviceMin = [3, 1, 1];
+
+  const incUsers = (setter: React.Dispatch<React.SetStateAction<number[]>>, i: number, max: number[]) =>
+    setter(prev => { const n = [...prev]; n[i] = Math.min(max[i], n[i] + 1); return n; });
+  const decUsers = (setter: React.Dispatch<React.SetStateAction<number[]>>, i: number, min: number[]) =>
+    setter(prev => { const n = [...prev]; n[i] = Math.max(min[i], n[i] - 1); return n; });
 
   return (
     <>
@@ -465,6 +470,7 @@ const Pricing = () => {
 
         {/* CRM / Office */}
         <motion.div
+          id="pricing-crm"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -474,13 +480,14 @@ const Pricing = () => {
           <SectionLabel>{t.sectionCrm}</SectionLabel>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {plans.map((plan, i) => (
-              <PlanCard key={i} plan={plan} i={i} perUserLabel={t.perUser} usersLabel={t.yourUsers} calculateLabel={t.calculateLabel} allFeatures={t.allFeatures} cta={t.cta} currency={t.currency} monthly={t.monthly} popular={t.popular} aiLabel={t.aiLabel} users={crmUsers[i]} onInc={() => incUsers(setCrmUsers, i)} onDec={() => decUsers(setCrmUsers, i)} onShowFeatures={() => setFeaturesModal({ plan, section: t.sectionCrm })} />
+              <PlanCard key={i} plan={plan} i={i} perUserLabel={t.perUser} usersLabel={t.yourUsers} calculateLabel={t.calculateLabel} allFeatures={t.allFeatures} cta={t.cta} currency={t.currency} monthly={t.monthly} popular={t.popular} aiLabel={t.aiLabel} users={crmUsers[i]} onInc={() => incUsers(setCrmUsers, i, crmMax)} onDec={() => decUsers(setCrmUsers, i, crmMin)} onShowFeatures={() => setFeaturesModal({ plan, section: t.sectionCrm })} />
             ))}
           </div>
         </motion.div>
 
         {/* Service */}
         <motion.div
+          id="pricing-service"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -490,7 +497,7 @@ const Pricing = () => {
           <SectionLabel>{t.sectionService}</SectionLabel>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {servicePlans.map((plan, i) => (
-              <PlanCard key={i} plan={plan} i={i} perUserLabel={t.perTech} usersLabel={t.yourTechs} calculateLabel={t.calculateLabel} allFeatures={t.allFeatures} cta={t.cta} currency={t.currency} monthly={t.monthly} popular={t.popular} aiLabel={t.aiLabel} users={serviceUsers[i]} onInc={() => incUsers(setServiceUsers, i)} onDec={() => decUsers(setServiceUsers, i)} onShowFeatures={() => setFeaturesModal({ plan, section: t.sectionService })} />
+              <PlanCard key={i} plan={plan} i={i} perUserLabel={t.perTech} usersLabel={t.yourTechs} calculateLabel={t.calculateLabel} allFeatures={t.allFeatures} cta={t.cta} currency={t.currency} monthly={t.monthly} popular={t.popular} aiLabel={t.aiLabel} users={serviceUsers[i]} onInc={() => incUsers(setServiceUsers, i, serviceMax)} onDec={() => decUsers(setServiceUsers, i, serviceMin)} onShowFeatures={() => setFeaturesModal({ plan, section: t.sectionService })} />
             ))}
           </div>
         </motion.div>
@@ -571,7 +578,7 @@ const Pricing = () => {
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="uppercase tracking-wide">
-            {featuresModal?.plan?.name} — {featuresModal?.section}
+            {featuresModal?.plan?.name} {featuresModal?.section}
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4 mt-2">

@@ -1,7 +1,8 @@
-import { useLanguage } from "@/contexts/LanguageContext";
+﻿import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Users, CalendarDays, FolderKanban, ClipboardCheck, BarChart3, X, ZoomIn } from "lucide-react";
+import { FileText, Users, CalendarDays, FolderKanban, ClipboardCheck, BarChart3, X, ZoomIn, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import ImageEditOverlay from "./ImageEditOverlay";
 import { useState } from "react";
 
@@ -257,7 +258,7 @@ const ProductShowcase = () => {
                       <div className="relative aspect-[16/10] bg-gradient-to-br from-muted/30 to-muted/60 flex items-center justify-center overflow-hidden">
                         <div className="text-center">
                           <Icon className="w-10 h-10 text-muted-foreground/20 mx-auto mb-2" />
-                          <p className="text-xs text-muted-foreground/30">{screenshotPrefix} — {item.tag}</p>
+                          <p className="text-xs text-muted-foreground/30">{screenshotPrefix} {item.tag}</p>
                         </div>
                         <ImageEditOverlay sectionKey="productShowcase" label="screenshot" empty />
                       </div>
@@ -268,6 +269,23 @@ const ProductShowcase = () => {
             );
           })}
         </div>
+
+        {/* Discover all features button */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.35 }}
+          className="flex justify-center mt-16 sm:mt-20"
+        >
+          <Link
+            to="/features"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm gradient-primary text-primary-foreground hover:opacity-90 transition-opacity shadow-md shadow-primary/20"
+          >
+            {lang === "fr" ? "Découvrir toutes les fonctionnalités" : "Discover all features"}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
       </div>
 
       {/* Lightbox */}

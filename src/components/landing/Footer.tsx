@@ -16,18 +16,15 @@ const Footer = () => {
       links: [
         { label: tr.nav.features, href: "/#features" },
         { label: tr.nav.pricing, href: "/pricing" },
-        { label: tr.nav.demo, href: "/#demo" },
+        { label: tr.nav.demo, href: "/demo" },
         { label: f.integrations, href: "/integrations" },
-        { label: f.docs, href: "/docs" },
       ],
     },
     {
       title: f.company,
       links: [
         { label: f.about, href: "/about" },
-        { label: f.careers, href: "/careers" },
         { label: f.partners, href: "/partners" },
-        { label: f.blog, href: "/blog" },
         { label: f.contact, href: "/contact" },
       ],
     },
@@ -36,9 +33,7 @@ const Footer = () => {
       links: [
         { label: f.support, href: "/support" },
         { label: f.docs, href: "/docs" },
-        { label: f.status, href: "/status" },
         { label: tr.nav.faq, href: "/#faq" },
-        { label: f.releases, href: "/releases" },
       ],
     },
     {

@@ -1,5 +1,5 @@
-/**
- * Default mega-menu content — mirrors the fallback used in
+﻿/**
+ * Default mega-menu content mirrors the fallback used in
  * src/components/landing/Navbar.tsx (defaultMegas).
  *
  * Admins use these as a starting template when a menu is empty,
@@ -67,7 +67,7 @@ const solutionsDefaults = (lang: Lang): MegaConfig => {
     tabs: [
       {
         id: "industries",
-        label: fr ? "Industries" : "Industries",
+        label: fr ? "Secteurs d'activité" : "Business Sectors",
         icon: "Building2",
         items: [
           { label: fr ? "Réfrigération & Climatisation" : "HVAC & Refrigeration", icon: "Snowflake", href: "/industries" },
@@ -86,7 +86,7 @@ const solutionsDefaults = (lang: Lang): MegaConfig => {
           { label: fr ? "Fabricant" : "Manufacturer", icon: "Factory", href: "/industries" },
           { label: fr ? "Commerçant" : "Retailer", icon: "Store", href: "/industries" },
         ],
-        footer: { label: fr ? "Trouvez votre secteur" : "Find your industry", href: "/industries" },
+        footer: { label: fr ? "Trouvez votre secteur" : "Find your sector", href: "/industries" },
       },
       {
         id: "applications",

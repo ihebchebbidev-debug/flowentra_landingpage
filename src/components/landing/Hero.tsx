@@ -1,38 +1,35 @@
-import { useLanguage } from "@/contexts/LanguageContext";
+﻿import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight, Play, LayoutDashboard, Layers } from "lucide-react";
 import { MEGA_ICONS } from "@/components/admin/megaMenuIcons";
 import heroBgTest from "@/assets/hero-bg-test.png";
 import dashboardPreview from "@/assets/dashboard-preview.png";
-import ImageEditOverlay from "./ImageEditOverlay";
 
 interface HeroModule {
   icon: string;
   label: string;
-  /** Optional uploaded screenshot — replaces the synthetic skeleton when present. */
+  /** Optional uploaded screenshot replaces the synthetic skeleton when present. */
   image?: string;
 }
 
 const DEFAULT_MODULES: HeroModule[] = [
-  { icon: "LayoutDashboard", label: "Dashboard" },
-  { icon: "Users", label: "Team Management" },
-  { icon: "FileText", label: "Smart Documents" },
-  { icon: "BarChart3", label: "Analytics & Reports" },
-  { icon: "Zap", label: "Automation" },
-  { icon: "Shield", label: "Security Center" },
-  { icon: "Settings", label: "Configuration" },
+  { icon: "LayoutDashboard", label: "Real-Time Dashboard",             image: "/hero-screenshots/hero-dashbord.png" },
+  { icon: "Users",           label: "Service Field Management",        image: "/hero-screenshots/hero-fsm.png" },
+  { icon: "FileText",        label: "Smart Documentation",             image: "/hero-screenshots/hero-documents.png" },
+  { icon: "BarChart3",       label: "Business Analytics",              image: "/hero-screenshots/hero-business-analytics.png" },
+  { icon: "Zap",             label: "Workflow Automation",             image: "/hero-screenshots/hero-workflow.png" },
+  { icon: "Settings",        label: "Flexible & Secure Configuration", image: "/hero-screenshots/hero-configuration.png" },
 ];
 
 const DEFAULT_MODULES_FR: HeroModule[] = [
-  { icon: "LayoutDashboard", label: "Tableau de bord" },
-  { icon: "Users", label: "Gestion d'équipe" },
-  { icon: "FileText", label: "Documents intelligents" },
-  { icon: "BarChart3", label: "Analyses & Rapports" },
-  { icon: "Zap", label: "Automatisation" },
-  { icon: "Shield", label: "Centre de sécurité" },
-  { icon: "Settings", label: "Configuration" },
+  { icon: "LayoutDashboard", label: "Tableau de bord en temps réel",      image: "/hero-screenshots/hero-dashbord.png" },
+  { icon: "Users",           label: "Gestion des interventions terrain",   image: "/hero-screenshots/hero-fsm.png" },
+  { icon: "FileText",        label: "Documentation intelligente",          image: "/hero-screenshots/hero-documents.png" },
+  { icon: "BarChart3",       label: "Analyses & rapports métier",          image: "/hero-screenshots/hero-business-analytics.png" },
+  { icon: "Zap",             label: "Automatisation des workflows",        image: "/hero-screenshots/hero-workflow.png" },
+  { icon: "Settings",        label: "Configuration flexible et sécurisée", image: "/hero-screenshots/hero-configuration.png" },
 ];
 
 const GRADIENT_COLORS = [
@@ -59,39 +56,20 @@ const Hero = () => {
 
   const fr = lang === "fr";
 
-  // Parse modules from CMS JSON or fall back to defaults
-  const modules: HeroModule[] = useMemo(() => {
-    if (cms.heroModules) {
-      try {
-        const parsed = typeof cms.heroModules === "string" ? JSON.parse(cms.heroModules) : cms.heroModules;
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      } catch { /* fall through */ }
-    }
-    return fr ? DEFAULT_MODULES_FR : DEFAULT_MODULES;
-  }, [cms.heroModules, fr]);
-
+  const modules: HeroModule[] = fr ? DEFAULT_MODULES_FR : DEFAULT_MODULES;
   const currentModule = modules[activeModule] || modules[0];
   const CurrentIcon = resolveIcon(currentModule?.icon);
   const gradientColor = GRADIENT_COLORS[activeModule % GRADIENT_COLORS.length];
 
-  // Admin-overridable images — fall back to bundled defaults so the page
-  // looks great out of the box and never goes blank if a CMS value is missing.
-  const heroBgUrl = (cms.heroBackground && String(cms.heroBackground).trim()) || heroBgTest;
-  const dashboardUrl = (cms.appScreenshot && String(cms.appScreenshot).trim()) || dashboardPreview;
-
   return (
     <section ref={sectionRef} className="relative flex flex-col pt-16 pb-0 overflow-hidden bg-background">
-      {/* Hero background image (admin-editable, default bundled) */}
+      {/* Hero background image */}
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 pointer-events-none bg-cover bg-center opacity-90"
-          style={{ backgroundImage: `url(${heroBgUrl})` }}
+          style={{ backgroundImage: `url(${heroBgTest})` }}
           aria-hidden="true"
         />
-        {/* Admin-only edit handle for the hero background */}
-        <div className="absolute top-20 right-4 w-44 h-12 z-30">
-          <ImageEditOverlay sectionKey="hero" label="background" empty={!cms.heroBackground} />
-        </div>
       </div>
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-background/70" aria-hidden="true" />
 
@@ -153,11 +131,11 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.35 }}
           >
-            <a href="#demo" className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all w-full sm:w-auto justify-center shadow-lg shadow-primary/30">
+            <a href="/demo" className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all w-full sm:w-auto justify-center shadow-lg shadow-primary/30">
               <Play className="w-4 h-4" />
               {cms.cta}
             </a>
-            <a href="#features" className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm bg-primary-foreground text-foreground hover:bg-primary-foreground/90 transition-colors w-full sm:w-auto justify-center">
+            <a href="/demo" className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm bg-primary-foreground text-foreground hover:bg-primary-foreground/90 transition-colors w-full sm:w-auto justify-center">
               {cms.ctaSecondary}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
@@ -210,9 +188,9 @@ const Hero = () => {
                 >
                   {activeModule === 0 || currentModule?.image ? (
                     <img
-                      src={currentModule?.image || dashboardUrl}
+                      src={currentModule?.image || dashboardPreview}
                       alt={currentModule.label}
-                      className="absolute inset-0 w-full h-full object-contain object-top bg-background"
+                      className="absolute inset-0 w-full h-full object-cover object-top bg-background"
                     />
                   ) : (
                     <div className="absolute inset-0 p-6 sm:p-8">
@@ -262,12 +240,11 @@ const Hero = () => {
                   )}
                 </motion.div>
               </AnimatePresence>
-              <ImageEditOverlay sectionKey="hero" label={activeModule === 0 ? "app screenshot" : "module image"} empty={activeModule !== 0 && !currentModule?.image} />
             </div>
 
-            {/* Floating vertical module switcher — top-right, shifted up */}
+            {/* Floating vertical module switcher top-right, shifted up */}
             <motion.div
-              className="hidden md:flex absolute -right-12 -top-6 z-20 flex-col w-72"
+              className="hidden md:flex absolute -right-12 top-8 z-20 flex-col w-72"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}

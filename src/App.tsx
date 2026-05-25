@@ -13,25 +13,25 @@ import { trackPageView } from "./components/admin/AnalyticsDashboard";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
-import Careers from "./pages/Careers";
 import Partners from "./pages/Partners";
-import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Support from "./pages/Support";
 import Documentation from "./pages/Documentation";
-import Status from "./pages/Status";
 import Integrations from "./pages/Integrations";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import SecurityPage from "./pages/SecurityPage";
 import ChatAssistant from "./components/ChatAssistant";
 import ScrollToTop from "./components/ScrollToTop";
-import Releases from "./pages/Releases";
 import Checkout from "./pages/Checkout";
 import Admin from "./pages/Admin";
 import PricingPage from "./pages/Pricing";
 import Features from "./pages/Features";
+import Modules from "./pages/Modules";
+import Applications from "./pages/Applications";
+import Services from "./pages/Services";
 import Industries from "./pages/Industries";
+import Demo from "./pages/Demo";
 import CustomPage from "./pages/CustomPage";
 
 const queryClient = new QueryClient();
@@ -65,23 +65,23 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/about" element={<About />} />
-      <Route path="/careers" element={<Careers />} />
       <Route path="/partners" element={<Partners />} />
-      <Route path="/blog" element={<Blog />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/support" element={<Support />} />
       <Route path="/docs" element={<Documentation />} />
       <Route path="/documentation" element={<Documentation />} />
-      <Route path="/status" element={<Status />} />
       <Route path="/integrations" element={<Integrations />} />
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/security" element={<SecurityPage />} />
-      <Route path="/releases" element={<Releases />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/features" element={<Features />} />
+      <Route path="/modules" element={<Modules />} />
+      <Route path="/applications" element={<Applications />} />
+      <Route path="/services" element={<Services />} />
       <Route path="/industries" element={<Industries />} />
+      <Route path="/demo" element={<Demo />} />
       <Route path="/p/:slug" element={<CustomPage />} />
       <Route path="/admin" element={
         <AdminOverlayProvider>

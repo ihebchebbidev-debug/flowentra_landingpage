@@ -1,76 +1,148 @@
 import PageLayout from "@/components/layout/PageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
+import { Lightbulb, Sparkles, Shield, Heart } from "lucide-react";
+
+const content = {
+  en: {
+    subtitle: "Flowentra was created to simplify business operations through one modern and intelligent platform.",
+    missionTitle: "Our Mission",
+    mission1: "Flowentra was created to simplify business operations through one modern and intelligent platform. We help companies centralize their workflows, automate repetitive tasks, and gain better visibility across their operations without the complexity of traditional enterprise software.",
+    mission2: "Our goal is to make powerful business tools accessible, flexible, and easy to use for growing teams and modern organizations.",
+    buildTitle: "What We Build",
+    build1: "Flowentra combines operations management, field service coordination, smart documentation, analytics, automation, and configuration tools into a unified platform designed to scale with your business.",
+    build2: "Built with flexibility in mind, Flowentra adapts to different industries and workflows while maintaining a clean and intuitive user experience.",
+    valuesTitle: "Our Values",
+    values: [
+      { icon: Sparkles, color: "text-violet-500", bg: "bg-violet-50 dark:bg-violet-950/40", title: "Innovation",       desc: "We continuously improve our platform with modern technologies and practical solutions that solve real business challenges." },
+      { icon: Lightbulb, color: "text-amber-500", bg: "bg-amber-50 dark:bg-amber-950/40",  title: "Simplicity",       desc: "Technology should make work easier, not more complicated. We design Flowentra to be intuitive from day one." },
+      { icon: Shield,    color: "text-blue-500",  bg: "bg-blue-50 dark:bg-blue-950/40",    title: "Reliability",      desc: "Security, performance, and availability are at the core of everything we build." },
+      { icon: Heart,     color: "text-rose-500",  bg: "bg-rose-50 dark:bg-rose-950/40",    title: "Customer Focus",   desc: "We grow with our clients by listening carefully, supporting their needs, and building long-term partnerships." },
+    ],
+    whyTitle: "Why Flowentra",
+    why: "We believe businesses should not need multiple disconnected tools to manage their operations. Flowentra brings everything together into one scalable platform that helps teams work smarter, faster, and with greater clarity.",
+    timelineTitle: "Growing with Ambition",
+    timelineYear: "2026 — Founded",
+    timelineDesc: "Startup-driven innovation focused on operational excellence and business automation.",
+    timelineTag: "Building the future of modern business management.",
+  },
+  fr: {
+    subtitle: "Flowentra a été créé pour simplifier les opérations d'entreprise grâce à une plateforme moderne et intelligente.",
+    missionTitle: "Notre Mission",
+    mission1: "Flowentra a été créé pour simplifier les opérations d'entreprise grâce à une plateforme moderne et intelligente. Nous aidons les entreprises à centraliser leurs workflows, automatiser les tâches répétitives et obtenir une meilleure visibilité sur leurs opérations sans la complexité des logiciels d'entreprise traditionnels.",
+    mission2: "Notre objectif est de rendre des outils métier puissants accessibles, flexibles et faciles à utiliser pour les équipes en croissance et les organisations modernes.",
+    buildTitle: "Ce que nous construisons",
+    build1: "Flowentra combine gestion des opérations, coordination des services terrain, documentation intelligente, analytique, automatisation et outils de configuration dans une plateforme unifiée conçue pour évoluer avec votre entreprise.",
+    build2: "Construit avec la flexibilité à l'esprit, Flowentra s'adapte aux différents secteurs et workflows tout en maintenant une expérience utilisateur claire et intuitive.",
+    valuesTitle: "Nos Valeurs",
+    values: [
+      { icon: Sparkles,  color: "text-violet-500", bg: "bg-violet-50 dark:bg-violet-950/40", title: "Innovation",        desc: "Nous améliorons continuellement notre plateforme avec des technologies modernes et des solutions pratiques qui résolvent de vrais défis métier." },
+      { icon: Lightbulb, color: "text-amber-500",  bg: "bg-amber-50 dark:bg-amber-950/40",   title: "Simplicité",        desc: "La technologie doit faciliter le travail, pas le compliquer. Nous concevons Flowentra pour être intuitif dès le premier jour." },
+      { icon: Shield,    color: "text-blue-500",   bg: "bg-blue-50 dark:bg-blue-950/40",     title: "Fiabilité",         desc: "La sécurité, la performance et la disponibilité sont au cœur de tout ce que nous construisons." },
+      { icon: Heart,     color: "text-rose-500",   bg: "bg-rose-50 dark:bg-rose-950/40",     title: "Centré Client",     desc: "Nous grandissons avec nos clients en écoutant attentivement, en soutenant leurs besoins et en construisant des partenariats durables." },
+    ],
+    whyTitle: "Pourquoi Flowentra",
+    why: "Nous croyons que les entreprises ne devraient pas avoir besoin de plusieurs outils déconnectés pour gérer leurs opérations. Flowentra réunit tout en une seule plateforme évolutive qui aide les équipes à travailler de manière plus intelligente, plus rapide et avec plus de clarté.",
+    timelineTitle: "Grandir avec Ambition",
+    timelineYear: "2026 — Fondée",
+    timelineDesc: "Innovation portée par une startup axée sur l'excellence opérationnelle et l'automatisation des entreprises.",
+    timelineTag: "Construire le futur de la gestion d'entreprise moderne.",
+  },
+};
 
 const About = () => {
   const { lang } = useLanguage();
-  const fr = lang === "fr";
+  const t = lang === "fr" ? content.fr : content.en;
 
   return (
     <PageLayout
-      title={fr ? "À propos de Flowentra" : "About Flowentra"}
-      subtitle={fr ? "Nous construisons la prochaine génération de logiciels de gestion d'entreprise." : "We're building the next generation of enterprise management software."}
+      title={lang === "fr" ? "À propos de Flowentra" : "About Flowentra"}
+      subtitle={t.subtitle}
     >
-      <section className="py-20">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <h2 className="text-2xl font-bold mb-6">{fr ? "Notre Mission" : "Our Mission"}</h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                {fr
-                  ? "Flowentra est née d'une conviction simple : les entreprises méritent des outils aussi performants que ceux des grandes multinationales, mais accessibles et faciles à utiliser."
-                  : "Flowentra was born from a simple belief: businesses deserve tools as powerful as those used by major corporations, yet accessible and easy to use."}
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                {fr
-                  ? "Nous développons une plateforme tout-en-un qui réunit CRM, automatisation, analytique et intelligence artificielle pour permettre aux entreprises de se concentrer sur l'essentiel : leur croissance."
-                  : "We develop an all-in-one platform that unifies CRM, automation, analytics, and AI to empower businesses to focus on what matters most: their growth."}
-              </p>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}>
-              <h2 className="text-2xl font-bold mb-6">{fr ? "Nos Valeurs" : "Our Values"}</h2>
-              <div className="space-y-5">
-                {(fr
-                  ? [
-                      { title: "Innovation", desc: "Nous repoussons les limites de la technologie pour offrir des solutions avant-gardistes." },
-                      { title: "Simplicité", desc: "La puissance sans la complexité. Nos outils sont intuitifs dès le premier jour." },
-                      { title: "Fiabilité", desc: "99.9% de disponibilité. Vos données sont sécurisées et toujours accessibles." },
-                      { title: "Proximité", desc: "Un support dédié et une écoute active de nos clients à chaque étape." },
-                    ]
-                  : [
-                      { title: "Innovation", desc: "We push technology boundaries to deliver cutting-edge solutions." },
-                      { title: "Simplicity", desc: "Power without complexity. Our tools are intuitive from day one." },
-                      { title: "Reliability", desc: "99.9% uptime. Your data is secure and always accessible." },
-                      { title: "Proximity", desc: "Dedicated support and active listening to our clients at every step." },
-                    ]
-                ).map((v, i) => (
-                  <div key={i} className="flex gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">{v.title}</h3>
-                      <p className="text-sm text-muted-foreground">{v.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto mt-20 pt-16 border-t border-border" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            {[
-              { value: "2026", label: fr ? "Fondée" : "Founded" },
-              { value: "50+", label: fr ? "Employés" : "Employees" },
-              { value: "2,500+", label: fr ? "Clients" : "Clients" },
-              { value: "150+", label: fr ? "Pays" : "Countries" },
-            ].map((s, i) => (
-              <div key={i} className="text-center">
-                <p className="text-2xl font-extrabold text-primary mb-1">{s.value}</p>
-                <p className="text-sm text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
+      {/* Mission + What We Build */}
+      <section className="py-12 lg:py-16 px-4 lg:px-8">
+        <div className="container mx-auto max-w-5xl grid md:grid-cols-2 gap-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.4 }}
+          >
+            <h2 className="text-base font-bold text-foreground mb-4">{t.missionTitle}</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-3">{t.mission1}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{t.mission2}</p>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            <h2 className="text-base font-bold text-foreground mb-4">{t.buildTitle}</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-3">{t.build1}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{t.build2}</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section className="py-12 px-4 lg:px-8 bg-muted/30 border-y border-border">
+        <div className="container mx-auto max-w-5xl">
+          <h2 className="text-base font-bold text-foreground mb-8">{t.valuesTitle}</h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {t.values.map((v, i) => {
+              const Icon = v.icon;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="rounded-2xl border border-border bg-card p-5 shadow-sm hover:shadow-md hover:border-primary/20 transition-all"
+                >
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${v.bg}`}>
+                    <Icon className={`w-5 h-5 ${v.color}`} />
+                  </div>
+                  <h3 className="text-sm font-bold text-foreground mb-2">{v.title}</h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">{v.desc}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Flowentra + Timeline */}
+      <section className="py-12 lg:py-16 px-4 lg:px-8">
+        <div className="container mx-auto max-w-5xl grid md:grid-cols-2 gap-8">
+
+          {/* Why */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.4 }}
+            className="rounded-2xl border border-border bg-card p-6 shadow-sm"
+          >
+            <h2 className="text-base font-bold text-foreground mb-4">{t.whyTitle}</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed">{t.why}</p>
+          </motion.div>
+
+          {/* Timeline */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.1 }}
+            className="rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-sm flex flex-col justify-between gap-6"
+          >
+            <div>
+              <h2 className="text-base font-bold text-foreground mb-5">{t.timelineTitle}</h2>
+              <div className="flex items-start gap-4">
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                <div>
+                  <p className="text-sm font-bold text-foreground">{t.timelineYear}</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed mt-1">{t.timelineDesc}</p>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs font-semibold text-primary border-t border-primary/15 pt-4">
+              {t.timelineTag}
+            </p>
+          </motion.div>
+
         </div>
       </section>
     </PageLayout>

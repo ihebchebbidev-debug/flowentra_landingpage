@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import { languages, publicLanguages } from "@/lib/i18n";
@@ -131,20 +131,21 @@ const Navbar = () => {
             { label: fr ? "Gestion de la finance" : "Finance Management", desc: fr ? "Contrôlez vos devis, factures, paiements et indicateurs financiers." : "Control your quotes, invoices, payments and financial KPIs.", icon: Banknote, href: "/#features", isRoute: true },
             { label: fr ? "Gestion de la ressource humaine" : "Human Resource Management", desc: fr ? "Gérez vos employés, la paie, les congés et les performances RH." : "Manage your employees, payroll, leaves and HR performance.", icon: UserCheck, href: "/#features", isRoute: true },
           ],
+          footer: { label: fr ? "Découvrir plus →" : "Discover more →", href: "/modules" },
         },
         {
           id: "features",
           label: fr ? "Fonctionnalités" : "Features",
           icon: CircuitBoard,
           items: [
-            { label: fr ? "Devis Intelligents & Gestion Commerciale" : "Smart Quotes & Sales Management", desc: fr ? "Devis, calculs de coûts et automatisation des offres commerciales." : "Quotes, cost calculations and sales offer automation.", icon: FileText, href: "/features", isRoute: true },
-            { label: fr ? "Gestion Client & Communication" : "Client Management & Communication", desc: fr ? "CRM, portails clients, notifications et suivi des interactions." : "CRM, client portals, notifications and interaction tracking.", icon: Users, href: "/features", isRoute: true },
-            { label: fr ? "Gestion des Interventions & Équipes Terrain" : "Field Operations & Team Management", desc: fr ? "Planification, dispatch IA, suivi temps réel et application mobile." : "Scheduling, AI dispatch, real-time tracking and mobile app.", icon: CalendarDays, href: "/features", isRoute: true },
-            { label: fr ? "Gestion des Projets, Maintenance & Équipements" : "Project, Maintenance & Equipment Management", desc: fr ? "Projets, maintenance, équipements et historique des interventions." : "Projects, maintenance, equipment tracking and intervention history.", icon: FolderKanban, href: "/features", isRoute: true },
-            { label: fr ? "Exécution des Services & Documentation Digitale" : "Service Execution & Digital Documentation", desc: fr ? "Checklists, photos, signatures électroniques et rapports terrain." : "Checklists, photos, e-signatures and automated field reports.", icon: ClipboardCheck, href: "/features", isRoute: true },
-            { label: fr ? "Facturation, Analyse, IA & Automatisation" : "Invoicing, Analytics, AI & Automation", desc: fr ? "Facturation automatisée, KPI, tableaux de bord IA et workflows." : "Automated invoicing, KPIs, AI dashboards and business workflows.", icon: BarChart3, href: "/features", isRoute: true },
+            { label: fr ? "Devis Intelligents & Gestion Commerciale" : "Smart Quotes & Sales Management", desc: fr ? "Devis, calculs de coûts et automatisation des offres commerciales." : "Quotes, cost calculations and sales offer automation.", icon: FileText, href: "/modules#quotes-sales", isRoute: true },
+            { label: fr ? "Gestion Client & Communication" : "Client Management & Communication", desc: fr ? "CRM, portails clients, notifications et suivi des interactions." : "CRM, client portals, notifications and interaction tracking.", icon: Users, href: "/modules#client-management", isRoute: true },
+            { label: fr ? "Gestion des Interventions & Équipes Terrain" : "Field Operations & Team Management", desc: fr ? "Planification, dispatch IA, suivi temps réel et application mobile." : "Scheduling, AI dispatch, real-time tracking and mobile app.", icon: CalendarDays, href: "/modules#field-operations", isRoute: true },
+            { label: fr ? "Gestion des Projets, Maintenance & Équipements" : "Project, Maintenance & Equipment Management", desc: fr ? "Projets, maintenance, équipements et historique des interventions." : "Projects, maintenance, equipment tracking and intervention history.", icon: FolderKanban, href: "/modules#project-maintenance", isRoute: true },
+            { label: fr ? "Exécution des Services & Documentation Digitale" : "Service Execution & Digital Documentation", desc: fr ? "Checklists, photos, signatures électroniques et rapports terrain." : "Checklists, photos, e-signatures and automated field reports.", icon: ClipboardCheck, href: "/modules#service-execution", isRoute: true },
+            { label: fr ? "Facturation, Analyse, IA & Automatisation" : "Invoicing, Analytics, AI & Automation", desc: fr ? "Facturation automatisée, KPI, tableaux de bord IA et workflows." : "Automated invoicing, KPIs, AI dashboards and business workflows.", icon: BarChart3, href: "/modules#invoicing-analytics", isRoute: true },
           ],
-          footer: { label: fr ? "Découvrir toutes les fonctionnalités →" : "Discover all features →", href: "/features" },
+          footer: { label: fr ? "Découvrir plus →" : "Discover more →", href: "/features" },
         },
         {
           id: "interfaces",
@@ -166,7 +167,7 @@ const Navbar = () => {
       tabs: [
         {
           id: "industries",
-          label: fr ? "Industries" : "Industries",
+          label: fr ? "Secteurs d'activité" : "Business Sectors",
           icon: Building2,
           items: [
             { label: fr ? "Réfrigération & Climatisation" : "HVAC & Refrigeration", icon: Snowflake, href: "/industries" },
@@ -185,15 +186,15 @@ const Navbar = () => {
             { label: fr ? "Fabricant" : "Manufacturer", icon: Factory, href: "/industries" },
             { label: fr ? "Commerçant" : "Retailer", icon: Store, href: "/industries" },
           ],
-          footer: { label: fr ? "Trouvez votre secteur" : "Find your industry", href: "/industries" },
+          footer: { label: fr ? "Trouvez votre secteur" : "Find your sector", href: "/industries" },
         },
         {
           id: "applications",
           label: fr ? "Applications" : "Applications",
           icon: Layers,
           items: [
-            { label: "Flowentra CRM/Office", desc: fr ? "Gestion commerciale complète." : "Complete business management.", icon: LayoutDashboard, href: "/features", isRoute: true },
-            { label: "Flowentra Service", desc: fr ? "Gestion des interventions terrain." : "Field intervention management.", icon: Wrench, href: "/features", isRoute: true },
+            { label: "Flowentra CRM/Office", desc: fr ? "Gestion commerciale complète." : "Complete business management.", icon: LayoutDashboard, href: "/applications#crm-office", isRoute: true },
+            { label: "Flowentra Service", desc: fr ? "Gestion des interventions terrain." : "Field intervention management.", icon: Wrench, href: "/applications#service", isRoute: true },
           ],
         },
         {
@@ -201,12 +202,13 @@ const Navbar = () => {
           label: fr ? "Services" : "Services",
           icon: Settings2,
           items: [
-            { label: fr ? "Conseil en processus" : "Process Consulting", desc: fr ? "Analyse et amélioration de vos processus métiers afin d'augmenter l'efficacité, réduire les coûts et aligner vos opérations avec vos objectifs." : "Analysis and improvement of your business processes to increase efficiency, reduce costs and align your operations with your goals.", icon: Eye, href: "#contact" },
-            { label: fr ? "Personnalisation et gestion de projets" : "Customisation & Project Management", desc: fr ? "Adaptation des solutions IT à vos besoins tout en assurant la planification, la coordination et la bonne livraison des projets." : "Tailoring IT solutions to your needs while ensuring planning, coordination and successful project delivery.", icon: Sparkles, href: "#contact" },
-            { label: fr ? "Développement de logiciels sur mesure" : "Custom Software Development", desc: fr ? "Création de solutions logicielles sécurisées et évolutives, conçues spécifiquement pour répondre aux besoins de votre entreprise." : "Building secure and scalable software solutions designed specifically to meet your business needs.", icon: Code2, href: "#contact" },
-            { label: fr ? "Solutions web et digitales" : "Web & Digital Solutions", desc: fr ? "Développement de sites web et d'applications web modernes pour améliorer votre présence en ligne et l'expérience utilisateur." : "Development of modern websites and web applications to improve your online presence and user experience.", icon: TrendingUp, href: "#contact" },
-            { label: fr ? "Support Client" : "Customer Support", desc: fr ? "Fournir une assistance réactive et fiable à vos clients, garantissant un fonctionnement fluide, une résolution rapide des problèmes et un support continu." : "Providing responsive and reliable assistance to your clients, ensuring smooth operation, fast issue resolution and continuous support.", icon: HeadphonesIcon, href: "/support", isRoute: true },
+            { label: fr ? "Conseil en processus" : "Process Consulting", desc: fr ? "Analyse et amélioration de vos processus métiers afin d'augmenter l'efficacité, réduire les coûts et aligner vos opérations avec vos objectifs." : "Analysis and improvement of your business processes to increase efficiency, reduce costs and align your operations with your goals.", icon: Eye, href: "/services#process-consulting", isRoute: true },
+            { label: fr ? "Personnalisation et gestion de projets" : "Customisation & Project Management", desc: fr ? "Adaptation des solutions IT à vos besoins tout en assurant la planification, la coordination et la bonne livraison des projets." : "Tailoring IT solutions to your needs while ensuring planning, coordination and successful project delivery.", icon: Sparkles, href: "/services#customisation-project", isRoute: true },
+            { label: fr ? "Développement de logiciels sur mesure" : "Custom Software Development", desc: fr ? "Création de solutions logicielles sécurisées et évolutives, conçues spécifiquement pour répondre aux besoins de votre entreprise." : "Building secure and scalable software solutions designed specifically to meet your business needs.", icon: Code2, href: "/services#custom-software", isRoute: true },
+            { label: fr ? "Solutions web et digitales" : "Web & Digital Solutions", desc: fr ? "Développement de sites web et d'applications web modernes pour améliorer votre présence en ligne et l'expérience utilisateur." : "Development of modern websites and web applications to improve your online presence and user experience.", icon: TrendingUp, href: "/services#web-digital", isRoute: true },
+            { label: fr ? "Support Client" : "Customer Support", desc: fr ? "Fournir une assistance réactive et fiable à vos clients, garantissant un fonctionnement fluide, une résolution rapide des problèmes et un support continu." : "Providing responsive and reliable assistance to your clients, ensuring smooth operation, fast issue resolution and continuous support.", icon: HeadphonesIcon, href: "/services#customer-support", isRoute: true },
           ],
+          footer: { label: fr ? "Découvrir plus →" : "Discover more →", href: "/services" },
         },
       ],
     },
@@ -217,9 +219,8 @@ const Navbar = () => {
           label: fr ? "Apprendre" : "Learn",
           icon: BookOpen,
           items: [
-            { label: fr ? "Démo interactive" : "Interactive Demo", desc: fr ? "Explorez la plateforme en direct." : "Explore the platform live.", icon: Play, href: "#demo" },
-            { label: fr ? "Tutoriels" : "Tutorials", desc: fr ? "Guides pas à pas." : "Step-by-step guides.", icon: BookOpen, href: "/documentation", isRoute: true },
-            { label: "FAQ", desc: fr ? "Questions fréquentes." : "Frequently asked questions.", icon: HelpCircle, href: "#faq" },
+            { label: fr ? "Démo interactive" : "Interactive Demo", desc: fr ? "Explorez la plateforme en direct." : "Explore the platform live.", icon: Play, href: "/demo", isRoute: true },
+            { label: "Documentation", desc: fr ? "Guides et références techniques." : "Guides and technical references.", icon: BookOpen, href: "/docs", isRoute: true },
           ],
         },
         {
@@ -249,7 +250,7 @@ const Navbar = () => {
     resources: hydrateMega(navMegaCms.resources as RawMega | undefined, defaultMegas.resources),
   };
 
-  // Custom links from CMS — admins can append { label, href } pairs to nav.customLinks (JSON).
+  // Custom links from CMS admins can append { label, href } pairs to nav.customLinks (JSON).
   const customLinks: Array<{ label: string; href: string }> = Array.isArray(navCms.customLinks) ? navCms.customLinks : [];
 
   const navItems: NavItem[] = [
@@ -524,8 +525,8 @@ const Navbar = () => {
 
           <div className={`w-px h-5 ${isDarkHero ? 'bg-primary/30' : 'bg-primary/30'}`} />
 
-          <Link to="/features" className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg transition-opacity hover:opacity-90 ${isDarkHero ? 'bg-primary text-primary-foreground' : 'bg-primary text-primary-foreground'}`}>
-            {fr ? "Découvrir" : "Discover"}
+          <Link to="/demo" className={`inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg transition-opacity hover:opacity-90 ${isDarkHero ? 'bg-primary text-primary-foreground' : 'bg-primary text-primary-foreground'}`}>
+            {fr ? "Essai gratuit" : "Free trial"}
           </Link>
         </div>
 
@@ -624,9 +625,9 @@ const Navbar = () => {
               </div>
 
               <div className="flex flex-col gap-2 pt-4">
-                <a href="#demo" onClick={() => setMobileOpen(false)} className="block text-center px-5 py-3.5 text-sm font-bold rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
-                  {fr ? "Demander une démo" : "Request Demo"}
-                </a>
+                <Link to="/demo" onClick={() => setMobileOpen(false)} className="block text-center px-5 py-3.5 text-sm font-bold rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/20">
+                  {fr ? "Essai gratuit / Démo" : "Free trial / Demo"}
+                </Link>
               </div>
             </div>
           </motion.div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pencil, EyeOff, MousePointerClick } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +9,7 @@ interface EditableSectionProps {
   sectionKey: string;
   children: React.ReactNode;
   label?: string;
+  id?: string;
 }
 
 /**
@@ -18,10 +19,10 @@ interface EditableSectionProps {
  *   - See a hover ring + explicit "Edit in admin" CTA
  *
  * Inner interactive elements (buttons, links, inputs, the per-image
- * ImageEditOverlay, etc.) keep working — we only treat clicks on the
+ * ImageEditOverlay, etc.) keep working we only treat clicks on the
  * section background as a navigation shortcut.
  */
-const EditableSection = ({ sectionKey, children, label }: EditableSectionProps) => {
+const EditableSection = ({ sectionKey, children, label, id }: EditableSectionProps) => {
   const { isAdmin, overlaysEnabled, publicPreview } = useAdminOverlay();
   const hiddenSections = useSectionVisibility();
   const [hovered, setHovered] = useState(false);
@@ -34,7 +35,7 @@ const EditableSection = ({ sectionKey, children, label }: EditableSectionProps) 
 
   // Admins always see content; if overlays disabled or in public preview, just render children.
   if (!isAdmin || !overlaysEnabled || publicPreview) {
-    return <div data-section-key={sectionKey}>{children}</div>;
+    return <div id={id} data-section-key={sectionKey}>{children}</div>;
   }
 
   const goEdit = (e: React.MouseEvent) => {
@@ -62,6 +63,7 @@ const EditableSection = ({ sectionKey, children, label }: EditableSectionProps) 
 
   return (
     <div
+      id={id}
       data-section-key={sectionKey}
       className="relative group/editable"
       onMouseEnter={() => setHovered(true)}
