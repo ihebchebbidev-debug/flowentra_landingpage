@@ -43,11 +43,9 @@ const content = {
         features: [
           "Drag-and-drop planning calendar with multi-technician view",
           "AI-assisted dispatch based on skills, availability and location",
-          "Real-time GPS tracking of field teams",
           "Mobile app for technicians: job details, navigation and status updates",
           "Digital checklists, photo capture and e-signature on-site",
           "Automatic PDF report generation after each intervention",
-          "Preventive and corrective maintenance scheduling",
         ],
         ideal: "Ideal for: field service companies, HVAC, plumbing, electrical, facility management and any business that schedules and manages on-site technician teams.",
         pricingHref: "/pricing#pricing-service",
@@ -95,11 +93,9 @@ const content = {
         features: [
           "Calendrier de planification drag-and-drop avec vue multi-techniciens",
           "Dispatch assisté par IA selon compétences, disponibilité et localisation",
-          "Suivi GPS en temps réel des équipes terrain",
           "Application mobile pour techniciens : détails de mission, navigation et mises à jour",
           "Checklists digitales, capture photo et signature électronique sur site",
           "Génération automatique de rapports PDF après chaque intervention",
-          "Planification de maintenance préventive et corrective",
         ],
         ideal: "Idéal pour : entreprises de services terrain, HVAC, plomberie, électricité, facility management et toute entreprise planifiant et gérant des équipes de techniciens sur site.",
         pricingHref: "/pricing#pricing-service",

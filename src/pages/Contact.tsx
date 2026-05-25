@@ -1,4 +1,4 @@
-import PageLayout from "@/components/layout/PageLayout";
+﻿import PageLayout from "@/components/layout/PageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -62,7 +62,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: fr ? "Siège Social" : "Headquarters",
-      value: fr ? "Lac, Tunis, Tunisie" : "Lac, Tunis, Tunisia",
+      value: fr ? "Centre, Nabeul, Tunisie" : "Center, Nabeul, Tunisia",
     },
     {
       icon: Clock,
@@ -298,11 +298,11 @@ const Contact = () => {
                 })}
               </div>
 
-              {/* Embedded map — Les Berges du Lac, Tunis */}
+              {/* Embedded map Nabeul Center */}
               <div className="rounded-2xl overflow-hidden border border-border shadow-sm aspect-[4/3]">
                 <iframe
                   title={fr ? "Localisation de Flowentra" : "Flowentra Location"}
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=10.2100%2C36.8250%2C10.2500%2C36.8550&layer=mapnik&marker=36.8420%2C10.2310"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=10.7176%2C36.4461%2C10.7576%2C36.4661&layer=mapnik&marker=36.4561%2C10.7376"
                   width="100%"
                   height="100%"
                   style={{ border: 0, display: "block" }}
@@ -311,7 +311,7 @@ const Contact = () => {
                 />
               </div>
               <a
-                href="https://www.openstreetmap.org/?mlat=36.842&mlon=10.231#map=15/36.842/10.231"
+                href="https://www.openstreetmap.org/?mlat=36.4561&mlon=10.7376#map=15/36.4561/10.7376"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-primary hover:underline text-center -mt-4"
