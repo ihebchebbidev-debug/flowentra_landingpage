@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,7 +61,7 @@ const STARTER_TEMPLATES: { name: string; icon: string; description: string; bloc
     icon: "🎉",
     description: "Sale or promotion announcement",
     blocks: [
-      { id: generateId(), type: "hero", content: { title: "🔥 Special Offer", subtitle: "Limited time only — save up to 50%", bgColor: "#dc2626", textColor: "#ffffff" } },
+      { id: generateId(), type: "hero", content: { title: "🔥 Special Offer", subtitle: "Limited time only save up to 50%", bgColor: "#dc2626", textColor: "#ffffff" } },
       { id: generateId(), type: "text", content: { text: "<p>Hi {{name}},</p><p>For a limited time, enjoy exclusive discounts on all plans. Upgrade now and unlock the full potential of your business.</p>" } },
       { id: generateId(), type: "columns", content: { left: "<div style='text-align:center;padding:16px;background:#fef2f2;border-radius:8px'><p style='font-size:32px;font-weight:bold;color:#dc2626;margin:0'>50%</p><p style='color:#6b7280;margin:4px 0 0'>OFF Starter</p></div>", right: "<div style='text-align:center;padding:16px;background:#eff6ff;border-radius:8px'><p style='font-size:32px;font-weight:bold;color:#2563eb;margin:0'>30%</p><p style='color:#6b7280;margin:4px 0 0'>OFF Enterprise</p></div>" } },
       { id: generateId(), type: "button", content: { text: "Claim Your Discount", url: "https://", bgColor: "#dc2626", textColor: "#ffffff", align: "center" } },

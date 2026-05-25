@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+﻿import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import logo from "@/assets/flowentra-logo.png";
 import { useCmsRaw } from "@/contexts/CmsContentContext";
@@ -11,7 +11,7 @@ interface LoadingScreenProps {
 const LoadingScreen = ({ minDuration = 1400, onComplete }: LoadingScreenProps) => {
   const [visible, setVisible] = useState(true);
   const [progress, setProgress] = useState(0);
-  // Hold the loader until the CMS has resolved its first fetch — guarantees
+  // Hold the loader until the CMS has resolved its first fetch guarantees
   // visitors never see the English defaults flash before their language loads.
   const { firstLoadDone } = useCmsRaw();
 

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+﻿import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/flowentra-logo.png";
@@ -18,13 +18,13 @@ const FAQ_RESPONSES: { keywords: string[]; en: string; fr: string }[] = [
   },
   {
     keywords: ["demo", "démo", "try", "essai", "test"],
-    en: "You can start a free 14-day trial with full access to all features — no credit card required. Click 'Start Free Trial' to begin!",
-    fr: "Vous pouvez commencer un essai gratuit de 14 jours avec accès complet — sans carte bancaire. Cliquez sur 'Essai Gratuit' !",
+    en: "You can start a free 14-day trial with full access to all features no credit card required. Click 'Start Free Trial' to begin!",
+    fr: "Vous pouvez commencer un essai gratuit de 14 jours avec accès complet sans carte bancaire. Cliquez sur 'Essai Gratuit' !",
   },
   {
     keywords: ["feature", "module", "fonctionnalit", "what can", "que fait"],
-    en: "Flowentra includes CRM, Workflow Engine, Analytics, Invoicing, Inventory, Smart Assistant, Website Builder, and much more — all in one platform.",
-    fr: "Flowentra comprend CRM, Moteur de Workflows, Analytique, Facturation, Inventaire, Assistant Intelligent, et bien plus — le tout dans une seule plateforme.",
+    en: "Flowentra includes CRM, Workflow Engine, Analytics, Invoicing, Inventory, Smart Assistant, Website Builder, and much more all in one platform.",
+    fr: "Flowentra comprend CRM, Moteur de Workflows, Analytique, Facturation, Inventaire, Assistant Intelligent, et bien plus le tout dans une seule plateforme.",
   },
   {
     keywords: ["support", "help", "aide", "contact"],

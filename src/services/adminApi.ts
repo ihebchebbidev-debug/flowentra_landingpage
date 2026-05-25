@@ -1,4 +1,4 @@
-// Admin CMS API Service — all operations go through the PHP backend
+﻿// Admin CMS API Service all operations go through the PHP backend
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
 
 interface ApiResponse<T = any> {
@@ -57,7 +57,7 @@ interface ChangeLogEntry {
   changed_by_name: string;
 }
 
-// Token management — always read fresh from localStorage to avoid stale closures
+// Token management always read fresh from localStorage to avoid stale closures
 function getHeaders(): HeadersInit {
   return { 'Content-Type': 'application/json' };
 }
@@ -77,7 +77,7 @@ async function apiCall<T>(url: string, options?: RequestInit): Promise<T> {
 
 export const adminAuth = {
   async login(email: string, password: string): Promise<LoginResponse> {
-    // Hardcoded admin — no server round-trip needed
+    // Hardcoded admin no server round-trip needed
     const user: AdminUser = { id: 1, email: 'admin@flowentra.io', name: 'Admin', role: 'super_admin' };
     localStorage.setItem('admin_user', JSON.stringify(user));
     return { success: true, token: 'static', user };
@@ -229,7 +229,7 @@ export const adminMedia = {
     formData.append('category', category);
     formData.append('alt_text', altText);
     if (section) formData.append('section', section);
-    // Pass admin token via form field — backend reads it as fallback when the
+    // Pass admin token via form field backend reads it as fallback when the
     // Authorization header is stripped by shared hosts (OVH etc).
     const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
     if (token) formData.append('_token', token);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pencil, ImagePlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,7 +9,7 @@ interface Props {
   sectionKey: string;
   /** Optional short label shown on the button (e.g. "Hero image", "Logo"). */
   label?: string;
-  /** True if no image is uploaded yet — surfaces an "Add image" CTA permanently visible. */
+  /** True if no image is uploaded yet surfaces an "Add image" CTA permanently visible. */
   empty?: boolean;
   /** Visual size variant. "sm" suits small avatar/logo tiles. */
   size?: "sm" | "md";

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Copy, Languages, ChevronRight } from "lucide-react";
 import FlagIcon from "@/components/FlagIcon";
 
@@ -119,7 +119,7 @@ const CopyLanguageBar = ({ allLanguages, currentLang, onLangChange, copy }: Prop
         )}
       </div>
       <p className="text-[10px] text-muted-foreground/60 mt-2 leading-relaxed">
-        Copies all translatable text/JSON fields. Images are already shared across languages. Changes are staged — click <span className="font-semibold">Save All Languages</span> to persist.
+        Copies all translatable text/JSON fields. Images are already shared across languages. Changes are staged click <span className="font-semibold">Save All Languages</span> to persist.
       </p>
     </div>
   );

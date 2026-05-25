@@ -1,7 +1,7 @@
-// Bundled default images shown in the Media Library picker so admins can
+﻿// Bundled default images shown in the Media Library picker so admins can
 // pick a great-looking default without having to upload anything.
 //
-// These are bundled as static assets — they are NOT stored server-side.
+// These are bundled as static assets they are NOT stored server-side.
 // When picked, the URL points to the built/bundled asset and works the
 // same as any uploaded image (it gets saved as the field's URL).
 import heroGradient from "@/assets/defaults/hero-gradient-1.jpg";

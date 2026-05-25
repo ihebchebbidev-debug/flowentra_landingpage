@@ -1,5 +1,5 @@
-// =============================================================================
-// Template Gallery — searchable, previewable section variant browser.
+﻿// =============================================================================
+// Template Gallery searchable, previewable section variant browser.
 // Lets admins find a section variant across all section types, see its
 // multilingual content rendered for EN/FR/DE/AR, and add it in one click.
 // =============================================================================
@@ -104,7 +104,7 @@ const TemplateGallery = ({ onPick, onClose }: Props) => {
             <div>
               <h3 className="font-bold text-foreground">Template Gallery</h3>
               <p className="text-xs text-muted-foreground">
-                {allEntries.length} section variants — search, preview, and add in one click.
+                {allEntries.length} section variants search, preview, and add in one click.
               </p>
             </div>
           </div>
@@ -135,7 +135,7 @@ const TemplateGallery = ({ onPick, onClose }: Props) => {
           </p>
         </div>
 
-        {/* Body — list + preview */}
+        {/* Body list + preview */}
         <div className="flex-1 grid grid-cols-1 md:grid-cols-[320px_1fr] min-h-0">
           {/* Variant list */}
           <div className="border-r border-border overflow-y-auto">

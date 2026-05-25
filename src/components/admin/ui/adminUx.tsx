@@ -1,9 +1,9 @@
-import { type ReactNode } from "react";
+﻿import { type ReactNode } from "react";
 import { AlertTriangle, RefreshCw, type LucideIcon } from "lucide-react";
 import { toast as sonnerToast } from "sonner";
 
 /**
- * Shared admin UX primitives — use across every admin list view so loading,
+ * Shared admin UX primitives use across every admin list view so loading,
  * error, empty, and toast feedback all look and behave the same.
  */
 
@@ -15,7 +15,7 @@ export const Skeleton = ({ className = "" }: { className?: string }) => (
 
 interface SkeletonListProps {
   rows?: number;
-  /** Visual variant — "row" for tables/lists, "card" for grid cards. */
+  /** Visual variant "row" for tables/lists, "card" for grid cards. */
   variant?: "row" | "card";
   className?: string;
 }
@@ -115,7 +115,7 @@ export const ErrorState = ({
 // ---------- Standardized toast helper ----------
 
 /**
- * Centralized toast helper — use these instead of sonner directly so every
+ * Centralized toast helper use these instead of sonner directly so every
  * admin surface speaks with the same voice (durations, descriptions, retry).
  */
 export const adminToast = {

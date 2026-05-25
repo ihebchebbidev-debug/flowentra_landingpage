@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 import { usePageSection } from "@/contexts/PageSectionContext";
 import { toast } from "sonner";
 
@@ -35,7 +35,7 @@ export const CmsContentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const fetchAll = useCallback(async (showLoading = true) => {
     if (showLoading) setLoading(true);
     try {
-      // Cache-busting via query param only — avoid Cache-Control/Pragma headers
+      // Cache-busting via query param only avoid Cache-Control/Pragma headers
       // because they trigger CORS preflight rejections on the PHP backend.
       const res = await fetch(`${API_BASE}/content.php?action=get_all&_=${Date.now()}`, {
         cache: "no-store",
@@ -79,13 +79,13 @@ export const CmsContentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         isFirstLoadRef.current = false;
       }
     } catch {
-      // Silently fail — components fall back to hardcoded i18n
+      // Silently fail components fall back to hardcoded i18n
     } finally {
       setLoading(false);
       setFirstLoadDone(true);
     }
 
-    // Fetch section visibility (separate, non-blocking — failure leaves all visible)
+    // Fetch section visibility (separate, non-blocking failure leaves all visible)
     try {
       const r = await fetch(`${API_BASE}/content.php?action=sections_status&_=${Date.now()}`, { cache: "no-store" });
       if (r.ok) {
@@ -98,7 +98,7 @@ export const CmsContentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         }
       }
     } catch {
-      // ignore — keep current visibility map
+      // ignore keep current visibility map
     }
   }, []);
 
@@ -204,12 +204,12 @@ export const CmsContentProvider: React.FC<{ children: React.ReactNode }> = ({ ch
           }
           return;
         }
-        // Default: a bulk save happened — refetch everything
+        // Default: a bulk save happened refetch everything
         fetchAll(false);
       };
     }
 
-    // Poll every 15s while tab is visible — catches edits from other devices
+    // Poll every 15s while tab is visible catches edits from other devices
     const interval = setInterval(() => {
       if (document.visibilityState === "visible") fetchAll(false);
     }, 15000);
@@ -234,7 +234,7 @@ export function useSectionVisibility() {
   return useContext(CmsContentContext).hiddenSections;
 }
 
-// Legacy fallback list — used when the backend doesn't yet return a `types` map
+// Legacy fallback list used when the backend doesn't yet return a `types` map
 // (e.g. older PHP deployment). Once the new content.php is live, cmsTypes wins.
 const LEGACY_JSON_KEYS = new Set([
   "items", "plans", "logos", "nodes", "stats",

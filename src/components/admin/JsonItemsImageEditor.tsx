@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+﻿import { useMemo } from "react";
 import ImageUploader from "./ImageUploader";
 import { Image as ImageIcon, X, GripVertical } from "lucide-react";
 import {
@@ -22,7 +22,7 @@ import { CSS } from "@dnd-kit/utilities";
 interface Props {
   /** Raw JSON string value (the items array as serialized in the CMS field). */
   value: string;
-  /** Section key — used as upload "section" tag and category hint. */
+  /** Section key used as upload "section" tag and category hint. */
   sectionKey: string;
   /** Called with the new JSON string when an image is set/cleared or order changes. */
   onChange: (newJson: string) => void;
@@ -137,7 +137,7 @@ const JsonItemsImageEditor = ({ value, sectionKey, onChange, imageKey = "image",
   if (parsed.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-border bg-muted/30 p-3 text-[11px] text-muted-foreground">
-        No items yet — add at least one item in the JSON below.
+        No items yet add at least one item in the JSON below.
       </div>
     );
   }
@@ -169,7 +169,7 @@ const JsonItemsImageEditor = ({ value, sectionKey, onChange, imageKey = "image",
     onChange(JSON.stringify(reordered, null, 2));
   };
 
-  // Stable IDs by index — array order is the source of truth here
+  // Stable IDs by index array order is the source of truth here
   const ids = parsed.map((_, i) => String(i));
 
   return (

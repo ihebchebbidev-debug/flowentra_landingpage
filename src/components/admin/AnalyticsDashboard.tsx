@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+﻿import { useState, useEffect, useMemo } from "react";
 import {
   BarChart3, Users, Eye, Clock, Globe, Monitor, Smartphone,
   TrendingUp, ArrowUp, ArrowDown, Activity, MousePointerClick,
@@ -253,7 +253,7 @@ const AnalyticsDashboard = () => {
                   backgroundColor: count === 0 ? "hsl(var(--muted))" : `hsl(var(--primary) / ${Math.max(0.1, count / maxHourly)})`,
                   color: count / maxHourly > 0.5 ? "hsl(var(--primary-foreground))" : "hsl(var(--muted-foreground))",
                 }}
-                title={`${h}:00 — ${count} views`}
+                title={`${h}:00 ${count} views`}
               >
                 {h}
               </div>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -35,7 +35,7 @@ import FlagIcon from "@/components/FlagIcon";
 import { getDefaultMegaJson, getDefaultMegaConfig, type MegaMenuKey } from "./megaMenuDefaults";
 
 // ─────────────────────────────────────────────────────────────────────
-// Types — match Navbar.tsx RawMega / RawTab / RawTabItem
+// Types match Navbar.tsx RawMega / RawTab / RawTabItem
 // ─────────────────────────────────────────────────────────────────────
 export interface MegaItem {
   label: string;
@@ -547,7 +547,7 @@ const MegaMenuBuilder = ({
         <div>
           <h3 className="text-sm font-bold text-foreground">Mega-menu builder</h3>
           <p className="text-[11px] text-muted-foreground mt-0.5">
-            Add tabs, items, icons and links — drag to reorder. Saved per language.
+            Add tabs, items, icons and links drag to reorder. Saved per language.
           </p>
         </div>
 
@@ -674,7 +674,7 @@ const MegaMenuBuilder = ({
                       <Eye className="w-3.5 h-3.5 mt-0.5 shrink-0 text-primary" />
                       <div className="flex-1">
                         <p className="font-semibold">
-                          This menu is empty — visitors currently see the built-in default shown below.
+                          This menu is empty visitors currently see the built-in default shown below.
                         </p>
                         <p className="mt-0.5 text-muted-foreground">
                           Click <span className="font-semibold text-primary">"Load default"</span> on

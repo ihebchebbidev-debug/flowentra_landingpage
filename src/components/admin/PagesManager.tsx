@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import {
   DndContext, closestCenter, PointerSensor, useSensor, useSensors,
@@ -51,7 +51,7 @@ const PagesManager = () => {
       const data = await pagesApi.list();
       setPages(data);
     } catch (e: any) {
-      const msg = e?.message || "Failed to load pages — is the backend deployed?";
+      const msg = e?.message || "Failed to load pages is the backend deployed?";
       setLoadError(msg);
       toast.error(msg, { duration: 5000 });
     } finally {
@@ -476,7 +476,7 @@ const DeletePageDialog = ({ page, onClose, onDeleted }: {
 };
 
 // ============================================================================
-// Template Picker — categorized + searchable list of page templates
+// Template Picker categorized + searchable list of page templates
 // ============================================================================
 const TemplatePicker = ({ onPick }: { onPick: (t: PageTemplate) => void }) => {
   const [query, setQuery] = useState("");
@@ -619,7 +619,7 @@ const CreatePageDialog = ({ onClose, onCreated }: { onClose: () => void; onCreat
         if (tplRes.success) {
           toast.success(`Created page with ${tplRes.data!.count} section${tplRes.data!.count === 1 ? "" : "s"}`);
         } else {
-          // Backend may not yet support `apply_template` — fall back to per-section adds
+          // Backend may not yet support `apply_template` fall back to per-section adds
           let added = 0;
           let failed = 0;
           for (const s of payload) {
@@ -763,7 +763,7 @@ const PageEditor = ({ page: initialPage, onClose, onEditSection }: PageEditorPro
         reload();
         return;
       }
-      // Fallback: backend may not support apply_section_variant — add a plain section
+      // Fallback: backend may not support apply_section_variant add a plain section
       const fb = await pagesApi.addSection(page.id, type);
       if (fb.success) {
         toast.success(`Added ${type} (variant content unavailable on this server)`);
@@ -920,7 +920,7 @@ const PageEditor = ({ page: initialPage, onClose, onEditSection }: PageEditorPro
         {page.sections.length === 0 ? (
           <div className="text-center py-10 border-2 border-dashed border-border rounded-lg">
             <Layers className="w-8 h-8 mx-auto text-muted-foreground/40 mb-2" />
-            <p className="text-sm text-muted-foreground">No sections yet — click "Add section" to start building.</p>
+            <p className="text-sm text-muted-foreground">No sections yet click "Add section" to start building.</p>
           </div>
         ) : (
           <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>

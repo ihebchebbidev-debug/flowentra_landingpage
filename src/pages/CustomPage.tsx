@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/landing/Navbar";
@@ -87,7 +87,7 @@ const CustomPage = () => {
 
       {previewMode && !page.is_published && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-40 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-600 text-xs font-bold uppercase tracking-wider shadow-lg backdrop-blur">
-          Draft preview — not visible to public
+          Draft preview not visible to public
         </div>
       )}
 

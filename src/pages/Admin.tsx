@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { adminAuth, adminContent, type AdminUser, type CmsSection } from "@/services/adminApi";
 import AdminLogin from "@/components/admin/AdminLogin";
@@ -57,7 +57,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // Auto-authenticate on mount — visiting /admin marks the session as admin
+  // Auto-authenticate on mount visiting /admin marks the session as admin
   // so the landing page shows edit overlays.
   useEffect(() => {
     localStorage.setItem('admin_user', JSON.stringify(hardcodedUser));
@@ -186,7 +186,7 @@ const Admin = () => {
           </div>
 
           <div className="flex items-center gap-1.5">
-            {/* Language Selector — only for CMS sections */}
+            {/* Language Selector only for CMS sections */}
             {!isSpecialView && (
               <>
                 <div className="flex items-center bg-muted rounded-lg p-0.5 gap-0.5">

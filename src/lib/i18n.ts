@@ -1,4 +1,4 @@
-export type Lang = "en" | "fr" | "de" | "ar";
+﻿export type Lang = "en" | "fr" | "de" | "ar";
 
 export const languages: { code: Lang; label: string; country: string; dir: "ltr" | "rtl"; hidden?: boolean }[] = [
   { code: "fr", label: "Français", country: "FR", dir: "ltr" },
@@ -72,7 +72,7 @@ const translations = {
       subtitle: "Businesses across Tunisia and beyond trust Flowentra daily",
       items: [
         { name: "Nabil Gharbi", role: "CTO, Vermeg", quote: "Flowentra replaced 4 separate tools for us. Our team is faster and we finally have a single source of truth." },
-        { name: "Sarra Ben Amor", role: "Operations Lead, Telnet Holding", quote: "The workflow engine alone saved us thousands of hours. It's intuitive — even non-technical staff use it daily." },
+        { name: "Sarra Ben Amor", role: "Operations Lead, Telnet Holding", quote: "The workflow engine alone saved us thousands of hours. It's intuitive even non-technical staff use it daily." },
         { name: "Youssef Meddeb", role: "CEO, DataBridge Tunisia", quote: "We deployed in under 2 weeks. The multilingual support and local payment integration are game-changers." },
       ],
     },
@@ -187,7 +187,7 @@ const translations = {
     hero: {
       headline: "Ihr gesamtes Business an einem Ort",
       headlineSub: "CRM · Automatisierung · Analytik · KI",
-      subtext: "Schluss mit Tool-Chaos. Flowentra vereint CRM, Workflows, Analytik und KI in einer Plattform — damit Sie sich auf Wachstum konzentrieren können.",
+      subtext: "Schluss mit Tool-Chaos. Flowentra vereint CRM, Workflows, Analytik und KI in einer Plattform damit Sie sich auf Wachstum konzentrieren können.",
       cta: "Kostenlos testen",
       ctaSecondary: "Demo ansehen",
     },
@@ -239,7 +239,7 @@ const translations = {
       items: [
         { name: "Sarah Mitchell", role: "COO, TechVentures Inc.", quote: "Flowentra hat unseren gesamten Betrieb vereinheitlicht. Wir haben manuelle Prozesse im ersten Quartal um 60% reduziert." },
         { name: "Marc Dubois", role: "Direktor, EuroLogistics SA", quote: "Die Workflow-Engine allein hat uns tausende Stunden gespart. Die Plattform ist unglaublich intuitiv." },
-        { name: "Amira Ben Salem", role: "CEO, MediterraneanTrade", quote: "Endlich eine Plattform, die unsere Sprache spricht — buchstäblich. Die mehrsprachige Unterstützung ist makellos." },
+        { name: "Amira Ben Salem", role: "CEO, MediterraneanTrade", quote: "Endlich eine Plattform, die unsere Sprache spricht buchstäblich. Die mehrsprachige Unterstützung ist makellos." },
       ],
     },
     faq: {
@@ -270,7 +270,7 @@ const translations = {
     hero: {
       headline: "أدر أعمالك بالكامل من مكان واحد",
       headlineSub: "CRM · أتمتة · تحليلات · ذكاء اصطناعي",
-      subtext: "توقف عن التنقل بين الأدوات. Flowentra تجمع CRM والأتمتة والتحليلات والذكاء الاصطناعي في منصة واحدة — لتركز على النمو.",
+      subtext: "توقف عن التنقل بين الأدوات. Flowentra تجمع CRM والأتمتة والتحليلات والذكاء الاصطناعي في منصة واحدة لتركز على النمو.",
       cta: "ابدأ مجاناً",
       ctaSecondary: "شاهد العرض",
     },

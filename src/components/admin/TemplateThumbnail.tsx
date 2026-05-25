@@ -1,5 +1,5 @@
-// =============================================================================
-// TemplateThumbnail — generates a stylized SVG preview from a template's
+﻿// =============================================================================
+// TemplateThumbnail generates a stylized SVG preview from a template's
 // section list, so admins can spot the right layout at a glance without
 // loading any external image.
 // =============================================================================
@@ -295,7 +295,7 @@ const TemplateThumbnail = ({ template, variant, className, ariaLabel }: Props) =
         return drawer ? (
           <g key={`${r.type}-${i}`}>{drawer(r.y, r.h, W)}</g>
         ) : (
-          // Unknown section — neutral block
+          // Unknown section neutral block
           <rect
             key={`${r.type}-${i}`}
             x="10"

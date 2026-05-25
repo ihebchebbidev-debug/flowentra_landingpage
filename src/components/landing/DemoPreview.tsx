@@ -1,4 +1,4 @@
-import { useLanguage } from "@/contexts/LanguageContext";
+﻿import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -51,7 +51,7 @@ const DemoPreview = () => {
     screenshotNote: defaultScreenshotNote,
     barChart: defaultBarChart,
     analyticsStats: defaultAnalyticsStats,
-    // Optional admin-uploaded screenshots — when set, replace the synthetic mockup.
+    // Optional admin-uploaded screenshots when set, replace the synthetic mockup.
     workflowDesktopImage: "",
     workflowTabletImage: "",
     workflowMobileImage: "",
@@ -164,7 +164,7 @@ const DemoPreview = () => {
                 </div>
               </div>
 
-              {/* Content area — uploaded screenshot if present, else synthetic skeleton */}
+              {/* Content area uploaded screenshot if present, else synthetic skeleton */}
               {customScreenshot ? (
                 <div className="relative flex-1 min-h-[300px] bg-black/20 overflow-hidden">
                   <img

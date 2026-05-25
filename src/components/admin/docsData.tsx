@@ -1,4 +1,4 @@
-import {
+﻿import {
   BookOpen, Globe, Image as ImageIcon, LayoutGrid, Type, Hash,
   History, ShieldCheck, Sparkles, Mail, BarChart3, Tag, Settings,
   Receipt, Eye, AlertCircle, CheckCircle2, Lightbulb, Pencil, ArrowRight,
@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 
 // ──────────────────────────────────────────────────────────────────────
-// Doc structure — shared by AdminDocs (full page) and SectionHelpDrawer
+// Doc structure shared by AdminDocs (full page) and SectionHelpDrawer
 // ──────────────────────────────────────────────────────────────────────
 export interface DocSubsection {
   title: string;
@@ -34,12 +34,12 @@ export const DOCS: DocSection[] = [
     group: "Basics",
     icon: BookOpen,
     intro:
-      "Welcome to the Flowentra admin. This panel controls every piece of text, image, link, price, menu and color visible on the live website. Anything you save here goes live immediately — no code changes needed.",
+      "Welcome to the Flowentra admin. This panel controls every piece of text, image, link, price, menu and color visible on the live website. Anything you save here goes live immediately no code changes needed.",
     steps: [
       "Sign in at /admin with your admin email and password.",
-      "On the left sidebar, pick a Page Section (Hero, Pricing, Footer…) — these match what visitors see on the homepage from top to bottom.",
+      "On the left sidebar, pick a Page Section (Hero, Pricing, Footer…) these match what visitors see on the homepage from top to bottom.",
       "Use the language switcher in the top bar (EN / FR / DE / AR) to edit one language at a time. Each language is stored separately.",
-      "Edit a field, then click Save. If a required field is missing in any language, the editor blocks the save and shows you exactly which field — in which language — to fix (see 'Required-field validation' in the Reference group).",
+      "Edit a field, then click Save. If a required field is missing in any language, the editor blocks the save and shows you exactly which field in which language to fix (see 'Required-field validation' in the Reference group).",
       "Open the live site (top-left link) in another tab to verify.",
       "If something looks wrong, open Change History (clock icon, top right) to roll back.",
     ],
@@ -47,22 +47,22 @@ export const DOCS: DocSection[] = [
       {
         title: "Sidebar groups explained",
         body:
-          "Header & Navigation — top menu, hero banner.\n" +
-          "Social Proof — trusted logos, testimonials, key metrics.\n" +
-          "Product & Features — feature cards, screenshots, how-it-works steps, demo, industries, integrations.\n" +
-          "Conversion — pricing plans, comparison table, CTA banner.\n" +
-          "Support & Footer — FAQ, contact info, footer links.\n" +
-          "Admin Tools — pricing/invoices, email manager, analytics, release notes, site settings.",
+          "Header & Navigation top menu, hero banner.\n" +
+          "Social Proof trusted logos, testimonials, key metrics.\n" +
+          "Product & Features feature cards, screenshots, how-it-works steps, demo, industries, integrations.\n" +
+          "Conversion pricing plans, comparison table, CTA banner.\n" +
+          "Support & Footer FAQ, contact info, footer links.\n" +
+          "Admin Tools pricing/invoices, email manager, analytics, release notes, site settings.",
       },
       {
         title: "Top-bar buttons",
         body:
-          "🌐 Language switcher — changes which language you are editing.\n" +
-          "🕒 History — full change log; restore any previous version.\n" +
-          "⬇️ Export — downloads ALL content as one JSON backup file.\n" +
-          "⬆️ Import — restores content from a JSON backup (overwrites current).\n" +
-          "🚪 Logout — ends your admin session.",
-        tip: "Always click Export before doing big edits — you get a one-click rollback file.",
+          "🌐 Language switcher changes which language you are editing.\n" +
+          "🕒 History full change log; restore any previous version.\n" +
+          "⬇️ Export downloads ALL content as one JSON backup file.\n" +
+          "⬆️ Import restores content from a JSON backup (overwrites current).\n" +
+          "🚪 Logout ends your admin session.",
+        tip: "Always click Export before doing big edits you get a one-click rollback file.",
       },
     ],
   },
@@ -76,7 +76,7 @@ export const DOCS: DocSection[] = [
     steps: [
       "Choose a section in the sidebar (e.g. Hero).",
       "In the top bar, click the language flag you want to edit.",
-      "Edit the fields in that language — they only affect that language.",
+      "Edit the fields in that language they only affect that language.",
       "Switch flag → edit again for the next language.",
       "If a language is left empty for a field, the site falls back to English automatically.",
     ],
@@ -84,26 +84,26 @@ export const DOCS: DocSection[] = [
       {
         title: "100% of homepage text is editable",
         body:
-          "Every visible string on the landing page is wired through the CMS — headline, sub-text, CTA labels, feature titles & descriptions, pricing labels, FAQ items, testimonials, footer links, even the trusted-by company names. If you spot text you can't find a field for, open this drawer on that section and check 'Editable fields' — it's listed.",
+          "Every visible string on the landing page is wired through the CMS headline, sub-text, CTA labels, feature titles & descriptions, pricing labels, FAQ items, testimonials, footer links, even the trusted-by company names. If you spot text you can't find a field for, open this drawer on that section and check 'Editable fields' it's listed.",
         tip: "Use the 'Save All Languages' button at the top of every section: it saves EN/FR/DE/AR in one click.",
       },
       {
         title: "Arabic (RTL)",
         body:
-          "Arabic is right-to-left. When you edit Arabic text the input box flips automatically. On the live site the entire layout mirrors (menu on the right, text aligned right). Just translate the text — no extra work needed.",
-        warn: "Don't paste English text into the Arabic field — visitors switching to Arabic will see broken layout.",
+          "Arabic is right-to-left. When you edit Arabic text the input box flips automatically. On the live site the entire layout mirrors (menu on the right, text aligned right). Just translate the text no extra work needed.",
+        warn: "Don't paste English text into the Arabic field visitors switching to Arabic will see broken layout.",
       },
     ],
   },
 
-  // Page sections — keyed by sectionKey for drawer lookup
+  // Page sections keyed by sectionKey for drawer lookup
   {
     id: "hero",
     title: "Hero (top banner)",
     group: "Page Sections",
     icon: Sparkles,
     intro:
-      "The Hero is the first thing visitors see — big headline, sub-text, two call-to-action buttons, animated gradient background, and the browser-mockup screenshot underneath.",
+      "The Hero is the first thing visitors see big headline, sub-text, two call-to-action buttons, animated gradient background, and the browser-mockup screenshot underneath.",
     fields: [
       { name: "headline", type: "Text", desc: "Main title. Keep under ~9 words for impact." },
       { name: "headlineSub", type: "Text", desc: "Small line under the headline (e.g. 'CRM · Field Service · Projects')." },
@@ -135,7 +135,7 @@ export const DOCS: DocSection[] = [
     group: "Page Sections",
     icon: LayoutGrid,
     intro:
-      "The top navigation bar — link labels and the right-side CTA buttons (desktop and mobile).",
+      "The top navigation bar link labels and the right-side CTA buttons (desktop and mobile).",
     fields: [
       { name: "features", type: "Text", desc: "'Product' link label." },
       { name: "pricing", type: "Text", desc: "'Pricing' link label." },
@@ -156,7 +156,7 @@ export const DOCS: DocSection[] = [
     group: "Page Sections",
     icon: LayoutGrid,
     intro:
-      "Visual builder for the three big drop-down 'mega-menus'. Add tabs, items, icons, descriptions and links — no code needed.",
+      "Visual builder for the three big drop-down 'mega-menus'. Add tabs, items, icons, descriptions and links no code needed.",
     steps: [
       "Open 'Nav Mega Menu' in the sidebar.",
       "Pick a language flag in the top bar.",
@@ -165,21 +165,21 @@ export const DOCS: DocSection[] = [
       "Inside a tab, click '+ Add item' for each link card.",
       "For every item: pick an icon (200+ icons in 12 categories), set the label, an optional description, the link URL, and whether it's an internal page (/about) or anchor (#features).",
       "Drag tabs/items by their grip handle to reorder.",
-      "Watch the Live preview on the right — it renders exactly what visitors see.",
+      "Watch the Live preview on the right it renders exactly what visitors see.",
       "Click Save when done.",
     ],
     subsections: [
       {
         title: "Internal page vs Anchor link",
         body:
-          "Internal page — opens a real page on the site (e.g. /about, /pricing). Tick the 'Internal page' checkbox.\n" +
-          "Anchor — scrolls to a section on the current page (e.g. #features, #faq). Untick the checkbox.",
+          "Internal page opens a real page on the site (e.g. /about, /pricing). Tick the 'Internal page' checkbox.\n" +
+          "Anchor scrolls to a section on the current page (e.g. #features, #faq). Untick the checkbox.",
         warn: "If you point an anchor to a section that doesn't exist (e.g. #foo), the click does nothing.",
       },
       {
         title: "Choosing icons",
         body:
-          "Click the icon button next to any item — a picker opens with 200+ Lucide icons grouped into Business, People, Tech, Data, Files, Field & Map, Security, AI & Auto, UI, Facility, Health, Marketing. Type in the search box to filter.",
+          "Click the icon button next to any item a picker opens with 200+ Lucide icons grouped into Business, People, Tech, Data, Files, Field & Map, Security, AI & Auto, UI, Facility, Health, Marketing. Type in the search box to filter.",
       },
     ],
   },
@@ -192,13 +192,13 @@ export const DOCS: DocSection[] = [
       "Strip of customer/partner company names shown right under the hero, with a small heading.",
     fields: [
       { name: "title", type: "Text", desc: "Heading above the logos (e.g. 'They trust us')." },
-      { name: "logos", type: "JSON list of strings", desc: "Array of company names — e.g. [\"Telnet\", \"BIAT\", \"Vermeg\"]." },
+      { name: "logos", type: "JSON list of strings", desc: "Array of company names e.g. [\"Telnet\", \"BIAT\", \"Vermeg\"]." },
     ],
     subsections: [
       {
         title: "How to edit names",
         body:
-          "The 'logos' field is a JSON array. Add or remove names — they appear as muted text in the strip. To switch to images instead, contact your developer (current design uses text for a cleaner look).",
+          "The 'logos' field is a JSON array. Add or remove names they appear as muted text in the strip. To switch to images instead, contact your developer (current design uses text for a cleaner look).",
       },
     ],
   },
@@ -212,7 +212,7 @@ export const DOCS: DocSection[] = [
     fields: [
       { name: "title", type: "Text", desc: "Section title." },
       { name: "subtitle", type: "Text", desc: "One-line section subtitle." },
-      { name: "items", type: "JSON list of {title, desc}", desc: "12 entries — order = display order." },
+      { name: "items", type: "JSON list of {title, desc}", desc: "12 entries order = display order." },
     ],
     subsections: [
       {
@@ -228,13 +228,13 @@ export const DOCS: DocSection[] = [
     group: "Page Sections",
     icon: Sparkles,
     intro:
-      "Detailed product highlights with screenshots — what the product looks like in action.",
+      "Detailed product highlights with screenshots what the product looks like in action.",
     fields: [
       { name: "label", type: "Text", desc: "Small section label above the title." },
       { name: "title", type: "Text", desc: "Section title." },
       { name: "items", type: "JSON list of {tag, title, desc}", desc: "Each item is one showcase block." },
       { name: "browserBarHost", type: "Text", desc: "Hostname shown in each browser-mockup URL bar (e.g. 'app.flowentra.io')." },
-      { name: "screenshotPrefix", type: "Text", desc: "Caption prefix shown inside the placeholder (e.g. 'Screenshot' → 'Screenshot — Dashboard')." },
+      { name: "screenshotPrefix", type: "Text", desc: "Caption prefix shown inside the placeholder (e.g. 'Screenshot' → 'Screenshot Dashboard')." },
     ],
   },
   {
@@ -291,14 +291,14 @@ export const DOCS: DocSection[] = [
       { name: "monthly", type: "Text", desc: "Monthly suffix (e.g. '/month')." },
       { name: "cta", type: "Text", desc: "Plan CTA button label." },
       { name: "popular", type: "Text", desc: "'Most Popular' badge label." },
-      { name: "plans", type: "JSON list", desc: "Three plan objects — each {name, price/pricePerUser, features[], popular?}." },
+      { name: "plans", type: "JSON list", desc: "Three plan objects each {name, price/pricePerUser, features[], popular?}." },
     ],
     subsections: [
       {
         title: "Editing a price",
         body:
           "In the plans JSON, change `price` (or `pricePerUser`) to the new number (e.g. 39). The calculator multiplies this by the user count automatically.",
-        warn: "Price must be a number or a numeric string ('39'). Don't write '39 TND' — the currency is added separately.",
+        warn: "Price must be a number or a numeric string ('39'). Don't write '39 TND' the currency is added separately.",
       },
       {
         title: "Adding/removing features in a plan",
@@ -321,7 +321,7 @@ export const DOCS: DocSection[] = [
       { name: "featureColumnLabel", type: "Text", desc: "First column header (e.g. 'Feature')." },
       { name: "features", type: "JSON list of strings", desc: "Feature rows." },
       { name: "competitors", type: "JSON list of strings", desc: "Competitor column names." },
-      { name: "competitorSupport", type: "JSON object", desc: "{\"CompetitorName\": [true, false, true, …]} — one boolean per feature row." },
+      { name: "competitorSupport", type: "JSON object", desc: "{\"CompetitorName\": [true, false, true, …]} one boolean per feature row." },
     ],
   },
   {
@@ -330,7 +330,7 @@ export const DOCS: DocSection[] = [
     group: "Page Sections",
     icon: Type,
     intro:
-      "Customer reviews and quotes — social proof that builds trust.",
+      "Customer reviews and quotes social proof that builds trust.",
     fields: [
       { name: "sectionLabel", type: "Text", desc: "Small label above the title." },
       { name: "title", type: "Text", desc: "Section title." },
@@ -344,7 +344,7 @@ export const DOCS: DocSection[] = [
     group: "Page Sections",
     icon: AlertCircle,
     intro:
-      "Frequently asked questions — reduces support load and addresses objections. Renders as an accordion.",
+      "Frequently asked questions reduces support load and addresses objections. Renders as an accordion.",
     fields: [
       { name: "title", type: "Text", desc: "Section title." },
       { name: "subtitle", type: "Textarea", desc: "Section subtitle." },
@@ -388,7 +388,7 @@ export const DOCS: DocSection[] = [
     group: "Page Sections",
     icon: LayoutGrid,
     intro:
-      "Page footer — description, copyright, column labels and links.",
+      "Page footer description, copyright, column labels and links.",
     fields: [
       { name: "desc", type: "Textarea", desc: "Short company description shown in the footer." },
       { name: "copyright", type: "Text", desc: "Copyright line." },
@@ -427,7 +427,7 @@ export const DOCS: DocSection[] = [
       "Central place to upload, organize and reuse images. Every image field on the site accepts a Media Library URL.",
     steps: [
       "Open Site Settings → Media Library.",
-      "Click 'Upload' and pick one or more files (PNG, JPG, SVG, WebP — max 5 MB each).",
+      "Click 'Upload' and pick one or more files (PNG, JPG, SVG, WebP max 5 MB each).",
       "Optional: assign a category (e.g. 'Logos', 'Screenshots').",
       "Hover an image and click the copy icon to copy its URL.",
       "Paste the URL into any image field in the CMS.",
@@ -471,20 +471,20 @@ export const DOCS: DocSection[] = [
     group: "Admin Tools",
     icon: BarChart3,
     intro:
-      "Visitor counts, page views, top pages, country and source breakdowns — collected by the built-in tracker (no Google Analytics needed).",
+      "Visitor counts, page views, top pages, country and source breakdowns collected by the built-in tracker (no Google Analytics needed).",
   },
   {
     id: "pages",
-    title: "Pages — custom page builder",
+    title: "Pages custom page builder",
     group: "Admin Tools",
     icon: LayoutGrid,
     intro:
       "Build new pages by composing existing sections (Hero, Features, Pricing, FAQ, Testimonials, CTA, …). Each page lives at /p/<slug>, has its own SEO meta in 4 languages, and its own per-page content for every section you drop in.",
     steps: [
       "Open Pages → '+ New page'. Enter a title and slug (e.g. 'our-story' → /p/our-story).",
-      "On the page editor, click '+ Add section' and pick the sections you want — Hero, Features, FAQ, etc.",
+      "On the page editor, click '+ Add section' and pick the sections you want Hero, Features, FAQ, etc.",
       "Drag sections by the grip handle to reorder. Click the eye icon to hide one without deleting it.",
-      "Click the pencil ✎ on any section to open the standard Section Editor — your edits ONLY affect this page.",
+      "Click the pencil ✎ on any section to open the standard Section Editor your edits ONLY affect this page.",
       "Switch language tabs (EN / FR / DE / AR) to translate per-page content.",
       "When you're ready, click 'Publish' at the top right. The page is now live at /p/<slug>.",
     ],
@@ -492,21 +492,21 @@ export const DOCS: DocSection[] = [
       {
         title: "How per-page content works",
         body:
-          "Each section instance gets a unique key (e.g. page_3_hero_1) under the hood. Editing it does NOT change the same section on the homepage — only this page. If you don't customize a field, the page falls back to that section's homepage content so it always looks complete.",
+          "Each section instance gets a unique key (e.g. page_3_hero_1) under the hood. Editing it does NOT change the same section on the homepage only this page. If you don't customize a field, the page falls back to that section's homepage content so it always looks complete.",
       },
       {
         title: "Linking pages into navigation",
         body:
           "On the page editor, copy the /p/<slug> path. Then:\n" +
-          "• Mega Menu — open Nav Mega Menu, add a new item, paste the URL.\n" +
-          "• Top Navbar — open Nav, add the page to the 'Custom Nav Links' JSON: [{\"label\":\"Our Story\",\"href\":\"/p/our-story\"}].\n" +
-          "• Footer — open Footer, add a link to the appropriate column.\n" +
+          "• Mega Menu open Nav Mega Menu, add a new item, paste the URL.\n" +
+          "• Top Navbar open Nav, add the page to the 'Custom Nav Links' JSON: [{\"label\":\"Our Story\",\"href\":\"/p/our-story\"}].\n" +
+          "• Footer open Footer, add a link to the appropriate column.\n" +
           "Mobile menu mirrors all of the above automatically.",
         tip: "Use the linking helper buttons at the bottom of the page editor for one-click jumps to each editor.",
       },
       {
         title: "Drafts vs Published",
-        body: "New pages are Drafts by default — invisible to visitors. Click 'Publish' when ready. Unpublishing keeps the page and its sections; only the public URL stops working.",
+        body: "New pages are Drafts by default invisible to visitors. Click 'Publish' when ready. Unpublishing keeps the page and its sections; only the public URL stops working.",
       },
     ],
   },
@@ -516,12 +516,12 @@ export const DOCS: DocSection[] = [
     group: "Admin Tools",
     icon: Tag,
     intro:
-      "Public changelog — every entry appears on /releases for visitors to read.",
+      "Public changelog every entry appears on /releases for visitors to read.",
     steps: [
       "Open Release Notes → '+ New release'.",
       "Set version (e.g. v2.4.0), date, and a short summary.",
       "Add bullet points under New / Improved / Fixed.",
-      "Click Publish — the entry goes live immediately.",
+      "Click Publish the entry goes live immediately.",
     ],
   },
   {
@@ -559,11 +559,11 @@ export const DOCS: DocSection[] = [
     group: "Reference",
     icon: ShieldAlert,
     intro:
-      "The Section Editor blocks Save when required fields are missing — in ANY language, not just the one you're editing. This stops you from accidentally publishing a half-translated page.",
+      "The Section Editor blocks Save when required fields are missing in ANY language, not just the one you're editing. This stops you from accidentally publishing a half-translated page.",
     steps: [
       "Click Save (or 'Save All Languages').",
-      "If something is missing, a red banner appears at the top of the editor listing the exact field labels and the language each one is missing in (e.g. 'Headline — missing in FR, DE').",
-      "Click 'Jump to first missing field' — the editor scrolls to and highlights it in the current language.",
+      "If something is missing, a red banner appears at the top of the editor listing the exact field labels and the language each one is missing in (e.g. 'Headline missing in FR, DE').",
+      "Click 'Jump to first missing field' the editor scrolls to and highlights it in the current language.",
       "Or click any language flag inside the banner to switch to that language and jump straight to its first missing field.",
       "Fill the field, click Save again. Repeat until the banner disappears.",
     ],
@@ -572,13 +572,13 @@ export const DOCS: DocSection[] = [
         title: "What counts as 'required'?",
         body:
           "Core fields that the live site needs to render correctly: headline / title / cta on Hero, plan name & price on Pricing, question & answer pairs on FAQ, etc. Optional fields (taglines, secondary buttons, screenshots) never block Save.",
-        tip: "Empty languages still fall back to English on the live site — but validation makes sure you SEE the gap before publishing.",
+        tip: "Empty languages still fall back to English on the live site but validation makes sure you SEE the gap before publishing.",
       },
       {
         title: "Bypassing validation",
         body:
-          "There is no override. If a field is genuinely optional but flagged as required, contact your developer — the rule lives in the section's editor schema, not in the database.",
-        warn: "Don't paste a single space to 'fill' a field — validation trims whitespace and will still flag it.",
+          "There is no override. If a field is genuinely optional but flagged as required, contact your developer the rule lives in the section's editor schema, not in the database.",
+        warn: "Don't paste a single space to 'fill' a field validation trims whitespace and will still flag it.",
       },
     ],
   },
@@ -588,7 +588,7 @@ export const DOCS: DocSection[] = [
     group: "Reference",
     icon: Loader2,
     intro:
-      "First-time visitors of the homepage see a branded loading screen — the Flowentra logo with pulsing rings and three animated dots — while the page assets finish loading. It only shows once per browser session.",
+      "First-time visitors of the homepage see a branded loading screen the Flowentra logo with pulsing rings and three animated dots while the page assets finish loading. It only shows once per browser session.",
     subsections: [
       {
         title: "When it appears",
@@ -599,7 +599,7 @@ export const DOCS: DocSection[] = [
         title: "Customising it",
         body:
           "The logo is sourced from src/assets/flowentra-logo.png. Replace that file (same filename) to update the loader logo. Colours follow the design tokens (primary + accent), so changing the brand palette in Site Settings updates the dots and glow automatically.",
-        tip: "To preview the loader during testing, open the site in a private/incognito window — sessionStorage is cleared.",
+        tip: "To preview the loader during testing, open the site in a private/incognito window sessionStorage is cleared.",
       },
       {
         title: "Minimum display time",
@@ -617,10 +617,10 @@ export const DOCS: DocSection[] = [
       "Quick reference for the field types you'll see in the editor.",
     subsections: [
       { title: "Text", body: "Plain text input. What you type is what visitors see. Line breaks are kept." },
-      { title: "Toggle (on/off)", body: "Switch — used for things like 'Show banner' or 'Mark plan as popular'." },
+      { title: "Toggle (on/off)", body: "Switch used for things like 'Show banner' or 'Mark plan as popular'." },
       { title: "Image URL", body: "A URL pointing to a file in the Media Library. Click the small image icon next to the field to open the picker." },
       { title: "Link", body: "Internal route (/about), in-page anchor (#pricing) or full external URL (https://…)." },
-      { title: "JSON list", body: "Ordered list of items (FAQ entries, pricing plans, etc.). Most JSON lists have a visual builder.", warn: "When editing raw JSON: keep quotes balanced and don't remove commas — or the section won't render." },
+      { title: "JSON list", body: "Ordered list of items (FAQ entries, pricing plans, etc.). Most JSON lists have a visual builder.", warn: "When editing raw JSON: keep quotes balanced and don't remove commas or the section won't render." },
     ],
   },
   {
@@ -632,7 +632,7 @@ export const DOCS: DocSection[] = [
     subsections: [
       { title: "I saved but the live site didn't update", body: "1. Hard-refresh the live page (Ctrl+Shift+R / Cmd+Shift+R).\n2. Make sure you saved in the right language (top-bar flag).\n3. Open Change History to confirm the save was recorded." },
       { title: "A section shows broken/empty", body: "Likely a JSON syntax error. Open Change History, restore the previous version, then try the edit again carefully." },
-      { title: "Image doesn't appear", body: "Check the URL pastes correctly (no trailing space). Open the URL directly in your browser — if it doesn't load there, re-upload the file." },
+      { title: "Image doesn't appear", body: "Check the URL pastes correctly (no trailing space). Open the URL directly in your browser if it doesn't load there, re-upload the file." },
       { title: "Forgot password", body: "Use the 'Forgot password' link on the login page. A reset email will be sent if SMTP is configured." },
     ],
   },
@@ -672,7 +672,7 @@ export const DOC_TO_SECTION: Record<string, string> = Object.fromEntries(
 );
 
 // ──────────────────────────────────────────────────────────────────────
-// Shared renderer — same look in full Docs page and Help drawer
+// Shared renderer same look in full Docs page and Help drawer
 // ──────────────────────────────────────────────────────────────────────
 export const DocContent = ({
   doc,
@@ -764,7 +764,7 @@ export const DocContent = ({
             <div className="mt-2 flex items-start gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10">
               <Lightbulb className="w-4 h-4 text-primary shrink-0 mt-0.5" />
               <p className="text-xs text-foreground/80 leading-relaxed">
-                <span className="font-semibold text-primary">Tip — </span>
+                <span className="font-semibold text-primary">Tip </span>
                 {sub.tip}
               </p>
             </div>
@@ -773,7 +773,7 @@ export const DocContent = ({
             <div className="mt-2 flex items-start gap-2 p-3 rounded-lg bg-destructive/5 border border-destructive/10">
               <AlertCircle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
               <p className="text-xs text-foreground/80 leading-relaxed">
-                <span className="font-semibold text-destructive">Warning — </span>
+                <span className="font-semibold text-destructive">Warning </span>
                 {sub.warn}
               </p>
             </div>

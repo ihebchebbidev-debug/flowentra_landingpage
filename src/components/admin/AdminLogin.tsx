@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Lock, Mail, Eye, EyeOff } from "lucide-react";
 import logo from "@/assets/flowentra-logo.png";
 
@@ -76,7 +76,7 @@ const AdminLogin = ({ onLogin, loading }: Props) => {
         </form>
 
         <p className="text-center text-primary-foreground/20 text-xs mt-6">
-          Flowentra Admin Panel — Authorized access only
+          Flowentra Admin Panel Authorized access only
         </p>
       </div>
     </div>

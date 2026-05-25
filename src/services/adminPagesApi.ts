@@ -1,4 +1,4 @@
-// Pages CMS API — talks to /backend/api/pages.php
+﻿// Pages CMS API talks to /backend/api/pages.php
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
 
 export interface PageSectionRow {

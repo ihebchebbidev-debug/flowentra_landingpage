@@ -1,4 +1,4 @@
-// Email API Service — interfaces & fetch calls for the email system
+﻿// Email API Service interfaces & fetch calls for the email system
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
 

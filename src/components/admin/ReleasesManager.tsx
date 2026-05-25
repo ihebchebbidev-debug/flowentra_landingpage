@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { releasesApi, type Release, type ReleaseItem } from "@/services/adminReleasesApi";
 import { toast } from "sonner";
 import {
@@ -253,7 +253,7 @@ const ReleasesManager = () => {
                 <button
                   onClick={(e) => { e.stopPropagation(); handleTogglePublish(release.id); }}
                   className={`p-1.5 rounded-lg transition-colors ${release.is_published ? "text-primary hover:bg-primary/10" : "text-muted-foreground hover:bg-muted"}`}
-                  title={release.is_published ? "Published — click to unpublish" : "Draft — click to publish"}
+                  title={release.is_published ? "Published click to unpublish" : "Draft click to publish"}
                 >
                   {release.is_published ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                 </button>

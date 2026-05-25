@@ -1,4 +1,4 @@
-// =============================================================================
+﻿// =============================================================================
 // Page Templates & Section Variants
 // -----------------------------------------------------------------------------
 // Templates = pre-composed pages with multiple sections + ready content (4 langs).
@@ -42,14 +42,14 @@ export interface PageTemplate {
 const L = (en: string, fr: string, de: string, ar: string): LangMap => ({ en, fr, de, ar });
 
 // -----------------------------------------------------------------------------
-// SECTION VARIANTS — pick a flavor when adding a single section
+// SECTION VARIANTS pick a flavor when adding a single section
 // -----------------------------------------------------------------------------
 export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
   hero: [
     {
       id: "bold",
       label: "Bold launch",
-      description: "Punchy headline + dual CTAs — great for product launches.",
+      description: "Punchy headline + dual CTAs great for product launches.",
       content: {
         title: L("Ship faster. Scale smarter.", "Livrez plus vite. Évoluez plus intelligemment.", "Schneller liefern. Klüger skalieren.", "اشحن أسرع. توسّع بذكاء."),
         subtitle: L("The all-in-one platform built for teams that move fast and break nothing.", "La plateforme tout-en-un pour les équipes qui avancent vite sans rien casser.", "Die All-in-One-Plattform für Teams, die schnell vorankommen, ohne etwas zu zerbrechen.", "المنصة الشاملة للفرق التي تتحرك بسرعة دون كسر أي شيء."),
@@ -105,7 +105,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
       label: "Event / webinar",
       description: "Time-bound hero for conferences, launches, webinars.",
       content: {
-        title: L("Flowentra Live 2026 — Reserve your seat.", "Flowentra Live 2026 — Réservez votre place.", "Flowentra Live 2026 — Sichern Sie Ihren Platz.", "فلوينترا لايف 2026 — احجز مقعدك."),
+        title: L("Flowentra Live 2026 Reserve your seat.", "Flowentra Live 2026 Réservez votre place.", "Flowentra Live 2026 Sichern Sie Ihren Platz.", "فلوينترا لايف 2026 احجز مقعدك."),
         subtitle: L("Two days. Twenty speakers. One unmissable event for product teams.", "Deux jours. Vingt intervenants. L'événement à ne pas manquer.", "Zwei Tage. Zwanzig Speaker. Das Event für Produktteams.", "يومان. عشرون متحدثًا. حدث لا يُفوّت لفرق المنتجات."),
         primaryCtaLabel: L("Register now", "S'inscrire", "Jetzt anmelden", "سجّل الآن"),
         secondaryCtaLabel: L("View agenda", "Voir le programme", "Programm ansehen", "البرنامج"),
@@ -120,13 +120,13 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
       description: "Standard four-feature grid covering speed, scale, security, support.",
       content: {
         eyebrow: L("Why teams choose us", "Pourquoi les équipes nous choisissent", "Warum Teams uns wählen", "لماذا تختارنا الفرق"),
-        title: L("Everything you need, nothing you don't.", "Tout ce qu'il vous faut, rien de plus.", "Alles, was Sie brauchen — nichts, was Sie nicht brauchen.", "كل ما تحتاجه، ولا شيء زائد."),
+        title: L("Everything you need, nothing you don't.", "Tout ce qu'il vous faut, rien de plus.", "Alles, was Sie brauchen nichts, was Sie nicht brauchen.", "كل ما تحتاجه، ولا شيء زائد."),
       },
     },
     {
       id: "developer",
       label: "Developer-focused",
-      description: "Speaks directly to engineers — APIs, SDKs, tooling.",
+      description: "Speaks directly to engineers APIs, SDKs, tooling.",
       content: {
         eyebrow: L("Built by developers", "Conçu par des développeurs", "Von Entwicklern gebaut", "مبنية من قبل المطورين"),
         title: L("Tools that respect your time.", "Des outils qui respectent votre temps.", "Werkzeuge, die Ihre Zeit respektieren.", "أدوات تحترم وقتك."),
@@ -169,7 +169,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
       description: "Sales-led with a meeting booking action.",
       content: {
         title: L("See it in action.", "Voyez-le en action.", "Sehen Sie es in Aktion.", "شاهده وهو يعمل."),
-        subtitle: L("30 minutes with a product specialist — tailored to your stack.", "30 minutes avec un spécialiste produit — adapté à votre stack.", "30 Minuten mit einer Produktspezialistin — auf Ihren Stack zugeschnitten.", "30 دقيقة مع متخصص منتج — مخصصة لبيئتك."),
+        subtitle: L("30 minutes with a product specialist tailored to your stack.", "30 minutes avec un spécialiste produit adapté à votre stack.", "30 Minuten mit einer Produktspezialistin auf Ihren Stack zugeschnitten.", "30 دقيقة مع متخصص منتج مخصصة لبيئتك."),
         ctaLabel: L("Book a demo", "Réserver une démo", "Demo buchen", "احجز عرضًا"),
       },
     },
@@ -189,7 +189,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
       description: "General-purpose 'get in touch' banner.",
       content: {
         title: L("Have a question? We're listening.", "Une question ? Nous sommes à l'écoute.", "Eine Frage? Wir hören zu.", "هل لديك سؤال؟ نحن نستمع."),
-        subtitle: L("Reach out and a real human will reply within one business day.", "Écrivez-nous et un humain vous répondra sous un jour ouvré.", "Schreiben Sie uns — ein echter Mensch antwortet innerhalb eines Werktags.", "تواصل معنا وسيرد عليك إنسان حقيقي خلال يوم عمل."),
+        subtitle: L("Reach out and a real human will reply within one business day.", "Écrivez-nous et un humain vous répondra sous un jour ouvré.", "Schreiben Sie uns ein echter Mensch antwortet innerhalb eines Werktags.", "تواصل معنا وسيرد عليك إنسان حقيقي خلال يوم عمل."),
         ctaLabel: L("Contact us", "Nous contacter", "Kontaktieren Sie uns", "اتصل بنا"),
       },
     },
@@ -231,7 +231,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
       label: "Talk to sales",
       content: {
         title: L("Let's talk.", "Parlons.", "Lass uns reden.", "لنتحدث."),
-        subtitle: L("Tell us a bit about your team and we'll be in touch within one business day.", "Parlez-nous de votre équipe et nous reviendrons vers vous sous un jour ouvré.", "Erzählen Sie uns von Ihrem Team — wir melden uns innerhalb eines Werktags.", "أخبرنا عن فريقك وسنتواصل معك خلال يوم عمل واحد."),
+        subtitle: L("Tell us a bit about your team and we'll be in touch within one business day.", "Parlez-nous de votre équipe et nous reviendrons vers vous sous un jour ouvré.", "Erzählen Sie uns von Ihrem Team wir melden uns innerhalb eines Werktags.", "أخبرنا عن فريقك وسنتواصل معك خلال يوم عمل واحد."),
       },
     },
     {
@@ -247,7 +247,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
       label: "Partnerships",
       content: {
         title: L("Let's build together.", "Construisons ensemble.", "Lass uns gemeinsam bauen.", "لنبنِ معًا."),
-        subtitle: L("Agencies, resellers, integrators — we'd love to hear from you.", "Agences, revendeurs, intégrateurs — nous aimerions vous entendre.", "Agenturen, Reseller, Integratoren — wir hören gerne von Ihnen.", "وكالات وموزعون ومتكاملون — يسعدنا التواصل معكم."),
+        subtitle: L("Agencies, resellers, integrators we'd love to hear from you.", "Agences, revendeurs, intégrateurs nous aimerions vous entendre.", "Agenturen, Reseller, Integratoren wir hören gerne von Ihnen.", "وكالات وموزعون ومتكاملون يسعدنا التواصل معكم."),
       },
     },
     {
@@ -303,7 +303,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
     {
       id: "press",
       label: "As featured in",
-      description: "Media-mention bar — great for PR-led launches.",
+      description: "Media-mention bar great for PR-led launches.",
       content: {
         title: L("As featured in", "Vu dans", "Bekannt aus", "ظهرنا في"),
       },
@@ -347,7 +347,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
       description: "Clickable mock UI for hands-on exploration.",
       content: {
         eyebrow: L("Try it now", "Essayez maintenant", "Jetzt ausprobieren", "جرّب الآن"),
-        title: L("Play with a live preview — no signup required.", "Jouez avec un aperçu en direct — sans inscription.", "Spielen Sie mit einer Live-Vorschau — ohne Anmeldung.", "تفاعل مع معاينة مباشرة — دون تسجيل."),
+        title: L("Play with a live preview no signup required.", "Jouez avec un aperçu en direct sans inscription.", "Spielen Sie mit einer Live-Vorschau ohne Anmeldung.", "تفاعل مع معاينة مباشرة دون تسجيل."),
       },
     },
   ],
@@ -438,7 +438,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
     {
       id: "impact",
       label: "Customer impact",
-      description: "Outcome-focused stats — time saved, revenue earned.",
+      description: "Outcome-focused stats time saved, revenue earned.",
       content: {
         eyebrow: L("Real-world impact", "Impact concret", "Echte Wirkung", "أثر حقيقي"),
         title: L("Numbers our customers care about.", "Les chiffres qui comptent pour nos clients.", "Zahlen, die für unsere Kunden zählen.", "أرقام تهمّ عملاءنا."),
@@ -448,7 +448,7 @@ export const SECTION_VARIANTS: Record<string, SectionVariant[]> = {
 };
 
 // -----------------------------------------------------------------------------
-// PAGE TEMPLATES — multi-section starter pages
+// PAGE TEMPLATES multi-section starter pages
 // -----------------------------------------------------------------------------
 export const PAGE_TEMPLATES: PageTemplate[] = [
   {
@@ -470,7 +470,7 @@ export const PAGE_TEMPLATES: PageTemplate[] = [
     category: "Marketing",
     meta: {
       title: L("Modern SaaS for ambitious teams", "SaaS moderne pour équipes ambitieuses", "Modernes SaaS für ambitionierte Teams", "SaaS حديث للفرق الطموحة"),
-      description: L("All the tools your team needs to ship faster, in one beautifully integrated platform.", "Tous les outils dont votre équipe a besoin pour livrer plus vite, sur une plateforme intégrée.", "Alle Tools, die Ihr Team braucht, um schneller zu liefern — in einer integrierten Plattform.", "جميع الأدوات التي يحتاجها فريقك للشحن بسرعة، في منصة متكاملة."),
+      description: L("All the tools your team needs to ship faster, in one beautifully integrated platform.", "Tous les outils dont votre équipe a besoin pour livrer plus vite, sur une plateforme intégrée.", "Alle Tools, die Ihr Team braucht, um schneller zu liefern in einer integrierten Plattform.", "جميع الأدوات التي يحتاجها فريقك للشحن بسرعة، في منصة متكاملة."),
     },
     sections: [
       { section_type: "hero", variant: "bold" },
@@ -527,7 +527,7 @@ export const PAGE_TEMPLATES: PageTemplate[] = [
     category: "Marketing",
     meta: {
       title: L("Meet your new AI teammate", "Rencontrez votre nouvel équipier IA", "Lernen Sie Ihren neuen KI-Teamkollegen kennen", "تعرّف على زميلك الذكي الجديد"),
-      description: L("AI that ships work, not just suggestions.", "Une IA qui livre du travail, pas seulement des suggestions.", "KI, die liefert — nicht nur Vorschläge macht.", "ذكاء اصطناعي ينجز العمل، وليس مجرد اقتراحات."),
+      description: L("AI that ships work, not just suggestions.", "Une IA qui livre du travail, pas seulement des suggestions.", "KI, die liefert nicht nur Vorschläge macht.", "ذكاء اصطناعي ينجز العمل، وليس مجرد اقتراحات."),
     },
     sections: [
       { section_type: "hero", variant: "bold" },
@@ -859,7 +859,7 @@ export const PAGE_TEMPLATES: PageTemplate[] = [
   {
     id: "minimal-landing",
     label: "Minimal landing",
-    description: "Hero · Features · CTA — clean, distraction-free.",
+    description: "Hero · Features · CTA clean, distraction-free.",
     emoji: "✨",
     category: "Marketing",
     meta: {
@@ -939,7 +939,7 @@ export const PAGE_TEMPLATES: PageTemplate[] = [
   {
     id: "changelog-page",
     label: "Changelog / what's new",
-    description: "Hero · Showcase · CTA — perfect for release notes hub.",
+    description: "Hero · Showcase · CTA perfect for release notes hub.",
     emoji: "📝",
     category: "Utility",
     meta: {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   Shield, Lock, Unlock, Save, Eye, EyeOff, Key, Globe, Palette,
@@ -415,7 +415,7 @@ const AdminSettings = () => {
             label="Page Title"
             value={seo.siteTitle}
             onChange={v => updateSeo({ siteTitle: v })}
-            placeholder="Flowentra — All-in-One Business Platform"
+            placeholder="Flowentra All-in-One Business Platform"
             hint={`${seo.siteTitle.length}/60 characters ${seo.siteTitle.length > 60 ? "⚠️ Too long" : "✓"}`}
           />
           <FieldInput

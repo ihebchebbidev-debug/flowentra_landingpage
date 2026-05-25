@@ -1,4 +1,4 @@
-import { useLanguage } from "@/contexts/LanguageContext";
+﻿import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import { motion } from "framer-motion";
 import { CreditCard, UserPlus, Users, Rocket } from "lucide-react";
@@ -8,25 +8,25 @@ const stepIcons = [CreditCard, UserPlus, Users, Rocket];
 
 const defaultSteps: Record<string, { title: string; items: { title: string; desc: string }[] }> = {
   en: { title: "Your First Steps with Flowentra", items: [
-    { title: "Choose Your Plan", desc: "Start with a 14-day free trial — no credit card required." },
+    { title: "Choose Your Plan", desc: "Start with a 14-day free trial no credit card required." },
     { title: "Set Up Your Workspace", desc: "Configure your administrator profile and dashboard in seconds." },
     { title: "Invite Your Team", desc: "Add team members, assign roles, and start collaborating." },
     { title: "Start Optimizing", desc: "Automate processes and focus on growth." },
   ]},
   fr: { title: "Vos premiers pas avec Flowentra", items: [
-    { title: "Choisissez votre plan", desc: "Commencez avec un essai gratuit de 14 jours — sans carte bancaire." },
+    { title: "Choisissez votre plan", desc: "Commencez avec un essai gratuit de 14 jours sans carte bancaire." },
     { title: "Configurez votre espace", desc: "Créez votre profil administrateur et personnalisez votre tableau de bord." },
     { title: "Invitez votre équipe", desc: "Ajoutez vos collaborateurs, attribuez des rôles et commencez à travailler." },
     { title: "Optimisez votre travail", desc: "Automatisez vos processus et concentrez-vous sur la croissance." },
   ]},
   de: { title: "Ihre ersten Schritte mit Flowentra", items: [
-    { title: "Plan wählen", desc: "14-tägige kostenlose Testversion — keine Kreditkarte erforderlich." },
+    { title: "Plan wählen", desc: "14-tägige kostenlose Testversion keine Kreditkarte erforderlich." },
     { title: "Workspace einrichten", desc: "Administratorprofil und Dashboard in Sekunden konfigurieren." },
     { title: "Team einladen", desc: "Teammitglieder hinzufügen, Rollen zuweisen und zusammenarbeiten." },
     { title: "Optimieren starten", desc: "Prozesse automatisieren und auf Wachstum konzentrieren." },
   ]},
   ar: { title: "خطواتك الأولى مع Flowentra", items: [
-    { title: "اختر خطتك", desc: "ابدأ بتجربة مجانية لمدة 14 يومًا — بدون بطاقة ائتمان." },
+    { title: "اختر خطتك", desc: "ابدأ بتجربة مجانية لمدة 14 يومًا بدون بطاقة ائتمان." },
     { title: "أعد مساحة العمل", desc: "قم بإعداد ملفك الشخصي ولوحة التحكم في ثوانٍ." },
     { title: "أضف فريقك", desc: "أضف أعضاء الفريق وعيّن الأدوار وابدأ التعاون." },
     { title: "ابدأ التحسين", desc: "أتمت العمليات وركّز على النمو." },

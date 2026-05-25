@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   Plus, Trash2, Save, Receipt, CreditCard, X,
@@ -564,7 +564,7 @@ const PricingManager = () => {
                   <label className="text-[10px] font-semibold text-muted-foreground uppercase mb-1 block">Plan</label>
                   <select value={newInvoice.plan} onChange={e => setNewInvoice(p => ({ ...p, plan: e.target.value }))} className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
                     <option value="">Custom</option>
-                    {plans.map((p, idx) => <option key={idx} value={p.name}>{p.name} — {p.pricePerUser} TND</option>)}
+                    {plans.map((p, idx) => <option key={idx} value={p.name}>{p.name} {p.pricePerUser} TND</option>)}
                   </select>
                 </div>
                 <div>

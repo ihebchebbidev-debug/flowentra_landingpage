@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo, lazy, Suspense } from "react";
+﻿import { useState, useRef, useEffect, useMemo, lazy, Suspense } from "react";
 import { adminMedia, type MediaFile } from "@/services/adminApi";
 import { toast } from "sonner";
 import {
@@ -35,7 +35,7 @@ const CATEGORY_GUIDELINES: Record<
   logo:        { minWidth: 200,  minHeight: 60,                                              note: "Recommended ≥ 200×60, transparent PNG/SVG" },
   icon:        { minWidth: 64,   minHeight: 64,   aspectRatio: 1,     aspectTolerance: 0.1,  note: "Square ≥ 64×64, prefer SVG" },
   integration: { minWidth: 80,   minHeight: 80,   aspectRatio: 1,     aspectTolerance: 0.2,  note: "Square ~80×80, transparent PNG/SVG" },
-  general:     { note: "Any size — keep under 1 MB if possible" },
+  general:     { note: "Any size keep under 1 MB if possible" },
 };
 
 const MAX_BYTES = 20 * 1024 * 1024; // 20 MB
@@ -129,18 +129,18 @@ const ImageUploader = ({ category = "general", section, onSelect, currentValue, 
       errors.push(`Unsupported type "${file.type || "unknown"}". Use JPG, PNG, GIF, WebP, or SVG.`);
     }
 
-    // Size — hard cap
+    // Size hard cap
     if (file.size > MAX_BYTES) {
-      errors.push(`File is ${formatBytes(file.size)} — exceeds 20 MB limit.`);
+      errors.push(`File is ${formatBytes(file.size)} exceeds 20 MB limit.`);
     } else if (file.size > SOFT_BYTES) {
       warnings.push(
-        `File is ${formatBytes(file.size)} — consider compressing to keep the page fast.`
+        `File is ${formatBytes(file.size)} consider compressing to keep the page fast.`
       );
     }
 
     const objectUrl = URL.createObjectURL(file);
 
-    // Dimensions (skip for SVG — no intrinsic raster size)
+    // Dimensions (skip for SVG no intrinsic raster size)
     let width: number | null = null;
     let height: number | null = null;
     if (file.type !== "image/svg+xml") {
@@ -151,12 +151,12 @@ const ImageUploader = ({ category = "general", section, onSelect, currentValue, 
 
         if (guidelines.minWidth && width < guidelines.minWidth) {
           warnings.push(
-            `Width ${width}px is below recommended ${guidelines.minWidth}px — image may look soft.`
+            `Width ${width}px is below recommended ${guidelines.minWidth}px image may look soft.`
           );
         }
         if (guidelines.minHeight && height < guidelines.minHeight) {
           warnings.push(
-            `Height ${height}px is below recommended ${guidelines.minHeight}px — image may look soft.`
+            `Height ${height}px is below recommended ${guidelines.minHeight}px image may look soft.`
           );
         }
         if (guidelines.aspectRatio) {
@@ -164,12 +164,12 @@ const ImageUploader = ({ category = "general", section, onSelect, currentValue, 
           const delta = Math.abs(actual - guidelines.aspectRatio);
           if (delta > (guidelines.aspectTolerance ?? 0.15)) {
             warnings.push(
-              `Aspect ratio ${actual.toFixed(2)}:1 differs from recommended ${guidelines.aspectRatio.toFixed(2)}:1 — image may be cropped.`
+              `Aspect ratio ${actual.toFixed(2)}:1 differs from recommended ${guidelines.aspectRatio.toFixed(2)}:1 image may be cropped.`
             );
           }
         }
       } else {
-        errors.push("Could not read image — file may be corrupted.");
+        errors.push("Could not read image file may be corrupted.");
       }
     }
 
@@ -331,7 +331,7 @@ const ImageUploader = ({ category = "general", section, onSelect, currentValue, 
             {!pending.errors.length && !pending.warnings.length && (
               <div className="flex items-center gap-2 rounded-md bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-2 text-[11px] text-emerald-700 dark:text-emerald-400">
                 <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                <span>Looks good — matches the recommended guidelines.</span>
+                <span>Looks good matches the recommended guidelines.</span>
               </div>
             )}
 
@@ -453,7 +453,7 @@ const ImageUploader = ({ category = "general", section, onSelect, currentValue, 
     );
   }
 
-  // 3) EMPTY STATE — two clear actions: upload OR pick from library
+  // 3) EMPTY STATE two clear actions: upload OR pick from library
   return (
     <div className="space-y-2">
       {label && <label className="text-sm font-semibold text-foreground block">{label}</label>}

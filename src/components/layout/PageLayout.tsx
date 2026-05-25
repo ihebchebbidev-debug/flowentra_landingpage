@@ -1,4 +1,4 @@
-import Navbar from "@/components/landing/Navbar";
+﻿import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
@@ -32,7 +32,7 @@ const PageLayout = ({
       description={
         description ??
         subtitle ??
-        `${title} — Flowentra unifies CRM, workflows, analytics and AI in one platform.`
+        `${title} Flowentra unifies CRM, workflows, analytics and AI in one platform.`
       }
       canonical={canonical}
       jsonLd={jsonLd}

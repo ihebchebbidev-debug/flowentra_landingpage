@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { ChevronRight, Eye } from "lucide-react";
 import { resolveMegaIcon } from "./megaMenuIcons";
 import type { MegaConfig } from "./MegaMenuBuilder";
@@ -10,7 +10,7 @@ interface Props {
 }
 
 /**
- * Live mini-preview of a mega-menu — renders the SAME markup as Navbar.tsx
+ * Live mini-preview of a mega-menu renders the SAME markup as Navbar.tsx
  * (renderMegaPanel), at a slightly reduced scale, so admins see exactly what
  * visitors will see while editing.
  */
@@ -52,7 +52,7 @@ const MegaMenuPreview = ({ config, syncTabId }: Props) => {
         </div>
         <div className="flex items-center gap-1.5 mx-auto text-[10px] text-muted-foreground">
           <Eye className="w-3 h-3" />
-          Live preview — exactly as visitors see it
+          Live preview exactly as visitors see it
         </div>
       </div>
 

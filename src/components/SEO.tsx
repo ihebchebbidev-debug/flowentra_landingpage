@@ -1,16 +1,16 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 
 interface SEOProps {
   title: string;
   description: string;
-  /** Optional keywords list (kept short — most engines ignore but harmless) */
+  /** Optional keywords list (kept short most engines ignore but harmless) */
   keywords?: string;
   /** Absolute URL or path of the social preview image */
   image?: string;
   /** Override canonical URL (defaults to current path on flowentra.com) */
   canonical?: string;
-  /** og:type — "website" | "article" | "product" ... */
+  /** og:type "website" | "article" | "product" ... */
   type?: string;
   /** Optional JSON-LD structured data object */
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];

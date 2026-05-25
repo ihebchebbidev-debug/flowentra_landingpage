@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+﻿import { useState, useEffect, useCallback, useRef } from "react";
 import { adminContent, type CmsField, type MediaFile } from "@/services/adminApi";
 import { toast } from "sonner";
 import { Save, RefreshCw, Globe, AlertCircle, ImageIcon, Eye, EyeOff, Info, ChevronDown, ChevronUp, Monitor, Tablet, Smartphone, ExternalLink, Maximize2, Minimize2, Crosshair } from "lucide-react";
@@ -25,11 +25,11 @@ interface Props {
 const sectionInfo: Record<string, { description: string; previewHint: string; anchor: string }> = {
   nav: {
     description: "Navigation bar at the top of every page. Controls menu links and call-to-action buttons.",
-    previewHint: "Top of the page — always visible",
+    previewHint: "Top of the page always visible",
     anchor: "#",
   },
   navMega: {
-    description: "Mega-menu under Product, Solutions, and Resources. Add/rename tabs, items, descriptions, icons, and links — no code required.",
+    description: "Mega-menu under Product, Solutions, and Resources. Add/rename tabs, items, descriptions, icons, and links no code required.",
     previewHint: "Hover Product / Solutions / Resources in the top nav",
     anchor: "#",
   },
@@ -249,7 +249,7 @@ const defaultFieldSchemas: Record<string, CmsField[]> = {
   ],
   trustedBy: [
     { field_key: "title", field_label: "Section Title", field_type: "text", is_array: 0, array_max_items: null, sort_order: 1, placeholder: null, is_required: 1 },
-    { field_key: "logos", field_label: "Logos (JSON array of {name, logo} — logo is image URL; or array of strings for text-only)", field_type: "json", is_array: 0, array_max_items: null, sort_order: 2, placeholder: null, is_required: 1 },
+    { field_key: "logos", field_label: "Logos (JSON array of {name, logo} logo is image URL; or array of strings for text-only)", field_type: "json", is_array: 0, array_max_items: null, sort_order: 2, placeholder: null, is_required: 1 },
   ],
   demo: [
     { field_key: "sectionLabel", field_label: "Eyebrow Label (e.g. 'Live Demo')", field_type: "text", is_array: 0, array_max_items: null, sort_order: 1, placeholder: null, is_required: 0 },
@@ -268,7 +268,7 @@ const defaultFieldSchemas: Record<string, CmsField[]> = {
     { field_key: "stats", field_label: "Stats Labels (JSON: {revenue, users, completion})", field_type: "json", is_array: 0, array_max_items: null, sort_order: 14, placeholder: null, is_required: 1 },
     { field_key: "barChart", field_label: "Analytics Bar Chart Heights (JSON array of numbers 0-100)", field_type: "json", is_array: 0, array_max_items: null, sort_order: 15, placeholder: null, is_required: 0 },
     { field_key: "analyticsStats", field_label: "Analytics Stat Cards (JSON array of {label, value})", field_type: "json", is_array: 0, array_max_items: null, sort_order: 16, placeholder: null, is_required: 0 },
-    // Per-tab × per-device screenshots — each replaces the synthetic mockup when uploaded.
+    // Per-tab × per-device screenshots each replaces the synthetic mockup when uploaded.
     { field_key: "workflowDesktopImage", field_label: "Workflow · Desktop Screenshot", field_type: "image", is_array: 0, array_max_items: null, sort_order: 20, placeholder: null, is_required: 0 },
     { field_key: "workflowTabletImage", field_label: "Workflow · Tablet Screenshot", field_type: "image", is_array: 0, array_max_items: null, sort_order: 21, placeholder: null, is_required: 0 },
     { field_key: "workflowMobileImage", field_label: "Workflow · Mobile Screenshot", field_type: "image", is_array: 0, array_max_items: null, sort_order: 22, placeholder: null, is_required: 0 },
@@ -299,7 +299,7 @@ const fieldHelpText: Record<string, Record<string, string>> = {
     trustLine: "Small trust indicator text (e.g., 'Trusted by 500+ companies')",
     screenshotPlaceholder: "Text shown inside the screenshot placeholder (e.g., 'Your app screenshot here')",
     browserBarUrl: "Fake URL shown in the browser chrome bar (e.g., 'app.flowentra.io')",
-    heroModules: "Module switcher buttons (JSON array). Each item: {\"icon\":\"IconName\",\"label\":\"Label\"}. Icons use Lucide names like LayoutDashboard, Users, FileText, BarChart3, Zap, Shield, Settings, Brain, etc. Editable per language — change the label for each language.",
+    heroModules: "Module switcher buttons (JSON array). Each item: {\"icon\":\"IconName\",\"label\":\"Label\"}. Icons use Lucide names like LayoutDashboard, Users, FileText, BarChart3, Zap, Shield, Settings, Brain, etc. Editable per language change the label for each language.",
   },
   pricing: {
     plans: 'Array format: [{"name":"Starter","price":"29","features":["Feature 1","Feature 2"],"popular":false}]',
@@ -370,7 +370,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
   const [activeImageField, setActiveImageField] = useState<string>("");
   // ---------- Preview preferences (persisted per-section with global fallback) ----------
   // Schema:
-  //   admin_section_preview_open            -> "0" | "1"   (global — same for all sections)
+  //   admin_section_preview_open            -> "0" | "1"   (global same for all sections)
   //   admin_section_preview_device_global   -> device      (fallback when no per-section value)
   //   admin_section_preview_expanded_global -> "0" | "1"   (fallback when no per-section value)
   //   admin_section_preview_device:<key>    -> device      (per-section)
@@ -613,7 +613,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
   };
 
   const handleSave = async (force = false) => {
-    // Validation removed — admins can save/publish regardless of missing required fields.
+    // Validation removed admins can save/publish regardless of missing required fields.
 
 
     setSaving(true);
@@ -678,7 +678,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
           ? "Live sync: ✓ broadcast + storage"
           : storageOk
           ? "Live sync: ✓ storage only (no BroadcastChannel)"
-          : "Live sync: ✗ failed — other tabs may not refresh";
+          : "Live sync: ✗ failed other tabs may not refresh";
 
       // Resolve which public pages use this section (landing + custom pages)
       let pagesLine = "";
@@ -704,7 +704,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
       }
 
       if (totalChanges === 0) {
-        toast.success("✅ Saved — no changes detected", {
+        toast.success("✅ Saved no changes detected", {
           description: syncStatus,
           duration: 3000,
         });
@@ -807,7 +807,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
             value={val}
             onChange={(json) => handleChange(langCode, field.field_key, json)}
             onImageSync={(updater) => {
-              // Image edits are language-independent — apply to ALL languages
+              // Image edits are language-independent apply to ALL languages
               // by mapping each language's current heroModules JSON through `updater`.
               for (const l of allLanguages) {
                 const currentJson = allValues[l.code]?.[field.field_key] || "[]";
@@ -843,7 +843,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
                 imageKey={itemImageCfg.imageKey}
                 headerLabel={itemImageCfg.label}
                 onChange={(json) => {
-                  // Image URLs are language-independent — sync to ALL languages
+                  // Image URLs are language-independent sync to ALL languages
                   for (const l of allLanguages) {
                     handleChange(l.code, field.field_key, json);
                   }
@@ -1025,7 +1025,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
         </div>
       )}
 
-      {/* Live Preview iframe — device-aware, auto-scrolls to section anchor, auto-reloads on save */}
+      {/* Live Preview iframe device-aware, auto-scrolls to section anchor, auto-reloads on save */}
       {showPreview && (() => {
         // Anchor like "#hero" (from sectionInfo). "nav"/"navMega" use "#" = top of page.
         const rawAnchor = info?.anchor || "";
@@ -1148,9 +1148,9 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
                   key={previewReloadKey}
                   src={previewUrl}
                   className="w-full h-full border-0 bg-background"
-                  title={`Section Preview — ${device.label}`}
+                  title={`Section Preview ${device.label}`}
                   onLoad={() => {
-                    // Same-origin iframe — safely scroll to anchor as a fallback if hash navigation didn't.
+                    // Same-origin iframe safely scroll to anchor as a fallback if hash navigation didn't.
                     try {
                       const doc = previewIframeRef.current?.contentDocument;
                       if (doc && hash) {
@@ -1171,14 +1171,14 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
                 {scale < 1 ? ` · ${Math.round(scale * 100)}% scale` : ""})
               </span>
               {hasChanges && (
-                <span className="text-amber-600 font-medium">Unsaved — save to refresh preview</span>
+                <span className="text-amber-600 font-medium">Unsaved save to refresh preview</span>
               )}
             </div>
           </div>
         );
       })()}
 
-      {/* Validation banner removed — admins can save/publish with any fields filled as needed. */}
+      {/* Validation banner removed admins can save/publish with any fields filled as needed. */}
 
       {/* Save Bar */}
       <div className="flex items-center justify-between mb-4 sticky top-0 z-10 bg-muted/30 backdrop-blur-sm py-3 -mx-6 px-6 rounded-xl">
@@ -1186,7 +1186,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
           {hasChanges && (
             <span className="flex items-center gap-1.5 text-xs font-medium animate-pulse text-amber-600">
               <AlertCircle className="w-3.5 h-3.5" />
-              Unsaved changes — click Save All Languages
+              Unsaved changes click Save All Languages
             </span>
           )}
         </div>
@@ -1272,7 +1272,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
       {/* Fields */}
       <div className="space-y-4">
         {fields.map((field) => {
-          // Hide raw JSON editors for navMega — handled by visual builder above
+          // Hide raw JSON editors for navMega handled by visual builder above
           if (sectionKey === "navMega" && field.field_type === "json") return null;
           const helpText = fieldHelpText[sectionKey]?.[field.field_key];
           const isImage = isLangIndependent(field.field_type);
@@ -1367,7 +1367,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
                           for (const l of allLanguages) {
                             handleChange(l.code, field.field_key, "");
                           }
-                          toast.success(`${field.field_label} reverted to default — remember to Save`);
+                          toast.success(`${field.field_label} reverted to default remember to Save`);
                         }}
                         className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-lg border border-border bg-background text-muted-foreground hover:text-destructive hover:border-destructive/50 transition-colors"
                         title="Clear this image and use the built-in default"
@@ -1376,7 +1376,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
                         Revert to default
                       </button>
                       <span className="text-[10px] text-muted-foreground/70">
-                        Custom image active — clearing will restore the bundled default.
+                        Custom image active clearing will restore the bundled default.
                       </span>
                     </div>
                   )}
@@ -1393,7 +1393,7 @@ const SectionEditor = ({ sectionKey, lang, allLanguages, onLangChange }: Props) 
                         Or browse Media Library
                       </button>
                       <span className="text-[10px] text-muted-foreground/70">
-                        No custom image — built-in default is shown on the site.
+                        No custom image built-in default is shown on the site.
                       </span>
                     </div>
                   )}

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+﻿import { useRef, useState } from "react";
 import { Plus, Trash2, GripVertical } from "lucide-react";
 import IconPicker from "./IconPicker";
 import ImageUploader from "./ImageUploader";
@@ -50,7 +50,7 @@ const HeroModulesEditor = ({ value, onChange, onImageSync, langLabel, isRtl }: P
     update(next);
   };
 
-  // Image set/clear — synced across ALL languages so the same screenshot
+  // Image set/clear synced across ALL languages so the same screenshot
   // shows on EN, FR, DE, AR without re-uploading per language.
   const setImageAt = (i: number, url: string | null) => {
     if (onImageSync) {
@@ -129,7 +129,7 @@ const HeroModulesEditor = ({ value, onChange, onImageSync, langLabel, isRtl }: P
     const to = dropZone;
     applyStructural((list) => {
       const next = [...list];
-      // Guard against languages whose list is shorter — pad first
+      // Guard against languages whose list is shorter pad first
       while (next.length <= from) next.push({ icon: "Layers", label: "" });
       const [moved] = next.splice(from, 1);
       const target = to > from ? to - 1 : to;
@@ -168,7 +168,7 @@ const HeroModulesEditor = ({ value, onChange, onImageSync, langLabel, isRtl }: P
     <div className="space-y-0">
       <div className="flex items-center justify-between mb-2">
         <span className="text-[10px] text-muted-foreground font-medium">
-          {langLabel} — {modules.length} module{modules.length !== 1 ? "s" : ""}
+          {langLabel} {modules.length} module{modules.length !== 1 ? "s" : ""}
         </span>
         <button
           type="button"
@@ -231,7 +231,7 @@ const HeroModulesEditor = ({ value, onChange, onImageSync, langLabel, isRtl }: P
                 </button>
               </div>
 
-              {/* Per-module screenshot — replaces the synthetic skeleton on the live page.
+              {/* Per-module screenshot replaces the synthetic skeleton on the live page.
                   Image is shared across all languages (set once, shows everywhere). */}
               <div className="mt-2 pl-8">
                 <ImageUploader
@@ -265,7 +265,7 @@ const HeroModulesEditor = ({ value, onChange, onImageSync, langLabel, isRtl }: P
 
       {modules.length === 0 && (
         <p className="text-[10px] text-muted-foreground/60 text-center py-3">
-          No modules yet — click Add to start.
+          No modules yet click Add to start.
         </p>
       )}
     </div>

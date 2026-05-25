@@ -1,4 +1,4 @@
-// Centralized icon registry shared between the public Navbar and the admin MegaMenuBuilder.
+﻿// Centralized icon registry shared between the public Navbar and the admin MegaMenuBuilder.
 // Organized into categories so the IconPicker can offer tabbed browsing.
 import {
   // Business & Tools
@@ -153,7 +153,7 @@ export const ICON_CATEGORIES: { id: string; label: string; icons: IconMap }[] = 
   },
 ];
 
-// Flat registry — used by Navbar to resolve icon names from CMS strings.
+// Flat registry used by Navbar to resolve icon names from CMS strings.
 export const MEGA_ICONS: IconMap = ICON_CATEGORIES.reduce<IconMap>((acc, cat) => {
   for (const [name, Icon] of Object.entries(cat.icons)) acc[name] = Icon;
   return acc;
