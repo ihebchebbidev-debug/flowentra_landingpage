@@ -1,85 +1,34 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { adminAuth, adminContent, type AdminUser, type CmsSection } from "@/services/adminApi";
+import { adminAuth, adminContent, type AdminUser } from "@/services/adminApi";
 import AdminLogin from "@/components/admin/AdminLogin";
 import AdminSidebar from "@/components/admin/AdminSidebar";
-import SectionEditor from "@/components/admin/SectionEditor";
 import AdminHistory from "@/components/admin/AdminHistory";
-import PricingManager from "@/components/admin/PricingManager";
 import AnalyticsDashboard from "@/components/admin/AnalyticsDashboard";
 import AdminSettings from "@/components/admin/AdminSettings";
 import EmailManager from "@/components/admin/EmailManager";
-import ReleasesManager from "@/components/admin/ReleasesManager";
 import AdminDocs from "@/components/admin/AdminDocs";
-import PagesManager from "@/components/admin/PagesManager";
-import FlagIcon from "@/components/FlagIcon";
+import InboxViewer from "@/components/admin/InboxViewer";
+import ScreenshotsManager from "@/components/admin/ScreenshotsManager";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, History, Download, Upload, PanelLeftClose, PanelLeft } from "lucide-react";
-
-const FALLBACK_SECTIONS: CmsSection[] = [
-  { section_key: "nav", label: "Navigation", icon: "Navigation", sort_order: 1, is_active: 1 },
-  { section_key: "navMega", label: "Nav Mega Menu", icon: "LayoutGrid", sort_order: 1, is_active: 1 },
-  { section_key: "hero", label: "Hero Section", icon: "Sparkles", sort_order: 2, is_active: 1 },
-  { section_key: "trustedBy", label: "Trusted By", icon: "Building2", sort_order: 3, is_active: 1 },
-  { section_key: "features", label: "Features", icon: "Grid3X3", sort_order: 4, is_active: 1 },
-  { section_key: "productShowcase", label: "Product Showcase", icon: "Monitor", sort_order: 5, is_active: 1 },
-  { section_key: "howItWorks", label: "How It Works", icon: "ListOrdered", sort_order: 6, is_active: 1 },
-  { section_key: "demo", label: "Demo Preview", icon: "Play", sort_order: 7, is_active: 1 },
-  { section_key: "metrics", label: "Metrics", icon: "BarChart3", sort_order: 8, is_active: 1 },
-  
-  { section_key: "integrations", label: "Integrations", icon: "Plug", sort_order: 10, is_active: 1 },
-  { section_key: "pricing", label: "Pricing", icon: "CreditCard", sort_order: 11, is_active: 1 },
-  { section_key: "comparisonTable", label: "Comparison Table", icon: "Table", sort_order: 12, is_active: 1 },
-  { section_key: "testimonials", label: "Testimonials", icon: "MessageSquareQuote", sort_order: 13, is_active: 1 },
-  { section_key: "faq", label: "FAQ", icon: "HelpCircle", sort_order: 14, is_active: 1 },
-  { section_key: "contact", label: "Contact Section", icon: "Mail", sort_order: 15, is_active: 1 },
-  { section_key: "ctaBanner", label: "CTA Banner", icon: "Megaphone", sort_order: 16, is_active: 1 },
-  { section_key: "footer", label: "Footer", icon: "PanelBottom", sort_order: 17, is_active: 1 },
-];
-
-const LANGUAGES = [
-  { code: "en", label: "English" },
-  { code: "fr", label: "Français" },
-];
-
-// Special admin views (not CMS sections)
-const SPECIAL_VIEWS = ["__pricing", "__analytics", "__settings", "__history", "__email", "__releases", "__docs", "__pages"];
 
 const Admin = () => {
   const [searchParams] = useSearchParams();
   const hardcodedUser: AdminUser = { id: 1, email: 'admin@flowentra.io', name: 'Admin', role: 'super_admin' };
   const [user, setUser] = useState<AdminUser | null>(hardcodedUser);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const [sections, setSections] = useState<CmsSection[]>([]);
-  const [activeSection, setActiveSection] = useState<string>(searchParams.get("section") || "");
-  const [activeLang, setActiveLang] = useState<string>("en");
+  const [activeSection, setActiveSection] = useState<string>(searchParams.get("section") || "__docs");
   const [loading, setLoading] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // Auto-authenticate on mount visiting /admin marks the session as admin
-  // so the landing page shows edit overlays.
   useEffect(() => {
     localStorage.setItem('admin_user', JSON.stringify(hardcodedUser));
     if (!localStorage.getItem('admin_token')) {
       localStorage.setItem('admin_token', 'auto-admin-session');
     }
   }, []);
-
-  useEffect(() => {
-    if (isAuthenticated) loadSections();
-  }, [isAuthenticated]);
-
-  const loadSections = async () => {
-    try {
-      const data = await adminContent.getSections();
-      setSections(data);
-      if (data.length > 0 && !activeSection) setActiveSection(data[0].section_key);
-    } catch {
-      setSections(FALLBACK_SECTIONS);
-      if (!activeSection) setActiveSection(FALLBACK_SECTIONS[0].section_key);
-    }
-  };
 
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -101,7 +50,7 @@ const Admin = () => {
     await adminAuth.logout();
     setUser(null);
     setIsAuthenticated(false);
-    setActiveSection("");
+    setActiveSection("__docs");
     toast.success("Logged out");
   };
 
@@ -144,16 +93,13 @@ const Admin = () => {
     return <AdminLogin onLogin={handleLogin} loading={loading} />;
   }
 
-  const isSpecialView = SPECIAL_VIEWS.includes(activeSection);
-  const currentLabel = activeSection === "__pricing" ? "Pricing & Invoices"
+  const currentLabel = activeSection === "__inbox" ? "Inbox"
+    : activeSection === "__screenshots" ? "Screenshots"
     : activeSection === "__email" ? "Email Manager"
-    : activeSection === "__releases" ? "Release Notes"
     : activeSection === "__analytics" ? "Analytics"
     : activeSection === "__settings" ? "Site Settings"
     : activeSection === "__history" ? "Change History"
-    : activeSection === "__docs" ? "Documentation"
-    : activeSection === "__pages" ? "Pages"
-    : sections.find(s => s.section_key === activeSection)?.label || "Admin";
+    : "Documentation";
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
@@ -162,7 +108,7 @@ const Admin = () => {
       {/* Sidebar */}
       {!sidebarCollapsed && (
         <AdminSidebar
-          sections={sections}
+          sections={[]}
           activeSection={activeSection}
           onSectionChange={(key) => setActiveSection(key)}
           user={user}
@@ -186,29 +132,6 @@ const Admin = () => {
           </div>
 
           <div className="flex items-center gap-1.5">
-            {/* Language Selector only for CMS sections */}
-            {!isSpecialView && (
-              <>
-                <div className="flex items-center bg-muted rounded-lg p-0.5 gap-0.5">
-                  {LANGUAGES.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => setActiveLang(lang.code)}
-                      className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-medium transition-all ${
-                        activeLang === lang.code
-                          ? "bg-primary text-primary-foreground shadow-sm"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      <FlagIcon country={lang.code} className="w-4 h-3" />
-                      {lang.label}
-                    </button>
-                  ))}
-                </div>
-                <div className="w-px h-6 bg-border mx-1" />
-              </>
-            )}
-
             <button
               onClick={() => setActiveSection("__history")}
               className={`p-1.5 rounded-lg transition-colors ${activeSection === "__history" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted"}`}
@@ -242,12 +165,10 @@ const Admin = () => {
         <main className="flex-1 overflow-y-auto p-6 bg-muted/30">
           {activeSection === "__docs" ? (
             <AdminDocs onJumpToSection={(key) => setActiveSection(key)} />
-          ) : activeSection === "__pages" ? (
-            <PagesManager />
-          ) : activeSection === "__pricing" ? (
-            <PricingManager />
-          ) : activeSection === "__releases" ? (
-            <ReleasesManager />
+          ) : activeSection === "__inbox" ? (
+            <InboxViewer />
+          ) : activeSection === "__screenshots" ? (
+            <ScreenshotsManager />
           ) : activeSection === "__email" ? (
             <EmailManager />
           ) : activeSection === "__analytics" ? (
@@ -257,12 +178,7 @@ const Admin = () => {
           ) : activeSection === "__history" ? (
             <AdminHistory section="" />
           ) : (
-            <SectionEditor
-              sectionKey={activeSection}
-              lang={activeLang}
-              allLanguages={LANGUAGES}
-              onLangChange={setActiveLang}
-            />
+            <AdminDocs onJumpToSection={(key) => setActiveSection(key)} />
           )}
         </main>
       </div>

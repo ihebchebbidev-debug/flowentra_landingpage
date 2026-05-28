@@ -58,6 +58,18 @@ const Support = () => {
       const json = await res.json().catch(() => ({}));
 
       if (res.ok && json.success !== false) {
+        // Also persist to admin inbox (fire-and-forget)
+        fetch(`${API_BASE}/inbox.php?action=save`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            mailbox: "support",
+            category,
+            priority,
+            subject: `[${category} – ${priority}] ${title}`,
+            message: description,
+          }),
+        }).catch(() => {});
         setStatus("sent");
         setTitle(""); setDescription(""); setCategory(""); setPriority(""); setFiles([]);
       } else {

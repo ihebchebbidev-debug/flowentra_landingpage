@@ -23,7 +23,6 @@ import Terms from "./pages/Terms";
 import SecurityPage from "./pages/SecurityPage";
 import ChatAssistant from "./components/ChatAssistant";
 import ScrollToTop from "./components/ScrollToTop";
-import Checkout from "./pages/Checkout";
 import Admin from "./pages/Admin";
 import PricingPage from "./pages/Pricing";
 import Features from "./pages/Features";
@@ -74,7 +73,6 @@ const AppRoutes = () => {
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/security" element={<SecurityPage />} />
-      <Route path="/checkout" element={<Checkout />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/features" element={<Features />} />
       <Route path="/modules" element={<Modules />} />

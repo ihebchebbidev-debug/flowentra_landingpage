@@ -100,7 +100,7 @@ const AdminDocs = ({ onJumpToSection }: { onJumpToSection?: (sectionKey: string)
           <DocContent doc={active} onJumpToSection={onJumpToSection} />
           <div className="mt-8 pt-5 border-t border-border text-[11px] text-muted-foreground/70 flex items-center gap-2">
             <Eye className="w-3 h-3" />
-            Tip: every CMS section also has a "? Help" button at the top opens this same content in a side drawer while you edit.
+            Tip: all page content is managed by developers in code. Use this panel for email, analytics and site settings.
           </div>
         </article>
       </div>

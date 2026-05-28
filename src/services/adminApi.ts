@@ -291,4 +291,105 @@ export const adminMedia = {
   },
 };
 
+// ==================== INBOX ====================
+
+export interface InboxMessage {
+  id: number;
+  mailbox: "contact" | "support";
+  sender_name: string;
+  sender_email: string;
+  sender_phone: string;
+  company: string;
+  category: string;
+  priority: string;
+  subject: string;
+  message: string;
+  is_read: number;
+  is_starred: number;
+  received_at: string;
+}
+
+export interface InboxCounts {
+  contact?: { total: number; unread: number };
+  support?: { total: number; unread: number };
+}
+
+export const adminInbox = {
+  async list(params: { mailbox?: string; unread?: boolean; starred?: boolean; page?: number; limit?: number } = {}): Promise<{
+    data: InboxMessage[];
+    counts: InboxCounts;
+    pagination: { page: number; limit: number; total: number; pages: number };
+  }> {
+    const q = new URLSearchParams({ action: "list" });
+    if (params.mailbox) q.set("mailbox", params.mailbox);
+    if (params.unread) q.set("unread", "1");
+    if (params.starred) q.set("starred", "1");
+    if (params.page) q.set("page", String(params.page));
+    if (params.limit) q.set("limit", String(params.limit));
+    return apiCall(`/inbox.php?${q}`);
+  },
+
+  async markRead(ids: number[]): Promise<void> {
+    await apiCall("/inbox.php?action=mark_read", {
+      method: "POST",
+      body: JSON.stringify({ ids }),
+    });
+  },
+
+  async toggleStar(id: number): Promise<void> {
+    await apiCall("/inbox.php?action=toggle_star", {
+      method: "POST",
+      body: JSON.stringify({ id }),
+    });
+  },
+
+  async delete(id: number): Promise<void> {
+    await apiCall("/inbox.php?action=delete", {
+      method: "POST",
+      body: JSON.stringify({ id }),
+    });
+  },
+};
+
+// ==================== SCREENSHOTS ====================
+
+export interface ScreenshotFile {
+  name: string;
+  folder: "hero-screenshots" | "screenshots";
+  size: number;
+  modified: number;
+  url: string;
+}
+
+export const adminScreenshots = {
+  async list(): Promise<{ "hero-screenshots": ScreenshotFile[]; screenshots: ScreenshotFile[] }> {
+    const res = await apiCall<{ success: boolean; data: { "hero-screenshots": ScreenshotFile[]; screenshots: ScreenshotFile[] } }>("/screenshots.php?action=list");
+    return res.data;
+  },
+
+  async upload(folder: string, file: File, filename?: string): Promise<ScreenshotFile> {
+    const form = new FormData();
+    form.append("folder", folder);
+    form.append("file", file);
+    if (filename) form.append("filename", filename);
+    const token = localStorage.getItem("admin_token");
+    const response = await fetch(`${API_BASE}/screenshots.php?action=upload`, {
+      method: "POST",
+      body: form,
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    });
+    const json = await response.json();
+    if (!json.success) throw new Error(json.message || "Upload failed");
+    return json.data;
+  },
+
+  async delete(folder: string, name: string): Promise<void> {
+    const res = await apiCall<{ success: boolean; message?: string }>("/screenshots.php?action=delete", {
+      method: "POST",
+      body: JSON.stringify({ folder, name }),
+    });
+    if (!res.success) throw new Error(res.message || "Delete failed");
+  },
+};
+
 export type { AdminUser, CmsSection, CmsField, ContentItem, ChangeLogEntry, MediaFile };

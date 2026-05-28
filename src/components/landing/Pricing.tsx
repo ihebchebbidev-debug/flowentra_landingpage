@@ -376,7 +376,7 @@ const PlanCard = ({ plan, i, perUserLabel, usersLabel, calculateLabel, allFeatur
           <div className={`text-xs leading-tight ${TEXT_BODY}`}>{perUserLabel}</div>
         </div>
       </div>
-      <Link to={`/checkout?plan=${plan.name.toLowerCase()}`} className="block w-full text-center py-3 rounded-xl text-sm font-bold bg-blue-400 text-[#0d1b3e] hover:bg-blue-300 transition-all shadow-sm">
+      <Link to="/contact" className="block w-full text-center py-3 rounded-xl text-sm font-bold bg-blue-400 text-[#0d1b3e] hover:bg-blue-300 transition-all shadow-sm">
         {cta}
       </Link>
     </div>
@@ -451,14 +451,14 @@ const Pricing = () => {
     <>
     <section
       id="pricing"
-      className="relative py-16 sm:py-24 lg:py-32 overflow-hidden"
+      className="relative py-10 sm:py-14 lg:py-16 overflow-hidden"
       style={{ backgroundImage: `url(${heroBg})`, backgroundSize: "cover", backgroundPosition: "center" }}
     >
       {/* dark overlay so text stays readable */}
       <div className="absolute inset-0 bg-[#05101f]/88 pointer-events-none" aria-hidden="true" />
       <div className="relative z-10 container mx-auto px-5 sm:px-4 lg:px-8 max-w-6xl">
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-14"
+          className="text-center max-w-2xl mx-auto mb-8"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
@@ -524,7 +524,7 @@ const Pricing = () => {
                   <span className={`text-5xl font-extrabold tracking-tight ${TEXT_HEADING}`}>{sup.price}</span>
                 </div>
                 <p className="text-xs text-blue-300 font-semibold mb-6">{sup.priceLabel}</p>
-                <Link to="/checkout?plan=support" className="block w-full text-center py-3 rounded-xl text-sm font-bold bg-blue-400 text-[#0d1b3e] hover:bg-blue-300 transition-all">
+                <Link to="/contact" className="block w-full text-center py-3 rounded-xl text-sm font-bold bg-blue-400 text-[#0d1b3e] hover:bg-blue-300 transition-all">
                   {t.cta}
                 </Link>
               </div>

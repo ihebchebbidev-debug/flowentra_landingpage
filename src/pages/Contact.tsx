@@ -36,6 +36,21 @@ const Contact = () => {
       const res = await fetch(`${API_BASE}/email.php`, { method: "POST", body });
       const json = await res.json().catch(() => ({}));
       if (res.ok && json.success !== false) {
+        // Also persist to admin inbox (fire-and-forget)
+        fetch(`${API_BASE}/inbox.php?action=save`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            mailbox: "contact",
+            sender_name: `${form.firstName} ${form.lastName}`.trim(),
+            sender_email: form.email,
+            sender_phone: form.phone,
+            company: form.company,
+            category: form.category,
+            subject: `[${form.category || "Contact"}] ${form.firstName} ${form.lastName}`,
+            message: form.message,
+          }),
+        }).catch(() => {});
         setStatus("sent");
         setForm({ firstName: "", lastName: "", email: "", phone: "", company: "", category: "", message: "" });
       } else {
