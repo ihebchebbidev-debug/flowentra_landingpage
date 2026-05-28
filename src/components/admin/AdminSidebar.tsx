@@ -1,7 +1,7 @@
 import { type AdminUser } from "@/services/adminApi";
 import logo from "@/assets/flowentra-logo.png";
 import {
-  Mail, Inbox, ImageIcon, type LucideIcon,
+  Mail, Inbox, ImageIcon, Bug, type LucideIcon,
   Eye, LayoutDashboard, Activity, Settings, BookOpen,
 } from "lucide-react";
 
@@ -10,6 +10,7 @@ const adminPanels: { key: string; label: string; desc: string; icon: LucideIcon 
   { key: "__docs", label: "Documentation", desc: "How to use this admin panel", icon: BookOpen },
   { key: "__inbox", label: "Inbox", desc: "contact@ & support@ messages", icon: Inbox },
   { key: "__screenshots", label: "Screenshots", desc: "hero-screenshots & screenshots folders", icon: ImageIcon },
+  { key: "__errors", label: "Error Logs", desc: "JS, API & PHP server errors", icon: Bug },
   { key: "__email", label: "Email Manager", desc: "SMTP, campaigns, templates", icon: Mail },
   { key: "__analytics", label: "Analytics", desc: "Visitor stats, page views", icon: Activity },
   { key: "__settings", label: "Site Settings", desc: "Password, maintenance, meta", icon: Settings },

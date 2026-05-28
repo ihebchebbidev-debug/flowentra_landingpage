@@ -1,7 +1,7 @@
 import {
   BookOpen, History, ShieldCheck, Mail, BarChart3, Settings,
   AlertCircle, CheckCircle2, Lightbulb, Hash,
-  ShieldAlert, Loader2, Pencil, ArrowRight, Inbox, ImageIcon,
+  ShieldAlert, Loader2, Pencil, ArrowRight, Inbox, ImageIcon, Bug,
 } from "lucide-react";
 
 // ──────────────────────────────────────────────────────────────────────
@@ -42,6 +42,7 @@ export const DOCS: DocSection[] = [
           "Documentation — this guide.\n" +
           "Inbox — read messages submitted via the Contact and Support forms (contact@flowentra.io / support@flowentra.io).\n" +
           "Screenshots — upload, replace or delete images in the hero-screenshots and screenshots folders.\n" +
+          "Error Logs — view, resolve and delete JavaScript, API, network and PHP server errors.\n" +
           "Email Manager — configure SMTP, send campaigns, manage templates.\n" +
           "Analytics — visitor counts, page views, top pages, country and source breakdowns.\n" +
           "Site Settings — admin password, SEO defaults, maintenance mode.\n" +
@@ -173,6 +174,60 @@ export const DOCS: DocSection[] = [
         body:
           "The Screenshots manager requires screenshots.php to be deployed on the server at …/flowentra/api/screenshots.php. The PHP file handles listing, uploading and deleting files in the two folders.",
         warn: "If you see 'Could not load screenshots', the screenshots.php file is not yet on the server. Upload it from src/backend/api/screenshots.php.",
+      },
+    ],
+  },
+  {
+    id: "errors",
+    title: "Error Logs",
+    group: "Admin Tools",
+    icon: Bug,
+    intro:
+      "The Error Logs section captures and displays runtime errors from three sources: JavaScript errors thrown in the visitor's browser, failed API calls, and PHP server-side exceptions. Each entry shows the message, stack trace, URL, IP address and timestamp.",
+    subsections: [
+      {
+        title: "Error types",
+        body:
+          "JavaScript — uncaught exceptions and unhandled promise rejections from the visitor's browser. Captured automatically by the global error reporter initialised at app startup.\n\n" +
+          "API — failed fetch calls to the backend (non-2xx responses or network timeouts). Reported programmatically from API service code.\n\n" +
+          "Network — connection failures where no response was received at all (offline, DNS failure, CORS block).\n\n" +
+          "PHP / Server — uncaught PHP exceptions and fatal errors on the server. Captured by the custom error handler registered in errors.php and stored directly in the database.",
+      },
+      {
+        title: "Deduplication",
+        body:
+          "If the exact same error message and URL fires more than once within 60 seconds, only the first occurrence is stored. This prevents a single broken component from flooding the log with hundreds of identical entries.",
+      },
+      {
+        title: "Filtering",
+        body:
+          "Use the type tabs (All / JavaScript / API / PHP / Network) to focus on a specific source.\n" +
+          "Toggle 'Show resolved' to include entries you have already marked as fixed.\n" +
+          "Each tab shows an orange badge with the count of unresolved entries of that type.",
+      },
+      {
+        title: "Expanding an entry",
+        body:
+          "Click the arrow (›) on any row to expand it and see the full stack trace, context JSON (file, line, column, status code) and the visitor's user agent string.",
+      },
+      {
+        title: "Resolving errors",
+        body:
+          "Click the green tick (✓) on a row to mark it as resolved. Resolved entries are greyed out and excluded from the default view. Click the tick again to reopen an entry if the issue reappears.",
+        tip: "Mark an error resolved once you have deployed a fix. If it reappears after the fix, a new unresolved entry will be created.",
+      },
+      {
+        title: "Deleting and clearing",
+        body:
+          "Delete (×) removes a single entry permanently.\n" +
+          "'Clear resolved' at the top right permanently deletes all resolved entries at once — useful for housekeeping after a release.",
+        warn: "Deletion is permanent. There is no undo. Archive important stack traces elsewhere before clearing.",
+      },
+      {
+        title: "Server requirement",
+        body:
+          "The Error Logs require errors.php to be deployed on the server at …/flowentra/api/errors.php. The database table (flowentra_errors) is created automatically on first load.",
+        warn: "If you see 'Could not load error logs', deploy errors.php from src/backend/api/errors.php to your server.",
       },
     ],
   },

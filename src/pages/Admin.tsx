@@ -10,6 +10,7 @@ import EmailManager from "@/components/admin/EmailManager";
 import AdminDocs from "@/components/admin/AdminDocs";
 import InboxViewer from "@/components/admin/InboxViewer";
 import ScreenshotsManager from "@/components/admin/ScreenshotsManager";
+import ErrorsViewer from "@/components/admin/ErrorsViewer";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, History, Download, Upload, PanelLeftClose, PanelLeft } from "lucide-react";
@@ -95,6 +96,7 @@ const Admin = () => {
 
   const currentLabel = activeSection === "__inbox" ? "Inbox"
     : activeSection === "__screenshots" ? "Screenshots"
+    : activeSection === "__errors" ? "Error Logs"
     : activeSection === "__email" ? "Email Manager"
     : activeSection === "__analytics" ? "Analytics"
     : activeSection === "__settings" ? "Site Settings"
@@ -169,6 +171,8 @@ const Admin = () => {
             <InboxViewer />
           ) : activeSection === "__screenshots" ? (
             <ScreenshotsManager />
+          ) : activeSection === "__errors" ? (
+            <ErrorsViewer />
           ) : activeSection === "__email" ? (
             <EmailManager />
           ) : activeSection === "__analytics" ? (

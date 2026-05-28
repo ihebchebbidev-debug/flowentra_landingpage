@@ -351,6 +351,64 @@ export const adminInbox = {
   },
 };
 
+// ==================== ERROR LOGS ====================
+
+export interface ErrorLogEntry {
+  id: number;
+  type: "javascript" | "api" | "php" | "network";
+  severity: "error" | "warning" | "info";
+  message: string;
+  stack: string | null;
+  url: string | null;
+  user_agent: string | null;
+  ip: string | null;
+  context: string | null;
+  is_resolved: number;
+  occurred_at: string;
+}
+
+export interface ErrorSummaryEntry {
+  type: string;
+  severity: string;
+  unresolved: number;
+  total: number;
+}
+
+export const adminErrors = {
+  async list(params: { type?: string; resolved?: "0" | "1"; severity?: string; page?: number; limit?: number } = {}): Promise<{
+    data: ErrorLogEntry[];
+    summary: ErrorSummaryEntry[];
+    unresolved_total: number;
+    pagination: { page: number; limit: number; total: number; pages: number };
+  }> {
+    const q = new URLSearchParams({ action: "list" });
+    if (params.type) q.set("type", params.type);
+    if (params.resolved !== undefined) q.set("resolved", params.resolved);
+    if (params.severity) q.set("severity", params.severity);
+    if (params.page) q.set("page", String(params.page));
+    if (params.limit) q.set("limit", String(params.limit));
+    return apiCall(`/errors.php?${q}`);
+  },
+
+  async resolve(ids: number[], resolved = true): Promise<void> {
+    await apiCall("/errors.php?action=resolve", {
+      method: "POST",
+      body: JSON.stringify({ ids, resolved }),
+    });
+  },
+
+  async delete(id: number): Promise<void> {
+    await apiCall("/errors.php?action=delete", {
+      method: "POST",
+      body: JSON.stringify({ id }),
+    });
+  },
+
+  async clearResolved(): Promise<void> {
+    await apiCall("/errors.php?action=clear_resolved", { method: "POST", body: "{}" });
+  },
+};
+
 // ==================== SCREENSHOTS ====================
 
 export interface ScreenshotFile {
