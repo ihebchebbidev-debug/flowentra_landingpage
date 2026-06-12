@@ -9,6 +9,7 @@ import AdminSettings from "@/components/admin/AdminSettings";
 import EmailManager from "@/components/admin/EmailManager";
 import AdminDocs from "@/components/admin/AdminDocs";
 import InboxViewer from "@/components/admin/InboxViewer";
+import MailboxViewer from "@/components/admin/MailboxViewer";
 import ScreenshotsManager from "@/components/admin/ScreenshotsManager";
 import ErrorsViewer from "@/components/admin/ErrorsViewer";
 import { Toaster } from "@/components/ui/sonner";
@@ -94,7 +95,8 @@ const Admin = () => {
     return <AdminLogin onLogin={handleLogin} loading={loading} />;
   }
 
-  const currentLabel = activeSection === "__inbox" ? "Inbox"
+  const currentLabel = activeSection === "__mailbox" ? "Mailbox"
+    : activeSection === "__inbox" ? "Inbox"
     : activeSection === "__screenshots" ? "Screenshots"
     : activeSection === "__errors" ? "Error Logs"
     : activeSection === "__email" ? "Email Manager"
@@ -167,6 +169,8 @@ const Admin = () => {
         <main className="flex-1 overflow-y-auto p-6 bg-muted/30">
           {activeSection === "__docs" ? (
             <AdminDocs onJumpToSection={(key) => setActiveSection(key)} />
+          ) : activeSection === "__mailbox" ? (
+            <MailboxViewer />
           ) : activeSection === "__inbox" ? (
             <InboxViewer />
           ) : activeSection === "__screenshots" ? (

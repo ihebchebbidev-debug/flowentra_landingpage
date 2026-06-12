@@ -2,12 +2,13 @@ import { type AdminUser } from "@/services/adminApi";
 import logo from "@/assets/flowentra-logo.png";
 import {
   Mail, Inbox, ImageIcon, Bug, type LucideIcon,
-  Eye, LayoutDashboard, Activity, Settings, BookOpen,
+  Eye, LayoutDashboard, Activity, Settings, BookOpen, AtSign,
 } from "lucide-react";
 
 // Admin-only panels (not CMS content sections)
 const adminPanels: { key: string; label: string; desc: string; icon: LucideIcon }[] = [
   { key: "__docs", label: "Documentation", desc: "How to use this admin panel", icon: BookOpen },
+  { key: "__mailbox", label: "Mailbox", desc: "Read OVH mail: inbox, sent, spam", icon: AtSign },
   { key: "__inbox", label: "Inbox", desc: "contact@ & support@ messages", icon: Inbox },
   { key: "__screenshots", label: "Screenshots", desc: "hero-screenshots & screenshots folders", icon: ImageIcon },
   { key: "__errors", label: "Error Logs", desc: "JS, API & PHP server errors", icon: Bug },
