@@ -9,10 +9,11 @@ require_once __DIR__ . '/../config.php';
 
 $action = $_GET['action'] ?? '';
 
-// Resolve both managed folders (relative to this file's directory)
+// Resolve both managed folders in the public asset root.
+// These should mirror the public-facing paths used by the landing page.
 $FOLDERS = [
-    'hero-screenshots' => __DIR__ . '/../hero-screenshots',
-    'screenshots'      => __DIR__ . '/../screenshots',
+    'hero-screenshots' => __DIR__ . '/../../../public/hero-screenshots',
+    'screenshots'      => __DIR__ . '/../../../public/screenshots',
 ];
 
 // Ensure the managed folders exist so the admin screenshot manager can restore them.
@@ -25,10 +26,17 @@ foreach ($FOLDERS as $absPath) {
 // Allowed image MIME types
 $ALLOWED = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp', 'image/svg+xml'];
 
-// Public URL base — same origin as the API, one level up
+// Public URL base — same origin as the API, under the project root.
 $API_URL  = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http')
           . '://' . $_SERVER['HTTP_HOST'];
-$BASE_PATH = rtrim(dirname(dirname(str_replace($_SERVER['DOCUMENT_ROOT'], '', __DIR__))), '/');
+$scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
+if (preg_match('#/api/?$#', $scriptDir)) {
+    $scriptDir = preg_replace('#/api/?$#', '', $scriptDir);
+}
+if ($scriptDir === '/' || $scriptDir === '\\' || $scriptDir === '.') {
+    $scriptDir = '';
+}
+$BASE_PATH = rtrim($scriptDir, '/');
 
 function folderUrl(string $folder, string $apiUrl, string $basePath): string {
     return $apiUrl . $basePath . '/' . $folder;

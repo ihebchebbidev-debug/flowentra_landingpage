@@ -26,10 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 class Database {
-    private $host = "luccybcdb.mysql.db";
-    private $username = "luccybcdb";
-    private $password = "Dadouhibou2025";
-    private $database = "luccybcdb";
+  private $host = "localhost";
+private $username = "flowentra";
+private $password = "StrongPasswordHere!";
+private $database = "flowentra_db";
     public $conn;
 
     public function getConnection() {
