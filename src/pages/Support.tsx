@@ -1,7 +1,8 @@
 import PageLayout from "@/components/layout/PageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { reportLog } from "@/services/errorReporter";
 import { Send, Paperclip, X, BookOpen, Mail, Loader2, CheckCircle } from "lucide-react";
 
 const SUPPORT_EMAIL = "support@flowentra.io";
@@ -38,6 +39,13 @@ const Support = () => {
 
   const removeFile = (i: number) => setFiles((prev) => prev.filter((_, idx) => idx !== i));
 
+  useEffect(() => {
+    reportLog("Viewed support page", {
+      severity: "info",
+      context: { page: "/support" },
+    });
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim() || !description.trim() || !category || !priority) return;
@@ -58,6 +66,10 @@ const Support = () => {
       const json = await res.json().catch(() => ({}));
 
       if (res.ok && json.success !== false) {
+        reportLog("Support ticket submitted", {
+          severity: "info",
+          context: { category, priority, page: "/support" },
+        });
         // Also persist to admin inbox (fire-and-forget)
         fetch(`${API_BASE}/inbox.php?action=save`, {
           method: "POST",
@@ -73,9 +85,17 @@ const Support = () => {
         setStatus("sent");
         setTitle(""); setDescription(""); setCategory(""); setPriority(""); setFiles([]);
       } else {
+        reportLog("Support ticket submission failed", {
+          severity: "warning",
+          context: { category, priority, page: "/support" },
+        });
         setStatus("error");
       }
     } catch {
+      reportLog("Support ticket submission failed", {
+        severity: "warning",
+        context: { category, priority, page: "/support" },
+      });
       setStatus("error");
     }
   };

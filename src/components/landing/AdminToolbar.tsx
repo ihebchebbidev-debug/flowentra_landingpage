@@ -30,7 +30,6 @@ const AdminToolbar = () => {
   const links = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
     { icon: Settings, label: "Settings", path: "/admin?section=__settings" },
-    { icon: Mail, label: "Emails", path: "/admin?section=__email" },
     { icon: CreditCard, label: "Pricing", path: "/admin?section=__pricing" },
     { icon: BarChart3, label: "Analytics", path: "/admin?section=__analytics" },
     { icon: Megaphone, label: "Releases", path: "/admin?section=__releases" },

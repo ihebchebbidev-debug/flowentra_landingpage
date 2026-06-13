@@ -6,12 +6,11 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHistory from "@/components/admin/AdminHistory";
 import AnalyticsDashboard from "@/components/admin/AnalyticsDashboard";
 import AdminSettings from "@/components/admin/AdminSettings";
-import EmailManager from "@/components/admin/EmailManager";
 import AdminDocs from "@/components/admin/AdminDocs";
-import InboxViewer from "@/components/admin/InboxViewer";
 import MailboxViewer from "@/components/admin/MailboxViewer";
 import ScreenshotsManager from "@/components/admin/ScreenshotsManager";
 import ErrorsViewer from "@/components/admin/ErrorsViewer";
+import AdminLogsViewer from "@/components/admin/AdminLogsViewer";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, History, Download, Upload, PanelLeftClose, PanelLeft } from "lucide-react";
@@ -98,8 +97,8 @@ const Admin = () => {
   const currentLabel = activeSection === "__mailbox" ? "Mailbox"
     : activeSection === "__inbox" ? "Inbox"
     : activeSection === "__screenshots" ? "Screenshots"
-    : activeSection === "__errors" ? "Error Logs"
-    : activeSection === "__email" ? "Email Manager"
+    : activeSection === "__errors" ? "Logs"
+    : activeSection === "__activity" ? "Activity Logs"
     : activeSection === "__analytics" ? "Analytics"
     : activeSection === "__settings" ? "Site Settings"
     : activeSection === "__history" ? "Change History"
@@ -177,8 +176,8 @@ const Admin = () => {
             <ScreenshotsManager />
           ) : activeSection === "__errors" ? (
             <ErrorsViewer />
-          ) : activeSection === "__email" ? (
-            <EmailManager />
+          ) : activeSection === "__activity" ? (
+            <AdminLogsViewer />
           ) : activeSection === "__analytics" ? (
             <AnalyticsDashboard />
           ) : activeSection === "__settings" ? (

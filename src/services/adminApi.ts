@@ -374,6 +374,24 @@ export interface ErrorSummaryEntry {
   total: number;
 }
 
+export interface AdminActionLogEntry {
+  id: number;
+  category: string;
+  action: string;
+  level: "info" | "warning" | "error";
+  message: string;
+  url: string | null;
+  user_agent: string | null;
+  ip: string | null;
+  context: string | null;
+  created_at: string;
+}
+
+export interface AdminActionLogSummaryEntry {
+  level: string;
+  total: number;
+}
+
 export const adminErrors = {
   async list(params: { type?: string; resolved?: "0" | "1"; severity?: string; page?: number; limit?: number } = {}): Promise<{
     data: ErrorLogEntry[];
@@ -406,6 +424,29 @@ export const adminErrors = {
 
   async clearResolved(): Promise<void> {
     await apiCall("/errors.php?action=clear_resolved", { method: "POST", body: "{}" });
+  },
+};
+
+export const adminLogs = {
+  async list(params: { category?: string; action?: string; level?: string; page?: number; limit?: number } = {}): Promise<{
+    data: AdminActionLogEntry[];
+    summary: AdminActionLogSummaryEntry[];
+    pagination: { page: number; limit: number; total: number; pages: number };
+  }> {
+    const q = new URLSearchParams({ action: "list" });
+    if (params.category) q.set("category", params.category);
+    if (params.action) q.set("action", params.action);
+    if (params.level) q.set("level", params.level);
+    if (params.page) q.set("page", String(params.page));
+    if (params.limit) q.set("limit", String(params.limit));
+    return apiCall(`/log.php?${q}`);
+  },
+
+  async delete(id: number): Promise<void> {
+    await apiCall("/log.php?action=delete", {
+      method: "POST",
+      body: JSON.stringify({ id }),
+    });
   },
 };
 

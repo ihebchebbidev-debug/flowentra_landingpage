@@ -11,9 +11,16 @@ $action = $_GET['action'] ?? '';
 
 // Resolve both managed folders (relative to this file's directory)
 $FOLDERS = [
-    'hero-screenshots' => realpath(__DIR__ . '/../hero-screenshots'),
-    'screenshots'      => realpath(__DIR__ . '/../screenshots'),
+    'hero-screenshots' => __DIR__ . '/../hero-screenshots',
+    'screenshots'      => __DIR__ . '/../screenshots',
 ];
+
+// Ensure the managed folders exist so the admin screenshot manager can restore them.
+foreach ($FOLDERS as $absPath) {
+    if (!is_dir($absPath)) {
+        @mkdir($absPath, 0755, true);
+    }
+}
 
 // Allowed image MIME types
 $ALLOWED = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp', 'image/svg+xml'];

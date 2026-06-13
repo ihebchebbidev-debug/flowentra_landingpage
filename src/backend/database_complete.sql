@@ -72,7 +72,28 @@ CREATE TABLE IF NOT EXISTS `flowentra_content_changelog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- =============================================
--- 4. CMS: Media Library
+-- 4. AUDIT: Activity Logs
+-- =============================================
+
+CREATE TABLE IF NOT EXISTS `flowentra_action_logs` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `category` VARCHAR(100) NOT NULL DEFAULT 'general',
+  `action` VARCHAR(100) NOT NULL DEFAULT 'event',
+  `level` ENUM('info','warning','error') NOT NULL DEFAULT 'info',
+  `message` TEXT NOT NULL,
+  `url` VARCHAR(1000) DEFAULT NULL,
+  `user_agent` VARCHAR(500) DEFAULT NULL,
+  `ip` VARCHAR(100) DEFAULT NULL,
+  `context` TEXT DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX `idx_category` (`category`),
+  INDEX `idx_action` (`action`),
+  INDEX `idx_level` (`level`),
+  INDEX `idx_created_at` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =============================================
+-- 5. CMS: Media Library
 -- =============================================
 
 CREATE TABLE IF NOT EXISTS `flowentra_cms_media` (

@@ -28,6 +28,13 @@ const TYPE_FILTERS = [
   { key: "network",    label: "Network" },
 ];
 
+const SEV_FILTERS = [
+  { key: "", label: "All severities" },
+  { key: "error", label: "Errors" },
+  { key: "warning", label: "Warnings" },
+  { key: "info", label: "Info" },
+];
+
 function formatDate(iso: string) {
   return new Date(iso).toLocaleString(undefined, {
     day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit", second: "2-digit",
@@ -36,6 +43,10 @@ function formatDate(iso: string) {
 
 function unresolvedByType(summary: ErrorSummaryEntry[], type: string) {
   return summary.filter(s => s.type === type).reduce((a, s) => a + Number(s.unresolved), 0);
+}
+
+function unresolvedBySeverity(summary: ErrorSummaryEntry[], severity: string) {
+  return summary.filter(s => s.severity === severity).reduce((a, s) => a + Number(s.unresolved), 0);
 }
 
 const ErrorsViewer = () => {
@@ -48,6 +59,7 @@ const ErrorsViewer = () => {
   const [loading, setLoading]       = useState(true);
   const [error, setError]           = useState<string | null>(null);
   const [typeFilter, setTypeFilter] = useState("");
+  const [severityFilter, setSeverityFilter] = useState("");
   const [showResolved, setShowResolved] = useState(false);
   const [expanded, setExpanded]     = useState<number | null>(null);
   const [resolving, setResolving]   = useState<number | null>(null);
@@ -55,13 +67,14 @@ const ErrorsViewer = () => {
   const [clearing, setClearing]     = useState(false);
 
   const load = useCallback(async (
-    type = typeFilter, resolved = showResolved, p = page
+    type = typeFilter, severity = severityFilter, resolved = showResolved, p = page
   ) => {
     setLoading(true);
     setError(null);
     try {
       const res = await adminErrors.list({
         type: type || undefined,
+        severity: severity || undefined,
         resolved: resolved ? undefined : "0",
         page: p,
         limit: 50,
@@ -72,23 +85,28 @@ const ErrorsViewer = () => {
       setTotal(res.pagination?.total ?? 0);
       setPages(res.pagination?.pages ?? 1);
     } catch (err: any) {
-      setError(err?.message || "Failed to load error logs");
+      setError(err?.message || "Failed to load logs");
     } finally {
       setLoading(false);
     }
-  }, [typeFilter, showResolved, page]);
+  }, [typeFilter, severityFilter, showResolved, page]);
 
   useEffect(() => { load(); }, []);
 
   const switchType = (t: string) => {
     setTypeFilter(t); setPage(1); setExpanded(null);
-    load(t, showResolved, 1);
+    load(t, severityFilter, showResolved, 1);
+  };
+
+  const switchSeverity = (s: string) => {
+    setSeverityFilter(s); setPage(1); setExpanded(null);
+    load(typeFilter, s, showResolved, 1);
   };
 
   const toggleResolved = () => {
     const next = !showResolved;
     setShowResolved(next); setPage(1);
-    load(typeFilter, next, 1);
+    load(typeFilter, severityFilter, next, 1);
   };
 
   const handleResolve = async (entry: ErrorLogEntry, resolved: boolean) => {
@@ -141,14 +159,14 @@ const ErrorsViewer = () => {
             </div>
             <div>
               <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-                Error Logs
+                Logs
                 {unresolvedTotal > 0 && (
                   <span className="text-[11px] font-bold bg-destructive text-destructive-foreground rounded-full px-2 py-0.5">
                     {unresolvedTotal} unresolved
                   </span>
                 )}
               </h2>
-              <p className="text-xs text-muted-foreground">JavaScript errors, API failures and PHP server errors</p>
+              <p className="text-xs text-muted-foreground">JavaScript, API, network and visitor event logs</p>
             </div>
           </div>
 
@@ -210,12 +228,37 @@ const ErrorsViewer = () => {
           })}
         </div>
 
+        {/* Severity filter tabs */}
+        <div className="flex border-b border-border overflow-x-auto">
+          {SEV_FILTERS.map(f => {
+            const unresolved = f.key ? unresolvedBySeverity(summary, f.key) : unresolvedTotal;
+            return (
+              <button
+                key={f.key}
+                onClick={() => switchSeverity(f.key)}
+                className={`px-5 py-3 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+                  severityFilter === f.key
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {f.label}
+                {unresolved > 0 && (
+                  <span className="text-[10px] font-bold bg-destructive/10 text-destructive rounded-full px-1.5 py-0.5 ml-2">
+                    {unresolved}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Error state */}
         {error && (
           <div className="m-6 flex items-start gap-3 p-4 rounded-xl bg-destructive/5 border border-destructive/20">
             <AlertCircle className="w-4 h-4 text-destructive shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm font-semibold text-destructive">Could not load error logs</p>
+              <p className="text-sm font-semibold text-destructive">Could not load logs</p>
               <p className="text-xs text-muted-foreground font-mono mt-1">{error}</p>
               <p className="text-xs text-muted-foreground mt-1">
                 Make sure <code className="bg-muted px-1 rounded">errors.php</code> is deployed to your server.

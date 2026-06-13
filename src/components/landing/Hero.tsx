@@ -1,7 +1,7 @@
 ﻿import { useLanguage } from "@/contexts/LanguageContext";
 import { useCmsSection } from "@/contexts/CmsContentContext";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Play, LayoutDashboard, Layers } from "lucide-react";
 import { MEGA_ICONS } from "@/components/admin/megaMenuIcons";
 import heroBgTest from "@/assets/hero-bg-test.png";
@@ -50,6 +50,11 @@ const Hero = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
   const [activeModule, setActiveModule] = useState(0);
+  const [fallbackImage, setFallbackImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setFallbackImage(null);
+  }, [activeModule]);
 
   const contentOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const dashboardY = useTransform(scrollYProgress, [0, 1], [0, 40]);
@@ -188,8 +193,9 @@ const Hero = () => {
                 >
                   {activeModule === 0 || currentModule?.image ? (
                     <img
-                      src={currentModule?.image || dashboardPreview}
+                      src={fallbackImage || currentModule?.image || dashboardPreview}
                       alt={currentModule.label}
+                      onError={() => setFallbackImage(dashboardPreview)}
                       className="absolute inset-0 w-full h-full object-cover object-top bg-background"
                     />
                   ) : (

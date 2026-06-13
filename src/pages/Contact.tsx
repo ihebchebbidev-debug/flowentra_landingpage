@@ -1,7 +1,8 @@
 ﻿import PageLayout from "@/components/layout/PageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { reportLog } from "@/services/errorReporter";
 import { Mail, Phone, MapPin, Clock, Globe, Send, Loader2, CheckCircle } from "lucide-react";
 
 const CONTACT_EMAIL = "contact@flowentra.io";
@@ -36,6 +37,10 @@ const Contact = () => {
       const res = await fetch(`${API_BASE}/email.php`, { method: "POST", body });
       const json = await res.json().catch(() => ({}));
       if (res.ok && json.success !== false) {
+        reportLog("Contact form submitted", {
+          severity: "info",
+          context: { category: form.category || "Contact", page: "/contact" },
+        });
         // Also persist to admin inbox (fire-and-forget)
         fetch(`${API_BASE}/inbox.php?action=save`, {
           method: "POST",
@@ -54,12 +59,27 @@ const Contact = () => {
         setStatus("sent");
         setForm({ firstName: "", lastName: "", email: "", phone: "", company: "", category: "", message: "" });
       } else {
+        reportLog("Contact form submission failed", {
+          severity: "warning",
+          context: { category: form.category || "Contact", page: "/contact" },
+        });
         setStatus("error");
       }
     } catch {
+      reportLog("Contact form submission failed", {
+        severity: "warning",
+        context: { category: form.category || "Contact", page: "/contact" },
+      });
       setStatus("error");
     }
   };
+
+  useEffect(() => {
+    reportLog("Viewed contact page", {
+      severity: "info",
+      context: { page: "/contact" },
+    });
+  }, []);
 
   const contactInfo = [
     {
