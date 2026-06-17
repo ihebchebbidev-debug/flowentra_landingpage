@@ -278,7 +278,7 @@ switch ($action) {
             $ids = imap_search($imap, $criteria, SE_UID) ?: [];
             rsort($ids);
         } else {
-            $total = imap_num_msgs($imap);
+            $total = imap_num_msg($imap);
             $ids = [];
             for ($i = $total; $i >= 1; $i--) $ids[] = imap_uid($imap, $i);
         }
