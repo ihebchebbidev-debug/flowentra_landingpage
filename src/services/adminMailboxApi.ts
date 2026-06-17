@@ -131,4 +131,9 @@ export const adminMailbox = {
   async remove(folder: string, uid: number): Promise<void> {
     await apiCall(`/imap.php?action=delete&${mbq()}`, { method: 'POST', body: JSON.stringify({ folder, uid }) });
   },
+
+  // Compose / reply — sends via the active mailbox's SMTP account (From is fixed to it)
+  async send(payload: { to: string; cc?: string; bcc?: string; subject: string; html: string }): Promise<{ success: boolean; message?: string }> {
+    return apiCall(`/email.php?action=send_message&${mbq()}`, { method: 'POST', body: JSON.stringify(payload) });
+  },
 };

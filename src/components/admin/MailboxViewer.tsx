@@ -1,8 +1,9 @@
-import { useState, useEffect, useCallback, type MouseEvent } from "react";
+import { useState, useEffect, useCallback, useRef, type MouseEvent } from "react";
 import {
   Inbox, Send, ShieldAlert, Trash2, Star, RefreshCw, Search,
   ChevronLeft, ChevronRight, Paperclip, Download, Settings, X,
   MailOpen, Mail, AlertTriangle, Loader2, CheckCircle, Folder,
+  PenSquare, Reply, Bold, Italic, Underline, Link2, List, ListOrdered,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -52,6 +53,122 @@ function formatSize(bytes: number) {
   return `${(bytes / 1048576).toFixed(1)} MB`;
 }
 
+// Pull a bare email address out of a "Name <email>" header string
+function extractEmail(value: string): string {
+  const m = value?.match(/<([^>]+)>/);
+  if (m) return m[1].trim();
+  const m2 = value?.match(/[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+/);
+  return m2 ? m2[0] : (value || "").trim();
+}
+
+// ==================== COMPOSE / REPLY ====================
+const Composer = ({ fromAddress, initial, onClose, onSent }: {
+  fromAddress: string;
+  initial?: { to?: string; cc?: string; subject?: string; html?: string };
+  onClose: () => void;
+  onSent: () => void;
+}) => {
+  const [to, setTo] = useState(initial?.to || "");
+  const [cc, setCc] = useState(initial?.cc || "");
+  const [showCc, setShowCc] = useState(!!initial?.cc);
+  const [subject, setSubject] = useState(initial?.subject || "");
+  const [sending, setSending] = useState(false);
+  const bodyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (bodyRef.current) bodyRef.current.innerHTML = initial?.html || "";
+  }, []);
+
+  const exec = (cmd: string, val?: string) => {
+    document.execCommand(cmd, false, val);
+    bodyRef.current?.focus();
+  };
+
+  const addLink = () => {
+    const url = window.prompt("Link URL:", "https://");
+    if (url) exec("createLink", url);
+  };
+
+  const send = async () => {
+    if (!to.trim()) { toast.error("Add a recipient"); return; }
+    if (!subject.trim()) { toast.error("Add a subject"); return; }
+    const html = bodyRef.current?.innerHTML || "";
+    setSending(true);
+    try {
+      const r = await adminMailbox.send({ to: to.trim(), cc: cc.trim(), subject: subject.trim(), html });
+      if (r.success) { toast.success("Message sent"); onSent(); }
+      else toast.error(r.message || "Send failed");
+    } catch (err: any) {
+      toast.error(err?.message || "Send failed");
+    } finally {
+      setSending(false);
+    }
+  };
+
+  const tbBtn = "p-1.5 rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors";
+  const inputCls = "flex-1 bg-transparent text-sm focus:outline-none";
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+      <div className="bg-card border border-border rounded-xl shadow-2xl w-full max-w-2xl flex flex-col max-h-[90vh]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+          <h3 className="text-sm font-bold flex items-center gap-2"><Send className="w-4 h-4" /> New message</h3>
+          <button onClick={onClose} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"><X className="w-4 h-4" /></button>
+        </div>
+
+        <div className="px-4 py-2 space-y-0 overflow-y-auto">
+          <div className="flex items-center gap-2 py-2 border-b border-border/60">
+            <span className="text-xs text-muted-foreground w-14">From</span>
+            <span className="text-sm text-foreground">{fromAddress}</span>
+          </div>
+          <div className="flex items-center gap-2 py-2 border-b border-border/60">
+            <span className="text-xs text-muted-foreground w-14">To</span>
+            <input className={inputCls} value={to} onChange={(e) => setTo(e.target.value)} placeholder="recipient@example.com" autoFocus />
+            {!showCc && <button onClick={() => setShowCc(true)} className="text-xs text-primary hover:underline">Cc</button>}
+          </div>
+          {showCc && (
+            <div className="flex items-center gap-2 py-2 border-b border-border/60">
+              <span className="text-xs text-muted-foreground w-14">Cc</span>
+              <input className={inputCls} value={cc} onChange={(e) => setCc(e.target.value)} placeholder="cc@example.com, other@example.com" />
+            </div>
+          )}
+          <div className="flex items-center gap-2 py-2 border-b border-border/60">
+            <span className="text-xs text-muted-foreground w-14">Subject</span>
+            <input className={inputCls} value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Subject" />
+          </div>
+
+          {/* Formatting toolbar */}
+          <div className="flex items-center gap-0.5 py-2 border-b border-border/60">
+            <button type="button" className={tbBtn} title="Bold" onClick={() => exec("bold")}><Bold className="w-3.5 h-3.5" /></button>
+            <button type="button" className={tbBtn} title="Italic" onClick={() => exec("italic")}><Italic className="w-3.5 h-3.5" /></button>
+            <button type="button" className={tbBtn} title="Underline" onClick={() => exec("underline")}><Underline className="w-3.5 h-3.5" /></button>
+            <span className="w-px h-4 bg-border mx-1" />
+            <button type="button" className={tbBtn} title="Bulleted list" onClick={() => exec("insertUnorderedList")}><List className="w-3.5 h-3.5" /></button>
+            <button type="button" className={tbBtn} title="Numbered list" onClick={() => exec("insertOrderedList")}><ListOrdered className="w-3.5 h-3.5" /></button>
+            <button type="button" className={tbBtn} title="Insert link" onClick={addLink}><Link2 className="w-3.5 h-3.5" /></button>
+          </div>
+
+          {/* Rich text body */}
+          <div
+            ref={bodyRef}
+            contentEditable
+            className="min-h-[200px] max-h-[40vh] overflow-y-auto py-3 text-sm focus:outline-none [&_a]:text-primary [&_a]:underline [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
+            data-placeholder="Write your message…"
+            suppressContentEditableWarning
+          />
+        </div>
+
+        <div className="flex items-center gap-2 px-4 py-3 border-t border-border">
+          <button onClick={send} disabled={sending} className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 disabled:opacity-50">
+            {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />} Send
+          </button>
+          <button onClick={onClose} className="px-4 py-2 rounded-lg border border-border text-sm font-medium hover:bg-muted">Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const MailboxViewer = () => {
   const [mailbox, setMailboxState] = useState<MailboxKey>("contact");
   const [imapEnabled, setImapEnabled] = useState(true);
@@ -70,6 +187,17 @@ const MailboxViewer = () => {
 
   const [selected, setSelected] = useState<MailMessage | null>(null);
   const [loadingMsg, setLoadingMsg] = useState(false);
+  const [composing, setComposing] = useState<null | { to?: string; cc?: string; subject?: string; html?: string }>(null);
+
+  const fromAddress = mailbox === "support" ? "support@flowentra.app" : "contact@flowentra.io";
+
+  const startReply = () => {
+    if (!selected) return;
+    const replyTo = extractEmail(selected.from);
+    const subj = (selected.subject || "").toLowerCase().startsWith("re:") ? selected.subject : `Re: ${selected.subject || ""}`;
+    const quoted = `<br><br><blockquote style="border-left:2px solid #ccc;padding-left:10px;color:#666">On ${selected.date}, ${selected.from} wrote:<br>${selected.html || ""}</blockquote>`;
+    setComposing({ to: replyTo, subject: subj, html: quoted });
+  };
 
   // Resolve a quick folder's real name from discovered folders
   const resolveFolder = (candidates: string[]) =>
@@ -223,6 +351,9 @@ const MailboxViewer = () => {
           <span className="text-xs text-muted-foreground">{total} messages</span>
         </div>
         <div className="flex items-center gap-2">
+          <button onClick={() => setComposing({})} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors" title="Compose">
+            <PenSquare className="w-3.5 h-3.5" /> Compose
+          </button>
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
             <input
@@ -360,6 +491,9 @@ const MailboxViewer = () => {
                 <div className="flex items-center justify-between gap-2 px-4 py-2.5 border-b border-border">
                   <span className="text-xs font-medium text-muted-foreground truncate">{folder}</span>
                   <div className="flex items-center gap-1">
+                    <button onClick={startReply} className="p-1.5 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors" title="Reply">
+                      <Reply className="w-4 h-4" />
+                    </button>
                     {folder.toLowerCase() !== spamName.toLowerCase() && (
                       <button onClick={() => doMove(selected.uid, spamName, "Spam")} className="p-1.5 rounded-lg text-muted-foreground hover:text-orange-500 hover:bg-muted transition-colors" title="Move to Spam">
                         <ShieldAlert className="w-4 h-4" />
@@ -419,6 +553,14 @@ const MailboxViewer = () => {
           </div>
         </div>
       </div>
+      {composing && (
+        <Composer
+          fromAddress={fromAddress}
+          initial={composing}
+          onClose={() => setComposing(null)}
+          onSent={() => setComposing(null)}
+        />
+      )}
     </div>
   );
 };

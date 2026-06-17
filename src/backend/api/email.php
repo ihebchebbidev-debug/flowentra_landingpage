@@ -122,6 +122,26 @@ switch ($action) {
         echo json_encode(sendEmail($conn, $to, $subject, $html, $mailbox));
         break;
 
+    // ==================== COMPOSE / REPLY (admin mailbox) ====================
+    case 'send_message':
+        $data = json_decode(file_get_contents('php://input'), true) ?? [];
+        $to      = trim($data['to'] ?? '');
+        $cc      = $data['cc'] ?? '';
+        $bcc     = $data['bcc'] ?? '';
+        $subject = trim($data['subject'] ?? '');
+        $html    = $data['html'] ?? '';
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL) || $subject === '') {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'A valid To address and a subject are required']);
+            exit;
+        }
+        $result = sendEmail($conn, $to, $subject, $html, $mailbox, $cc, $bcc);
+        // Log it
+        $stmt = $conn->prepare("INSERT INTO flowentra_email_send_log (recipient_email, subject, status, sent_by) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$to, $subject, $result['success'] ? 'sent' : 'failed', $user['id']]);
+        echo json_encode($result);
+        break;
+
     // ==================== TEMPLATES ====================
     case 'get_templates':
         $stmt = $conn->query("SELECT * FROM flowentra_email_templates ORDER BY updated_at DESC");
@@ -367,7 +387,7 @@ switch ($action) {
 }
 
 // ==================== SMTP SEND FUNCTION ====================
-function sendEmail($conn, $to, $subject, $htmlBody, $mailbox = 'contact') {
+function sendEmail($conn, $to, $subject, $htmlBody, $mailbox = 'contact', $cc = [], $bcc = []) {
     $stmt = $conn->prepare("SELECT * FROM flowentra_email_smtp_settings WHERE mailbox = ?");
     $stmt->execute([$mailbox]);
     $smtp = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -375,6 +395,16 @@ function sendEmail($conn, $to, $subject, $htmlBody, $mailbox = 'contact') {
     if (!$smtp) {
         return ['success' => false, 'message' => "SMTP not configured for mailbox '$mailbox'"];
     }
+
+    // Normalize Cc/Bcc: accept array or comma/semicolon-separated string, keep valid emails only
+    $normalizeList = function ($v) {
+        if (is_string($v)) $v = preg_split('/[,;]+/', $v);
+        return array_values(array_filter(array_map('trim', (array)$v), function ($e) {
+            return $e !== '' && filter_var($e, FILTER_VALIDATE_EMAIL);
+        }));
+    };
+    $cc  = $normalizeList($cc);
+    $bcc = $normalizeList($bcc);
 
     $host = $smtp['host'];
     $port = intval($smtp['port']);
@@ -388,6 +418,8 @@ function sendEmail($conn, $to, $subject, $htmlBody, $mailbox = 'contact') {
     $boundary = md5(uniqid(time()));
     $headers = "MIME-Version: 1.0\r\n";
     $headers .= "From: $fromName <$fromEmail>\r\n";
+    $headers .= "To: $to\r\n";
+    if ($cc)  { $headers .= "Cc: " . implode(', ', $cc) . "\r\n"; }
     if ($smtp['reply_to']) {
         $headers .= "Reply-To: {$smtp['reply_to']}\r\n";
     }
@@ -461,13 +493,16 @@ function sendEmail($conn, $to, $subject, $htmlBody, $mailbox = 'contact') {
         fwrite($socket, "MAIL FROM:<$fromEmail>\r\n");
         fgets($socket, 512);
 
-        // RCPT TO
-        fwrite($socket, "RCPT TO:<$to>\r\n");
-        $rcptResponse = fgets($socket, 512);
-        if (substr($rcptResponse, 0, 3) !== '250') {
-            fwrite($socket, "QUIT\r\n");
-            fclose($socket);
-            return ['success' => false, 'message' => 'Recipient rejected'];
+        // RCPT TO — primary recipient plus every Cc and Bcc address
+        $allRecipients = array_merge([$to], $cc, $bcc);
+        foreach ($allRecipients as $rcpt) {
+            fwrite($socket, "RCPT TO:<$rcpt>\r\n");
+            $rcptResponse = fgets($socket, 512);
+            if (substr($rcptResponse, 0, 3) !== '250' && substr($rcptResponse, 0, 3) !== '251') {
+                fwrite($socket, "QUIT\r\n");
+                fclose($socket);
+                return ['success' => false, 'message' => "Recipient rejected: $rcpt"];
+            }
         }
 
         // DATA
