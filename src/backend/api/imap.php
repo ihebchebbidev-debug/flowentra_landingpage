@@ -14,17 +14,36 @@ require_once __DIR__ . '/../config.php';
 $db = new Database();
 $conn = $db->getConnection();
 
-// Auto-create the IMAP settings table (single row, id = 1)
+// Auto-create the IMAP settings table (one row per mailbox: contact, support)
 $conn->exec("CREATE TABLE IF NOT EXISTS flowentra_email_imap_settings (
-    id            INT PRIMARY KEY DEFAULT 1,
+    id            INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    mailbox       VARCHAR(20)  NOT NULL DEFAULT 'contact',
     host          VARCHAR(190) NOT NULL DEFAULT 'ssl0.ovh.net',
     port          INT          NOT NULL DEFAULT 993,
     encryption    VARCHAR(20)  NOT NULL DEFAULT 'ssl',
     validate_cert TINYINT(1)   NOT NULL DEFAULT 1,
     username      VARCHAR(190) NOT NULL DEFAULT '',
     password      VARCHAR(255) NOT NULL DEFAULT '',
-    updated_at    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP
+    updated_at    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY uniq_mailbox (mailbox)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+
+// Self-healing migration for installs created before multi-mailbox support.
+// Runs only once (until the `mailbox` column exists) to avoid per-request churn.
+if (!$conn->query("SHOW COLUMNS FROM flowentra_email_imap_settings LIKE 'mailbox'")->fetch()) {
+    foreach ([
+        "ALTER TABLE flowentra_email_imap_settings MODIFY id INT NOT NULL AUTO_INCREMENT",
+        "ALTER TABLE flowentra_email_imap_settings ADD COLUMN mailbox VARCHAR(20) NOT NULL DEFAULT 'contact'",
+        "ALTER TABLE flowentra_email_imap_settings ADD UNIQUE KEY uniq_mailbox (mailbox)",
+    ] as $mig) { try { $conn->exec($mig); } catch (Exception $e) { /* already applied */ } }
+}
+
+// Which mailbox account this request targets (contact | support)
+function mailboxParam(): string {
+    $m = $_GET['mailbox'] ?? 'contact';
+    return in_array($m, ['contact', 'support'], true) ? $m : 'contact';
+}
+$mailbox = mailboxParam();
 
 $action = $_GET['action'] ?? '';
 
@@ -41,8 +60,9 @@ function requireImapExtension() {
     }
 }
 
-function getImapSettings($conn) {
-    $stmt = $conn->query("SELECT * FROM flowentra_email_imap_settings WHERE id = 1");
+function getImapSettings($conn, $mailbox = 'contact') {
+    $stmt = $conn->prepare("SELECT * FROM flowentra_email_imap_settings WHERE mailbox = ?");
+    $stmt->execute([$mailbox]);
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
 }
 
@@ -156,7 +176,7 @@ switch ($action) {
 
     // ==================== SETTINGS ====================
     case 'get_settings': {
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if ($s) $s['password'] = $s['password'] ? '••••••••' : '';
         echo json_encode([
             'success'      => true,
@@ -181,16 +201,19 @@ switch ($action) {
             exit;
         }
 
-        $exists = $conn->query("SELECT id FROM flowentra_email_imap_settings WHERE id = 1")->fetch();
+        $check = $conn->prepare("SELECT id FROM flowentra_email_imap_settings WHERE mailbox = ?");
+        $check->execute([$mailbox]);
+        $exists = $check->fetch();
         if ($exists) {
             $sql = "UPDATE flowentra_email_imap_settings SET host=?, port=?, encryption=?, validate_cert=?, username=?, updated_at=NOW()";
             $params = [$host, $port, $encryption, $validate_cert, $username];
             if ($password && $password !== '••••••••') { $sql .= ", password=?"; $params[] = $password; }
-            $sql .= " WHERE id = 1";
+            $sql .= " WHERE mailbox = ?";
+            $params[] = $mailbox;
             $conn->prepare($sql)->execute($params);
         } else {
-            $stmt = $conn->prepare("INSERT INTO flowentra_email_imap_settings (id, host, port, encryption, validate_cert, username, password) VALUES (1, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$host, $port, $encryption, $validate_cert, $username, $password ?? '']);
+            $stmt = $conn->prepare("INSERT INTO flowentra_email_imap_settings (mailbox, host, port, encryption, validate_cert, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$mailbox, $host, $port, $encryption, $validate_cert, $username, $password ?? '']);
         }
         echo json_encode(['success' => true, 'message' => 'IMAP settings saved']);
         break;
@@ -198,7 +221,7 @@ switch ($action) {
 
     case 'test': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $imap = openImap($s, 'INBOX');
         if (!$imap) {
@@ -214,7 +237,7 @@ switch ($action) {
     // ==================== FOLDERS ====================
     case 'folders': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $imap = openImap($s, 'INBOX');
         if (!$imap) { echo json_encode(['success' => false, 'message' => 'Connection failed: ' . imap_last_error()]); break; }
@@ -240,7 +263,7 @@ switch ($action) {
     // ==================== LIST MESSAGES ====================
     case 'list': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $folder = $_GET['folder'] ?? 'INBOX';
         $page   = max(1, intval($_GET['page'] ?? 1));
@@ -295,7 +318,7 @@ switch ($action) {
     // ==================== READ ONE MESSAGE ====================
     case 'message': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $folder = $_GET['folder'] ?? 'INBOX';
         $uid    = intval($_GET['uid'] ?? 0);
@@ -343,7 +366,7 @@ switch ($action) {
     // ==================== DOWNLOAD ATTACHMENT (raw bytes) ====================
     case 'attachment': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { http_response_code(404); exit; }
         $folder = $_GET['folder'] ?? 'INBOX';
         $uid    = intval($_GET['uid'] ?? 0);
@@ -381,7 +404,7 @@ switch ($action) {
     // ==================== FLAGS ====================
     case 'mark': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $data = json_decode(file_get_contents('php://input'), true) ?? [];
         $folder = $data['folder'] ?? 'INBOX';
@@ -399,7 +422,7 @@ switch ($action) {
 
     case 'flag': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $data = json_decode(file_get_contents('php://input'), true) ?? [];
         $folder  = $data['folder'] ?? 'INBOX';
@@ -418,7 +441,7 @@ switch ($action) {
     // ==================== MOVE (spam / trash / any folder) ====================
     case 'move': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $data = json_decode(file_get_contents('php://input'), true) ?? [];
         $from = $data['folder'] ?? 'INBOX';
@@ -438,7 +461,7 @@ switch ($action) {
     // ==================== DELETE ====================
     case 'delete': {
         requireImapExtension();
-        $s = getImapSettings($conn);
+        $s = getImapSettings($conn, $mailbox);
         if (!$s) { echo json_encode(['success' => false, 'message' => 'IMAP not configured']); break; }
         $data = json_decode(file_get_contents('php://input'), true) ?? [];
         $folder = $data['folder'] ?? 'INBOX';

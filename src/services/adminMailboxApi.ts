@@ -2,6 +2,12 @@
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend.flowentra.io/api';
 
+// Which mail account ("contact" | "support") all calls target. The MailboxViewer
+// switches this before (re)loading. Defaults to "contact" for backward-compat.
+export type MailboxKey = 'contact' | 'support';
+let currentMailbox: MailboxKey = 'contact';
+const mbq = () => `mailbox=${currentMailbox}`;
+
 async function apiCall<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${url}`, {
     ...options,
@@ -73,53 +79,56 @@ export interface Pagination {
 // ==================== API Methods ====================
 
 export const adminMailbox = {
+  setMailbox(mailbox: MailboxKey) { currentMailbox = mailbox; },
+  getMailbox(): MailboxKey { return currentMailbox; },
+
   async getSettings(): Promise<{ data: ImapSettings | null; imap_enabled: boolean }> {
-    return apiCall('/imap.php?action=get_settings');
+    return apiCall(`/imap.php?action=get_settings&${mbq()}`);
   },
 
   async saveSettings(settings: Partial<ImapSettings>): Promise<void> {
-    await apiCall('/imap.php?action=save_settings', { method: 'POST', body: JSON.stringify(settings) });
+    await apiCall(`/imap.php?action=save_settings&${mbq()}`, { method: 'POST', body: JSON.stringify(settings) });
   },
 
   async test(): Promise<{ success: boolean; message?: string }> {
-    return apiCall('/imap.php?action=test', { method: 'POST' });
+    return apiCall(`/imap.php?action=test&${mbq()}`, { method: 'POST' });
   },
 
   async getFolders(): Promise<MailFolder[]> {
-    const r = await apiCall<{ success: boolean; data: MailFolder[] }>('/imap.php?action=folders');
+    const r = await apiCall<{ success: boolean; data: MailFolder[] }>(`/imap.php?action=folders&${mbq()}`);
     return r.data || [];
   },
 
   async list(folder: string, page = 1, search = ''): Promise<{ data: MailListItem[]; pagination: Pagination }> {
-    const params = new URLSearchParams({ action: 'list', folder, page: String(page) });
+    const params = new URLSearchParams({ action: 'list', folder, page: String(page), mailbox: currentMailbox });
     if (search) params.append('search', search);
     return apiCall(`/imap.php?${params}`);
   },
 
   async getMessage(folder: string, uid: number, markSeen = true): Promise<MailMessage> {
-    const params = new URLSearchParams({ action: 'message', folder, uid: String(uid), mark_seen: markSeen ? '1' : '0' });
+    const params = new URLSearchParams({ action: 'message', folder, uid: String(uid), mark_seen: markSeen ? '1' : '0', mailbox: currentMailbox });
     const r = await apiCall<{ success: boolean; data: MailMessage }>(`/imap.php?${params}`);
     return r.data;
   },
 
   attachmentUrl(folder: string, uid: number, part: string, name: string): string {
-    const params = new URLSearchParams({ action: 'attachment', folder, uid: String(uid), part, name });
+    const params = new URLSearchParams({ action: 'attachment', folder, uid: String(uid), part, name, mailbox: currentMailbox });
     return `${API_BASE}/imap.php?${params}`;
   },
 
   async mark(folder: string, uid: number, seen: boolean): Promise<void> {
-    await apiCall('/imap.php?action=mark', { method: 'POST', body: JSON.stringify({ folder, uid, seen }) });
+    await apiCall(`/imap.php?action=mark&${mbq()}`, { method: 'POST', body: JSON.stringify({ folder, uid, seen }) });
   },
 
   async flag(folder: string, uid: number, flagged: boolean): Promise<void> {
-    await apiCall('/imap.php?action=flag', { method: 'POST', body: JSON.stringify({ folder, uid, flagged }) });
+    await apiCall(`/imap.php?action=flag&${mbq()}`, { method: 'POST', body: JSON.stringify({ folder, uid, flagged }) });
   },
 
   async move(folder: string, uid: number, to: string): Promise<void> {
-    await apiCall('/imap.php?action=move', { method: 'POST', body: JSON.stringify({ folder, uid, to }) });
+    await apiCall(`/imap.php?action=move&${mbq()}`, { method: 'POST', body: JSON.stringify({ folder, uid, to }) });
   },
 
   async remove(folder: string, uid: number): Promise<void> {
-    await apiCall('/imap.php?action=delete', { method: 'POST', body: JSON.stringify({ folder, uid }) });
+    await apiCall(`/imap.php?action=delete&${mbq()}`, { method: 'POST', body: JSON.stringify({ folder, uid }) });
   },
 };

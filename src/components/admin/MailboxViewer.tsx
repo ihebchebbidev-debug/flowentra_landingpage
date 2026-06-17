@@ -6,8 +6,25 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import {
-  adminMailbox, type MailFolder, type MailListItem, type MailMessage, type ImapSettings,
+  adminMailbox, type MailFolder, type MailListItem, type MailMessage, type ImapSettings, type MailboxKey,
 } from "@/services/adminMailboxApi";
+
+// Segmented Contact / Support account switcher
+const MailboxSwitch = ({ mailbox, onChange }: { mailbox: MailboxKey; onChange: (m: MailboxKey) => void }) => (
+  <div className="inline-flex items-center gap-0.5 bg-muted rounded-lg p-0.5">
+    {(["contact", "support"] as MailboxKey[]).map((m) => (
+      <button
+        key={m}
+        onClick={() => onChange(m)}
+        className={`px-3 py-1.5 rounded-md text-xs font-medium capitalize transition-colors ${
+          mailbox === m ? "bg-card shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+        }`}
+      >
+        {m === "contact" ? "Contact (.io)" : "Support (.app)"}
+      </button>
+    ))}
+  </div>
+);
 
 // Quick-access folders. We match the real IMAP folder names (discovered from
 // the server) against these candidates so OVH naming variants still resolve.
@@ -36,6 +53,7 @@ function formatSize(bytes: number) {
 }
 
 const MailboxViewer = () => {
+  const [mailbox, setMailboxState] = useState<MailboxKey>("contact");
   const [imapEnabled, setImapEnabled] = useState(true);
   const [configured, setConfigured] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -85,25 +103,40 @@ const MailboxViewer = () => {
     }
   }, [folder, page, search]);
 
-  // Initial: check settings/extension, then load
-  useEffect(() => {
-    (async () => {
-      try {
-        const r = await adminMailbox.getSettings();
-        setImapEnabled(r.imap_enabled);
-        const isConfigured = !!r.data?.username;
-        setConfigured(isConfigured);
-        if (!isConfigured) {
-          setShowSettings(true);
-          return;
-        }
-        await loadFolders();
-        await loadMessages("INBOX", 1, "");
-      } catch (err: any) {
-        setError(err?.message || "Failed to initialize mailbox");
+  // Check settings/extension for the active mailbox, then load
+  const init = useCallback(async () => {
+    setError(null);
+    setSelected(null);
+    setMessages([]);
+    setFolders([]);
+    try {
+      const r = await adminMailbox.getSettings();
+      setImapEnabled(r.imap_enabled);
+      const isConfigured = !!r.data?.username;
+      setConfigured(isConfigured);
+      if (!isConfigured) {
+        setShowSettings(true);
+        return;
       }
-    })();
-  }, []);
+      setShowSettings(false);
+      await loadFolders();
+      await loadMessages("INBOX", 1, "");
+    } catch (err: any) {
+      setError(err?.message || "Failed to initialize mailbox");
+    }
+  }, [loadFolders, loadMessages]);
+
+  // Re-initialize on mount and whenever the active mailbox changes
+  useEffect(() => { init(); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, [mailbox]);
+
+  const switchMailbox = (m: MailboxKey) => {
+    if (m === mailbox) return;
+    adminMailbox.setMailbox(m);
+    setFolder("INBOX");
+    setPage(1);
+    setSearch("");
+    setMailboxState(m);
+  };
 
   const switchFolder = (name: string) => {
     setFolder(name);
@@ -162,24 +195,31 @@ const MailboxViewer = () => {
 
   // ==================== SETTINGS PANEL ====================
   if (showSettings) {
-    return <SettingsPanel
-      imapEnabled={imapEnabled}
-      onClose={configured ? () => setShowSettings(false) : undefined}
-      onSaved={async () => {
-        setShowSettings(false);
-        setConfigured(true);
-        await loadFolders();
-        await loadMessages("INBOX", 1, "");
-      }}
-    />;
+    return (
+      <div className="space-y-4 max-w-xl mx-auto">
+        <MailboxSwitch mailbox={mailbox} onChange={switchMailbox} />
+        <SettingsPanel
+          mailbox={mailbox}
+          imapEnabled={imapEnabled}
+          onClose={configured ? () => setShowSettings(false) : undefined}
+          onSaved={async () => {
+            setShowSettings(false);
+            setConfigured(true);
+            await loadFolders();
+            await loadMessages("INBOX", 1, "");
+          }}
+        />
+      </div>
+    );
   }
 
   return (
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <h2 className="text-base font-bold text-foreground">Mailbox</h2>
+          <MailboxSwitch mailbox={mailbox} onChange={switchMailbox} />
           <span className="text-xs text-muted-foreground">{total} messages</span>
         </div>
         <div className="flex items-center gap-2">
@@ -384,11 +424,13 @@ const MailboxViewer = () => {
 };
 
 // ==================== SETTINGS PANEL ====================
-const SettingsPanel = ({ imapEnabled, onClose, onSaved }: {
+const SettingsPanel = ({ mailbox, imapEnabled, onClose, onSaved }: {
+  mailbox: MailboxKey;
   imapEnabled: boolean;
   onClose?: () => void;
   onSaved: () => void;
 }) => {
+  const defaultUser = mailbox === "support" ? "support@flowentra.app" : "contact@flowentra.io";
   const [form, setForm] = useState<Partial<ImapSettings>>({
     host: "ssl0.ovh.net", port: 993, encryption: "ssl", validate_cert: 1, username: "", password: "",
   });
@@ -440,7 +482,7 @@ const SettingsPanel = ({ imapEnabled, onClose, onSaved }: {
   return (
     <div className="max-w-xl mx-auto space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-bold text-foreground flex items-center gap-2"><Settings className="w-4 h-4" /> IMAP Mailbox Settings</h2>
+        <h2 className="text-base font-bold text-foreground flex items-center gap-2"><Settings className="w-4 h-4" /> IMAP Settings — {mailbox === "support" ? "Support (.app)" : "Contact (.io)"}</h2>
         {onClose && <button onClick={onClose} className="p-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted"><X className="w-4 h-4" /></button>}
       </div>
 
@@ -482,7 +524,7 @@ const SettingsPanel = ({ imapEnabled, onClose, onSaved }: {
 
         <div>
           <label className="text-xs font-medium text-muted-foreground block mb-1">Email / Username</label>
-          <input className={field} value={form.username || ""} onChange={(e) => setForm({ ...form, username: e.target.value })} placeholder="contact@flowentra.io" autoComplete="off" />
+          <input className={field} value={form.username || ""} onChange={(e) => setForm({ ...form, username: e.target.value })} placeholder={defaultUser} autoComplete="off" />
         </div>
 
         <div>

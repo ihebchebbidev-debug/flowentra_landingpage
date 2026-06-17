@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { reportLog } from "@/services/errorReporter";
 import { Send, Paperclip, X, BookOpen, Mail, Loader2, CheckCircle } from "lucide-react";
 
-const SUPPORT_EMAIL = "support@flowentra.io";
+const SUPPORT_EMAIL = "support@flowentra.app";
 
 const CATEGORIES = {
   en: ["Support", "Sales", "Consultancy", "Others"],
@@ -52,45 +52,39 @@ const Support = () => {
     setStatus("sending");
 
     try {
+      const subject = `[${category} – ${priority}] ${title}`;
+      const messageText = `Category: ${category}\nPriority: ${priority}\n\n${description}`;
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://backend.flowentra.io/api";
+
+      // Persist to the admin inbox (source of truth)
+      const inboxRes = await fetch(`${API_BASE}/inbox.php?action=save`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mailbox: "support",
+          category,
+          priority,
+          subject,
+          message: description,
+        }),
+      });
+      const inboxJson = await inboxRes.json().catch(() => ({}));
+      if (!inboxRes.ok || inboxJson.success === false) throw new Error("inbox save failed");
+
+      // Notify the team from the support@ mailbox (fire-and-forget)
+      // Note: attachments are shown in the form but not emailed (SMTP sender is text/html only).
       const body = new FormData();
       body.append("to", SUPPORT_EMAIL);
-      body.append("subject", `[${category} – ${priority}] ${title}`);
-      body.append(
-        "message",
-        `Category: ${category}\nPriority: ${priority}\n\n${description}`
-      );
-      files.forEach((f) => body.append("attachments[]", f));
+      body.append("subject", subject);
+      body.append("message", messageText);
+      fetch(`${API_BASE}/email.php?action=form_send&mailbox=support`, { method: "POST", body }).catch(() => {});
 
-      const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://backend.flowentra.io/api";
-      const res = await fetch(`${API_BASE}/email.php`, { method: "POST", body });
-      const json = await res.json().catch(() => ({}));
-
-      if (res.ok && json.success !== false) {
-        reportLog("Support ticket submitted", {
-          severity: "info",
-          context: { category, priority, page: "/support" },
-        });
-        // Also persist to admin inbox (fire-and-forget)
-        fetch(`${API_BASE}/inbox.php?action=save`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            mailbox: "support",
-            category,
-            priority,
-            subject: `[${category} – ${priority}] ${title}`,
-            message: description,
-          }),
-        }).catch(() => {});
-        setStatus("sent");
-        setTitle(""); setDescription(""); setCategory(""); setPriority(""); setFiles([]);
-      } else {
-        reportLog("Support ticket submission failed", {
-          severity: "warning",
-          context: { category, priority, page: "/support" },
-        });
-        setStatus("error");
-      }
+      reportLog("Support ticket submitted", {
+        severity: "info",
+        context: { category, priority, page: "/support" },
+      });
+      setStatus("sent");
+      setTitle(""); setDescription(""); setCategory(""); setPriority(""); setFiles([]);
     } catch {
       reportLog("Support ticket submission failed", {
         severity: "warning",

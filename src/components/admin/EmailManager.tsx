@@ -565,29 +565,34 @@ const VisualEmailComposer = ({ initialBlocks, onSendHtml }: {
 
 // ==================== SMTP Settings Tab ====================
 const SmtpSettings = () => {
-  const [settings, setSettings] = useState({
+  type MailboxKey = "contact" | "support";
+  const [mailbox, setMailbox] = useState<MailboxKey>("contact");
+  const defaultsFor = (m: MailboxKey) => ({
     host: "ssl0.ovh.net",
     port: 587,
-    username: "",
+    username: m === "support" ? "support@flowentra.app" : "contact@flowentra.io",
     password: "",
     encryption: "tls",
     from_name: "Flowentra",
-    from_email: "",
+    from_email: m === "support" ? "support@flowentra.app" : "contact@flowentra.io",
     reply_to: "",
   });
+  const [settings, setSettings] = useState(defaultsFor("contact"));
   const [testEmail, setTestEmail] = useState("");
   const [saving, setSaving] = useState(false);
   const [testing, setTesting] = useState(false);
 
   useEffect(() => {
-    adminEmail.getSmtpSettings().then(s => { if (s) setSettings(prev => ({ ...prev, ...s })); }).catch(() => {});
-  }, []);
+    setSettings(defaultsFor(mailbox));
+    adminEmail.getSmtpSettings(mailbox).then(s => { if (s) setSettings(prev => ({ ...prev, ...s })); }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mailbox]);
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      await adminEmail.saveSmtpSettings(settings);
-      toast.success("SMTP settings saved");
+      await adminEmail.saveSmtpSettings(settings, mailbox);
+      toast.success(`SMTP settings saved (${mailbox})`);
     } catch (e: any) { toast.error(e.message); }
     finally { setSaving(false); }
   };
@@ -596,7 +601,7 @@ const SmtpSettings = () => {
     if (!testEmail) return toast.error("Enter a test email");
     setTesting(true);
     try {
-      const result = await adminEmail.testSmtp(testEmail);
+      const result = await adminEmail.testSmtp(testEmail, mailbox);
       if (result.success) toast.success("Test email sent!");
       else toast.error(result.message || "Test failed");
     } catch (e: any) { toast.error(e.message); }
@@ -605,6 +610,22 @@ const SmtpSettings = () => {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
+        <div className="inline-flex items-center gap-0.5 bg-muted rounded-lg p-0.5">
+          {(["contact", "support"] as MailboxKey[]).map((m) => (
+            <button
+              key={m}
+              onClick={() => setMailbox(m)}
+              className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                mailbox === m ? "bg-card shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {m === "contact" ? "Contact (.io)" : "Support (.app)"}
+            </button>
+          ))}
+        </div>
+        <p className="text-[11px] text-muted-foreground">Campaigns always send from the <strong>Contact</strong> account.</p>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-sm">

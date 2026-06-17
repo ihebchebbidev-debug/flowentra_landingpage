@@ -10,6 +10,25 @@ require_once __DIR__ . '/../config.php';
 $db = new Database();
 $conn = $db->getConnection();
 
+// Self-healing migration: per-mailbox SMTP accounts (contact, support).
+// Runs only once (until the `mailbox` column exists) to avoid per-request churn.
+try {
+    if (!$conn->query("SHOW COLUMNS FROM flowentra_email_smtp_settings LIKE 'mailbox'")->fetch()) {
+        foreach ([
+            "ALTER TABLE flowentra_email_smtp_settings MODIFY id INT NOT NULL AUTO_INCREMENT",
+            "ALTER TABLE flowentra_email_smtp_settings ADD COLUMN mailbox VARCHAR(20) NOT NULL DEFAULT 'contact'",
+            "ALTER TABLE flowentra_email_smtp_settings ADD UNIQUE KEY uniq_mailbox (mailbox)",
+        ] as $mig) { try { $conn->exec($mig); } catch (Exception $e) { /* already applied */ } }
+    }
+} catch (Exception $e) { /* table may not exist yet; created on first save */ }
+
+// Which mailbox account this request targets (contact | support)
+function mailboxParam(): string {
+    $m = $_GET['mailbox'] ?? 'contact';
+    return in_array($m, ['contact', 'support'], true) ? $m : 'contact';
+}
+$mailbox = mailboxParam();
+
 $user = ['id' => 1, 'email' => 'admin@flowentra.io', 'name' => 'Admin', 'role' => 'super_admin'];
 
 $action = $_GET['action'] ?? '';
@@ -17,7 +36,8 @@ $action = $_GET['action'] ?? '';
 switch ($action) {
     // ==================== SMTP SETTINGS ====================
     case 'get_smtp':
-        $stmt = $conn->query("SELECT * FROM flowentra_email_smtp_settings WHERE id = 1");
+        $stmt = $conn->prepare("SELECT * FROM flowentra_email_smtp_settings WHERE mailbox = ?");
+        $stmt->execute([$mailbox]);
         $settings = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($settings) {
             $settings['password'] = '••••••••'; // mask password
@@ -43,8 +63,9 @@ switch ($action) {
             exit;
         }
 
-        // Check if settings exist
-        $stmt = $conn->query("SELECT id FROM flowentra_email_smtp_settings WHERE id = 1");
+        // Check if settings exist for this mailbox
+        $stmt = $conn->prepare("SELECT id FROM flowentra_email_smtp_settings WHERE mailbox = ?");
+        $stmt->execute([$mailbox]);
         $exists = $stmt->fetch();
 
         if ($exists) {
@@ -54,12 +75,13 @@ switch ($action) {
                 $sql .= ", password=?";
                 $params[] = $password;
             }
-            $sql .= " WHERE id = 1";
+            $sql .= " WHERE mailbox = ?";
+            $params[] = $mailbox;
             $stmt = $conn->prepare($sql);
             $stmt->execute($params);
         } else {
-            $stmt = $conn->prepare("INSERT INTO flowentra_email_smtp_settings (id, host, port, username, password, encryption, from_name, from_email, reply_to) VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$host, $port, $username, $password ?? '', $encryption, $from_name, $from_email, $reply_to]);
+            $stmt = $conn->prepare("INSERT INTO flowentra_email_smtp_settings (mailbox, host, port, username, password, encryption, from_name, from_email, reply_to) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$mailbox, $host, $port, $username, $password ?? '', $encryption, $from_name, $from_email, $reply_to]);
         }
 
         echo json_encode(['success' => true, 'message' => 'SMTP settings saved']);
@@ -74,8 +96,30 @@ switch ($action) {
             exit;
         }
 
-        $result = sendEmail($conn, $testEmail, 'Flowentra SMTP Test', '<h2>SMTP Test Successful</h2><p>Your OVH SMTP configuration is working correctly.</p><p>Sent at: ' . date('Y-m-d H:i:s') . '</p>');
+        $result = sendEmail($conn, $testEmail, 'Flowentra SMTP Test', '<h2>SMTP Test Successful</h2><p>Your OVH SMTP configuration is working correctly.</p><p>Sent at: ' . date('Y-m-d H:i:s') . '</p>', $mailbox);
         echo json_encode($result);
+        break;
+
+    // ==================== PUBLIC FORM SEND (contact / support pages) ====================
+    case 'form_send':
+        // Accepts FormData or JSON from the public Contact/Support forms.
+        $to      = trim($_POST['to'] ?? '');
+        $subject = trim($_POST['subject'] ?? '');
+        $message = $_POST['message'] ?? '';
+        if ($to === '' || $subject === '') {
+            // fall back to JSON body
+            $j = json_decode(file_get_contents('php://input'), true) ?? [];
+            $to      = $to      ?: trim($j['to'] ?? '');
+            $subject = $subject ?: trim($j['subject'] ?? '');
+            $message = $message ?: ($j['message'] ?? '');
+        }
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL) || $subject === '') {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Valid recipient and subject required']);
+            exit;
+        }
+        $html = nl2br(htmlspecialchars($message));
+        echo json_encode(sendEmail($conn, $to, $subject, $html, $mailbox));
         break;
 
     // ==================== TEMPLATES ====================
@@ -216,7 +260,7 @@ switch ($action) {
             exit;
         }
 
-        $result = sendEmail($conn, $to, $subject, $html_body);
+        $result = sendEmail($conn, $to, $subject, $html_body, $mailbox);
 
         // Log it
         $stmt = $conn->prepare("INSERT INTO flowentra_email_send_log (recipient_email, subject, status, sent_by) VALUES (?, ?, ?, ?)");
@@ -270,7 +314,8 @@ switch ($action) {
             );
             $personalizedSubject = str_replace('{{name}}', $contact['name'] ?: 'there', $subject);
 
-            $result = sendEmail($conn, $contact['email'], $personalizedSubject, $personalizedBody);
+            // Campaigns always send from the contact@ account (per configuration)
+            $result = sendEmail($conn, $contact['email'], $personalizedSubject, $personalizedBody, 'contact');
 
             $status = $result['success'] ? 'sent' : 'failed';
             $stmt = $conn->prepare("INSERT INTO flowentra_email_send_log (campaign_id, recipient_email, subject, status, sent_by) VALUES (?, ?, ?, ?, ?)");
@@ -322,12 +367,13 @@ switch ($action) {
 }
 
 // ==================== SMTP SEND FUNCTION ====================
-function sendEmail($conn, $to, $subject, $htmlBody) {
-    $stmt = $conn->query("SELECT * FROM flowentra_email_smtp_settings WHERE id = 1");
+function sendEmail($conn, $to, $subject, $htmlBody, $mailbox = 'contact') {
+    $stmt = $conn->prepare("SELECT * FROM flowentra_email_smtp_settings WHERE mailbox = ?");
+    $stmt->execute([$mailbox]);
     $smtp = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$smtp) {
-        return ['success' => false, 'message' => 'SMTP not configured'];
+        return ['success' => false, 'message' => "SMTP not configured for mailbox '$mailbox'"];
     }
 
     $host = $smtp['host'];

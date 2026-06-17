@@ -63,18 +63,18 @@ export interface EmailCampaign {
 // ==================== API Methods ====================
 
 export const adminEmail = {
-  // SMTP
-  async getSmtpSettings(): Promise<SmtpSettings | null> {
-    const result = await apiCall<{ success: boolean; data: SmtpSettings | null }>('/email.php?action=get_smtp');
+  // SMTP (per mailbox account: "contact" | "support")
+  async getSmtpSettings(mailbox: 'contact' | 'support' = 'contact'): Promise<SmtpSettings | null> {
+    const result = await apiCall<{ success: boolean; data: SmtpSettings | null }>(`/email.php?action=get_smtp&mailbox=${mailbox}`);
     return result.data;
   },
 
-  async saveSmtpSettings(settings: Partial<SmtpSettings>): Promise<void> {
-    await apiCall('/email.php?action=save_smtp', { method: 'POST', body: JSON.stringify(settings) });
+  async saveSmtpSettings(settings: Partial<SmtpSettings>, mailbox: 'contact' | 'support' = 'contact'): Promise<void> {
+    await apiCall(`/email.php?action=save_smtp&mailbox=${mailbox}`, { method: 'POST', body: JSON.stringify(settings) });
   },
 
-  async testSmtp(testEmail: string): Promise<{ success: boolean; message?: string }> {
-    return apiCall('/email.php?action=test_smtp', { method: 'POST', body: JSON.stringify({ test_email: testEmail }) });
+  async testSmtp(testEmail: string, mailbox: 'contact' | 'support' = 'contact'): Promise<{ success: boolean; message?: string }> {
+    return apiCall(`/email.php?action=test_smtp&mailbox=${mailbox}`, { method: 'POST', body: JSON.stringify({ test_email: testEmail }) });
   },
 
   // Templates

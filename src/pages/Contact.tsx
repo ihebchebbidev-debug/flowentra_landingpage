@@ -27,44 +27,40 @@ const Contact = () => {
     if (!form.firstName || !form.email || !form.message) return;
     setStatus("sending");
     try {
+      const subject = `[${form.category || "Contact"}] ${form.firstName} ${form.lastName} – ${form.company || "—"}`;
+      const messageText = `Name: ${form.firstName} ${form.lastName}\nEmail: ${form.email}\nPhone: ${form.phone || "—"}\nCompany: ${form.company || "—"}\nCategory: ${form.category || "—"}\n\n${form.message}`;
+
+      // Persist to the admin inbox (source of truth)
+      const inboxRes = await fetch(`${API_BASE}/inbox.php?action=save`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          mailbox: "contact",
+          sender_name: `${form.firstName} ${form.lastName}`.trim(),
+          sender_email: form.email,
+          sender_phone: form.phone,
+          company: form.company,
+          category: form.category,
+          subject,
+          message: form.message,
+        }),
+      });
+      const inboxJson = await inboxRes.json().catch(() => ({}));
+      if (!inboxRes.ok || inboxJson.success === false) throw new Error("inbox save failed");
+
+      // Notify the team from the contact@ mailbox (fire-and-forget)
       const body = new FormData();
       body.append("to", CONTACT_EMAIL);
-      body.append("subject", `[${form.category || "Contact"}] ${form.firstName} ${form.lastName} – ${form.company || "—"}`);
-      body.append(
-        "message",
-        `Name: ${form.firstName} ${form.lastName}\nEmail: ${form.email}\nPhone: ${form.phone || "—"}\nCompany: ${form.company || "—"}\nCategory: ${form.category || "—"}\n\n${form.message}`
-      );
-      const res = await fetch(`${API_BASE}/email.php`, { method: "POST", body });
-      const json = await res.json().catch(() => ({}));
-      if (res.ok && json.success !== false) {
-        reportLog("Contact form submitted", {
-          severity: "info",
-          context: { category: form.category || "Contact", page: "/contact" },
-        });
-        // Also persist to admin inbox (fire-and-forget)
-        fetch(`${API_BASE}/inbox.php?action=save`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            mailbox: "contact",
-            sender_name: `${form.firstName} ${form.lastName}`.trim(),
-            sender_email: form.email,
-            sender_phone: form.phone,
-            company: form.company,
-            category: form.category,
-            subject: `[${form.category || "Contact"}] ${form.firstName} ${form.lastName}`,
-            message: form.message,
-          }),
-        }).catch(() => {});
-        setStatus("sent");
-        setForm({ firstName: "", lastName: "", email: "", phone: "", company: "", category: "", message: "" });
-      } else {
-        reportLog("Contact form submission failed", {
-          severity: "warning",
-          context: { category: form.category || "Contact", page: "/contact" },
-        });
-        setStatus("error");
-      }
+      body.append("subject", subject);
+      body.append("message", messageText);
+      fetch(`${API_BASE}/email.php?action=form_send&mailbox=contact`, { method: "POST", body }).catch(() => {});
+
+      reportLog("Contact form submitted", {
+        severity: "info",
+        context: { category: form.category || "Contact", page: "/contact" },
+      });
+      setStatus("sent");
+      setForm({ firstName: "", lastName: "", email: "", phone: "", company: "", category: "", message: "" });
     } catch {
       reportLog("Contact form submission failed", {
         severity: "warning",
