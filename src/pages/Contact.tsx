@@ -6,7 +6,7 @@ import { reportLog } from "@/services/errorReporter";
 import { Mail, Phone, MapPin, Clock, Globe, Send, Loader2, CheckCircle } from "lucide-react";
 
 const CONTACT_EMAIL = "contact@flowentra.io";
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://luccibyey.com.tn/flowentra/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://backend.flowentra.io/api";
 
 const Contact = () => {
   const { lang } = useLanguage();

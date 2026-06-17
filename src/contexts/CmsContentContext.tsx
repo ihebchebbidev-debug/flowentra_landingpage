@@ -2,7 +2,7 @@
 import { usePageSection } from "@/contexts/PageSectionContext";
 import { toast } from "sonner";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend.flowentra.io/api';
 
 interface CmsContextType {
   cmsData: Record<string, Record<string, Record<string, string>>>; // section -> lang -> key -> value

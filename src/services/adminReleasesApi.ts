@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend.flowentra.io/api';
 
 function getHeaders(): HeadersInit {
   return { 'Content-Type': 'application/json' };

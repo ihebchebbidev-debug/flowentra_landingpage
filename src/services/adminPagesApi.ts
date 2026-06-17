@@ -1,5 +1,5 @@
 ﻿// Pages CMS API talks to /backend/api/pages.php
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend.flowentra.io/api';
 
 export interface PageSectionRow {
   id: number;

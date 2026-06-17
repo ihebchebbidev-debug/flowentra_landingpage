@@ -1,5 +1,5 @@
 ﻿// Admin CMS API Service all operations go through the PHP backend
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend.flowentra.io/api';
 
 interface ApiResponse<T = any> {
   success: boolean;

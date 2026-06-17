@@ -1,6 +1,6 @@
 // IMAP Mailbox API — reads real OVH mailboxes (INBOX, Sent, Spam, Trash)
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://luccibyey.com.tn/flowentra/api';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend.flowentra.io/api';
 
 async function apiCall<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(`${API_BASE}${url}`, {

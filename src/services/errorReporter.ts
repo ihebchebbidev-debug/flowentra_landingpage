@@ -3,7 +3,7 @@
  * Call initErrorReporter() once at app startup (main.tsx).
  */
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://luccibyey.com.tn/flowentra/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://backend.flowentra.io/api";
 const ENDPOINT = `${API_BASE}/errors.php?action=report`;
 const LOG_ENDPOINT = `${API_BASE}/log.php?action=report`;
 

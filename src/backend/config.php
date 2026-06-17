@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 class Database {
-  private $host = "localhost";
+private $host = "localhost";
 private $username = "flowentra";
 private $password = "StrongPasswordHere!";
 private $database = "flowentra_db";
