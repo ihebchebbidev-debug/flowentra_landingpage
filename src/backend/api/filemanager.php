@@ -214,6 +214,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action !== 'login') {
         }
         header('Location: ?dir=' . urlencode($dir)); exit;
     }
+
+    if ($action === 'reload') {
+        // Clear the compiled PHP (OPcache) so edited files take effect immediately.
+        if (function_exists('opcache_reset')) {
+            $ok = @opcache_reset();
+            flash($ok ? 'ok' : 'err', $ok
+                ? 'Backend reloaded — PHP OPcache cleared.'
+                : 'OPcache reset returned false (it may be disabled for CLI/this pool).');
+        } else {
+            flash('ok', 'OPcache is not enabled, so PHP already serves the latest file edits.');
+        }
+        header('Location: ?dir=' . urlencode($dir)); exit;
+    }
+
     http_response_code(400); exit('Unknown action.');
 }
 
@@ -434,6 +448,12 @@ $f = take_flash();
     </form>
     <button class="btn" onclick="doNew('file')" <?= $dirWritable ? '' : 'disabled' ?>>📄 New file</button>
     <button class="btn" onclick="doNew('folder')" <?= $dirWritable ? '' : 'disabled' ?>>📁 New folder</button>
+    <form method="post" action="?" style="display:inline" title="Clear PHP OPcache so edited .php files take effect now">
+      <input type="hidden" name="csrf" value="<?= h(csrf_token()) ?>">
+      <input type="hidden" name="action" value="reload">
+      <input type="hidden" name="dir" value="<?= h($dirRel) ?>">
+      <button class="btn primary" type="submit">♻ Reload backend</button>
+    </form>
   </div>
 
   <?php if (!$dirWritable): ?>
