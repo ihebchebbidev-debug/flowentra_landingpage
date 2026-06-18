@@ -26,20 +26,15 @@ foreach ($FOLDERS as $absPath) {
 // Allowed image MIME types
 $ALLOWED = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp', 'image/svg+xml'];
 
-// Public URL base — same origin as the API, under the project root.
-$API_URL  = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http')
-          . '://' . $_SERVER['HTTP_HOST'];
-$scriptDir = dirname($_SERVER['SCRIPT_NAME'] ?? '');
-if (preg_match('#/api/?$#', $scriptDir)) {
-    $scriptDir = preg_replace('#/api/?$#', '', $scriptDir);
-}
-if ($scriptDir === '/' || $scriptDir === '\\' || $scriptDir === '.') {
-    $scriptDir = '';
-}
-$BASE_PATH = rtrim($scriptDir, '/');
+// Where the managed image folders are served from for the browser.
+// The backend (this server, behind Nginx) serves /hero-screenshots and
+// /screenshots from its public/ folder, so uploads/replacements go live
+// instantly. The frontend falls back to its own bundled copies if a file
+// is missing. Override with the FLOWENTRA_PUBLIC_URL env var if it moves.
+$PUBLIC_BASE = getenv('FLOWENTRA_PUBLIC_URL') ?: 'https://backend.flowentra.io';
 
-function folderUrl(string $folder, string $apiUrl, string $basePath): string {
-    return $apiUrl . $basePath . '/' . $folder;
+function folderUrl(string $folder, string $publicBase): string {
+    return rtrim($publicBase, '/') . '/' . $folder;
 }
 
 switch ($action) {
@@ -60,7 +55,7 @@ switch ($action) {
                     'folder'   => $folderName,
                     'size'     => filesize($f),
                     'modified' => filemtime($f),
-                    'url'      => folderUrl($folderName, $API_URL, $BASE_PATH) . '/' . $filename,
+                    'url'      => folderUrl($folderName, $PUBLIC_BASE) . '/' . $filename,
                 ];
             }
             // newest first
@@ -127,7 +122,7 @@ switch ($action) {
             'data'    => [
                 'name'   => $targetName,
                 'folder' => $folderKey,
-                'url'    => folderUrl($folderKey, $API_URL, $BASE_PATH) . '/' . $targetName,
+                'url'    => folderUrl($folderKey, $PUBLIC_BASE) . '/' . $targetName,
             ],
         ]);
         break;

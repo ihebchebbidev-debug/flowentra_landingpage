@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Play, LayoutDashboard, Layers } from "lucide-react";
 import { MEGA_ICONS } from "@/components/admin/megaMenuIcons";
+import { managedImg, localFallback } from "@/lib/screenshotUrl";
 import heroBgTest from "@/assets/hero-bg-test.png";
 import dashboardPreview from "@/assets/dashboard-preview.png";
 
@@ -193,9 +194,10 @@ const Hero = () => {
                 >
                   {activeModule === 0 || currentModule?.image ? (
                     <img
-                      src={fallbackImage || currentModule?.image || dashboardPreview}
+                      src={fallbackImage || managedImg(currentModule?.image) || dashboardPreview}
                       alt={currentModule.label}
-                      onError={() => setFallbackImage(dashboardPreview)}
+                      data-local={currentModule?.image || ""}
+                      onError={(e) => { if (!localFallback(e)) setFallbackImage(dashboardPreview); }}
                       className="absolute inset-0 w-full h-full object-cover object-top bg-background"
                     />
                   ) : (

@@ -5,6 +5,7 @@ import { FileText, Users, CalendarDays, FolderKanban, ClipboardCheck, BarChart3,
 import { Link } from "react-router-dom";
 import ImageEditOverlay from "./ImageEditOverlay";
 import { useState } from "react";
+import { managedImg, localFallback } from "@/lib/screenshotUrl";
 
 const showcaseData = {
   en: {
@@ -242,9 +243,11 @@ const ProductShowcase = () => {
                         onClick={() => setLightbox({ src: item.image, alt: item.title || item.tag || "" })}
                       >
                         <img
-                          src={item.image}
+                          src={managedImg(item.image)}
+                          data-local={item.image}
                           alt={item.title || item.tag || ""}
                           loading="lazy"
+                          onError={localFallback}
                           className="block w-full h-auto transition-transform duration-300 group-hover/img:scale-[1.02]"
                         />
                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 bg-black/20">
@@ -314,8 +317,10 @@ const ProductShowcase = () => {
                 <X className="w-5 h-5" />
               </button>
               <img
-                src={lightbox.src}
+                src={managedImg(lightbox.src)}
+                data-local={lightbox.src}
                 alt={lightbox.alt}
+                onError={localFallback}
                 className="block w-full h-auto"
               />
             </motion.div>
