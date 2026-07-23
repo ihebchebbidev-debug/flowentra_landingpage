@@ -28,13 +28,28 @@ const MailboxSwitch = ({ mailbox, onChange }: { mailbox: MailboxKey; onChange: (
 );
 
 // Quick-access folders. We match the real IMAP folder names (discovered from
-// the server) against these candidates so OVH naming variants still resolve.
-const QUICK_FOLDERS: { label: string; icon: typeof Inbox; candidates: string[] }[] = [
-  { label: "Inbox", icon: Inbox, candidates: ["INBOX"] },
-  { label: "Sent", icon: Send, candidates: ["Sent", "INBOX.Sent", "Sent Messages", "Sent Items"] },
-  { label: "Spam", icon: ShieldAlert, candidates: ["Spam", "INBOX.Spam", "Junk", "INBOX.Junk"] },
-  { label: "Trash", icon: Trash2, candidates: ["Trash", "INBOX.Trash", "Deleted", "Deleted Messages"] },
+// the server) against these tokens so OVH naming variants still resolve.
+// Matching is done on the last path segment (case-insensitive) so nested
+// mailboxes like "INBOX.INBOX.Sent" still resolve to "Sent".
+const QUICK_FOLDERS: { label: string; icon: typeof Inbox; tokens: string[] }[] = [
+  { label: "Inbox", icon: Inbox, tokens: ["inbox"] },
+  { label: "Sent", icon: Send, tokens: ["sent", "sent messages", "sent items"] },
+  { label: "Drafts", icon: PenSquare, tokens: ["drafts", "draft"] },
+  { label: "Spam", icon: ShieldAlert, tokens: ["spam", "junk"] },
+  { label: "Trash", icon: Trash2, tokens: ["trash", "deleted", "deleted messages", "bin"] },
 ];
+
+// Pretty label for a raw IMAP folder path: keep last segment, title-cased.
+function prettyFolder(name: string): string {
+  const seg = name.split(/[./]/).filter(Boolean).pop() || name;
+  if (seg.toUpperCase() === "INBOX") return "Inbox";
+  return seg.charAt(0).toUpperCase() + seg.slice(1);
+}
+
+// Returns the last path segment lowercased, used for quick-folder matching.
+function lastSegment(name: string): string {
+  return (name.split(/[./]/).filter(Boolean).pop() || name).toLowerCase();
+}
 
 function formatDate(ts: number, iso: string) {
   const d = ts ? new Date(ts * 1000) : new Date(iso);
@@ -199,12 +214,24 @@ const MailboxViewer = () => {
     setComposing({ to: replyTo, subject: subj, html: quoted });
   };
 
-  // Resolve a quick folder's real name from discovered folders
-  const resolveFolder = (candidates: string[]) =>
-    folders.find((f) => candidates.some((c) => c.toLowerCase() === f.name.toLowerCase()))?.name;
+  // Resolve a quick folder's real IMAP name from discovered folders.
+  // We match by the last path segment so "INBOX.INBOX.Trash" still resolves.
+  const resolveFolder = (tokens: string[]) =>
+    folders.find((f) => tokens.includes(lastSegment(f.name)))?.name;
 
-  const trashName = resolveFolder(QUICK_FOLDERS[3].candidates) || "Trash";
-  const spamName = resolveFolder(QUICK_FOLDERS[2].candidates) || "Spam";
+  // Reorder in canonical quick-folder order (Inbox, Sent, Drafts, Spam, Trash),
+  // dedup, and split remaining folders as "other".
+  const quickResolved = QUICK_FOLDERS.map((qf) => ({
+    ...qf,
+    real: resolveFolder(qf.tokens),
+  }));
+  const quickRealNames = new Set(
+    quickResolved.map((q) => q.real?.toLowerCase()).filter(Boolean) as string[]
+  );
+  const otherFolders = folders.filter((f) => !quickRealNames.has(f.name.toLowerCase()));
+
+  const trashName = quickResolved.find((q) => q.label === "Trash")?.real || "Trash";
+  const spamName = quickResolved.find((q) => q.label === "Spam")?.real || "Spam";
 
   const loadFolders = useCallback(async () => {
     try {
@@ -382,17 +409,26 @@ const MailboxViewer = () => {
 
       <div className="grid grid-cols-12 gap-4">
         {/* Folder rail */}
-        <div className="col-span-12 md:col-span-3 lg:col-span-2 space-y-1">
-          {QUICK_FOLDERS.map((qf) => {
-            const real = resolveFolder(qf.candidates) || qf.candidates[0];
-            const meta = folders.find((f) => f.name.toLowerCase() === real.toLowerCase());
-            const active = folder.toLowerCase() === real.toLowerCase();
+        <div className="col-span-12 md:col-span-3 lg:col-span-2 space-y-0.5">
+          <div className="px-2 pt-1 pb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+            Folders
+          </div>
+          {quickResolved.map((qf) => {
+            const real = qf.real;
+            const meta = real ? folders.find((f) => f.name.toLowerCase() === real.toLowerCase()) : undefined;
+            const active = real ? folder.toLowerCase() === real.toLowerCase() : false;
+            const disabled = !real;
             return (
               <button
                 key={qf.label}
-                onClick={() => switchFolder(real)}
+                onClick={() => real && switchFolder(real)}
+                disabled={disabled}
                 className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-left transition-all ${
-                  active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  active
+                    ? "bg-primary/10 text-primary"
+                    : disabled
+                      ? "text-muted-foreground/40 cursor-not-allowed"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 }`}
               >
                 <span className="flex items-center gap-2 text-xs font-medium">
@@ -407,22 +443,33 @@ const MailboxViewer = () => {
           })}
 
           {/* Other discovered folders */}
-          {folders.filter((f) => !QUICK_FOLDERS.some((qf) => qf.candidates.some((c) => c.toLowerCase() === f.name.toLowerCase()))).map((f) => (
-            <button
-              key={f.name}
-              onClick={() => switchFolder(f.name)}
-              className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-left transition-all ${
-                folder === f.name ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-              }`}
-            >
-              <span className="flex items-center gap-2 text-xs font-medium truncate">
-                <Folder className="w-3.5 h-3.5 shrink-0" />
-                <span className="truncate">{f.display}</span>
-              </span>
-              {f.unseen > 0 && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">{f.unseen}</span>}
-            </button>
-          ))}
+          {otherFolders.length > 0 && (
+            <div className="px-2 pt-4 pb-1 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+              Other
+            </div>
+          )}
+          {otherFolders.map((f) => {
+            const label = prettyFolder(f.display || f.name);
+            const active = folder === f.name;
+            return (
+              <button
+                key={f.name}
+                onClick={() => switchFolder(f.name)}
+                title={f.display || f.name}
+                className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-lg text-left transition-all ${
+                  active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                }`}
+              >
+                <span className="flex items-center gap-2 text-xs font-medium truncate">
+                  <Folder className="w-3.5 h-3.5 shrink-0" />
+                  <span className="truncate">{label}</span>
+                </span>
+                {f.unseen > 0 && <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary">{f.unseen}</span>}
+              </button>
+            );
+          })}
         </div>
+
 
         {/* Message list */}
         <div className="col-span-12 md:col-span-9 lg:col-span-4">

@@ -11,6 +11,7 @@ import MailboxViewer from "@/components/admin/MailboxViewer";
 import ScreenshotsManager from "@/components/admin/ScreenshotsManager";
 import ErrorsViewer from "@/components/admin/ErrorsViewer";
 import AdminLogsViewer from "@/components/admin/AdminLogsViewer";
+import TicketsManager from "@/components/admin/TicketsManager";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, History, Download, Upload, PanelLeftClose, PanelLeft } from "lucide-react";
@@ -96,6 +97,7 @@ const Admin = () => {
 
   const currentLabel = activeSection === "__mailbox" ? "Mailbox"
     : activeSection === "__inbox" ? "Inbox"
+    : activeSection === "__tickets" ? "Tickets"
     : activeSection === "__screenshots" ? "Screenshots"
     : activeSection === "__errors" ? "Logs"
     : activeSection === "__activity" ? "Activity Logs"
@@ -170,8 +172,8 @@ const Admin = () => {
             <AdminDocs onJumpToSection={(key) => setActiveSection(key)} />
           ) : activeSection === "__mailbox" ? (
             <MailboxViewer />
-          ) : activeSection === "__inbox" ? (
-            <InboxViewer />
+          ) : activeSection === "__tickets" ? (
+            <TicketsManager />
           ) : activeSection === "__screenshots" ? (
             <ScreenshotsManager />
           ) : activeSection === "__errors" ? (

@@ -401,10 +401,10 @@ const ErrorsViewer = () => {
           <div className="border-t border-border px-5 py-3 flex items-center justify-between">
             <span className="text-xs text-muted-foreground">{total} entries</span>
             <div className="flex items-center gap-1">
-              <button disabled={page <= 1} onClick={() => { const p = page - 1; setPage(p); load(typeFilter, showResolved, p); }}
+              <button disabled={page <= 1} onClick={() => { const p = page - 1; setPage(p); load(typeFilter, severityFilter, showResolved, p); }}
                 className="text-xs px-2 py-1 rounded border border-border disabled:opacity-40 hover:bg-muted transition-colors">Prev</button>
               <span className="text-xs text-muted-foreground px-2">{page}/{pages}</span>
-              <button disabled={page >= pages} onClick={() => { const p = page + 1; setPage(p); load(typeFilter, showResolved, p); }}
+              <button disabled={page >= pages} onClick={() => { const p = page + 1; setPage(p); load(typeFilter, severityFilter, showResolved, p); }}
                 className="text-xs px-2 py-1 rounded border border-border disabled:opacity-40 hover:bg-muted transition-colors">Next</button>
             </div>
           </div>
