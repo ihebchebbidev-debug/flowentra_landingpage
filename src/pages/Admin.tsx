@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { adminAuth, adminContent, type AdminUser } from "@/services/adminApi";
 import AdminLogin from "@/components/admin/AdminLogin";
+import SecurityCheck from "@/components/admin/SecurityCheck";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminHistory from "@/components/admin/AdminHistory";
 import AnalyticsDashboard from "@/components/admin/AnalyticsDashboard";
@@ -16,42 +17,72 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { LogOut, History, Download, Upload, PanelLeftClose, PanelLeft } from "lucide-react";
 
+// Hardcoded admin credentials (frontend gate only)
+const ADMIN_EMAIL = "contact@flowentra.io";
+const ADMIN_PASSWORD = "Zaleyo2026";
+const SHIELD_KEY = "flowentra_shield_passed";
+const AUTH_KEY = "flowentra_admin_authed";
+
 const Admin = () => {
   const [searchParams] = useSearchParams();
-  const hardcodedUser: AdminUser = { id: 1, email: 'admin@flowentra.io', name: 'Admin', role: 'super_admin' };
-  const [user, setUser] = useState<AdminUser | null>(hardcodedUser);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const adminUser: AdminUser = { id: 1, email: ADMIN_EMAIL, name: 'Admin', role: 'super_admin' };
+  const [shieldPassed, setShieldPassed] = useState<boolean>(
+    () => sessionStorage.getItem(SHIELD_KEY) === "true"
+  );
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    () => sessionStorage.getItem(AUTH_KEY) === "true"
+  );
+  const [user, setUser] = useState<AdminUser | null>(
+    isAuthenticated ? adminUser : null
+  );
   const [activeSection, setActiveSection] = useState<string>(searchParams.get("section") || "__docs");
   const [loading, setLoading] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('admin_user', JSON.stringify(hardcodedUser));
-    if (!localStorage.getItem('admin_token')) {
-      localStorage.setItem('admin_token', 'auto-admin-session');
+    if (isAuthenticated) {
+      localStorage.setItem('admin_user', JSON.stringify(adminUser));
+      if (!localStorage.getItem('admin_token')) {
+        localStorage.setItem('admin_token', 'auto-admin-session');
+      }
     }
-  }, []);
+  }, [isAuthenticated]);
+
+  const handleShieldVerified = () => {
+    sessionStorage.setItem(SHIELD_KEY, "true");
+    setShieldPassed(true);
+  };
 
   const handleLogin = async (email: string, password: string) => {
+    setLoading(true);
+    // Simulate small delay
+    await new Promise((r) => setTimeout(r, 400));
     try {
-      setLoading(true);
-      const result = await adminAuth.login(email, password);
-      if (result.success) {
-        setUser(result.user);
+      if (
+        email.trim().toLowerCase() === ADMIN_EMAIL &&
+        password === ADMIN_PASSWORD
+      ) {
+        setUser(adminUser);
         setIsAuthenticated(true);
-        toast.success("Welcome back, " + result.user.name);
+        sessionStorage.setItem(AUTH_KEY, "true");
+        localStorage.setItem('admin_token', 'auto-admin-session');
+        localStorage.setItem('admin_user', JSON.stringify(adminUser));
+        toast.success("Welcome back, Admin");
+      } else {
+        toast.error("Invalid email or password");
       }
-    } catch (err: any) {
-      toast.error(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
   };
 
   const handleLogout = async () => {
-    await adminAuth.logout();
+    try { await adminAuth.logout(); } catch { /* ignore */ }
     setUser(null);
     setIsAuthenticated(false);
+    sessionStorage.removeItem(AUTH_KEY);
+    localStorage.removeItem('admin_token');
+    localStorage.removeItem('admin_user');
     setActiveSection("__docs");
     toast.success("Logged out");
   };
@@ -91,9 +122,14 @@ const Admin = () => {
     input.click();
   };
 
+  if (!shieldPassed) {
+    return <SecurityCheck onVerified={handleShieldVerified} />;
+  }
+
   if (!isAuthenticated) {
     return <AdminLogin onLogin={handleLogin} loading={loading} />;
   }
+
 
   const currentLabel = activeSection === "__mailbox" ? "Mailbox"
     : activeSection === "__inbox" ? "Inbox"

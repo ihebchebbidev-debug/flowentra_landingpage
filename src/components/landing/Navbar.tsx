@@ -7,12 +7,12 @@ import {
   Menu, X, ChevronDown, ChevronRight, Layers,
   Wrench, FolderKanban, LayoutDashboard, ClipboardCheck,
   BarChart3,
-  Globe, Users, ShoppingCart, Banknote, UserCheck, CalendarDays, FileText,
+  Globe, Users, ShoppingCart, Banknote, Package, UserCheck, CalendarDays, FileText,
   Sparkles, TrendingUp, Code2,
   Snowflake, Building2, Eye, SprayCan, Settings2, Sun, Wifi,
   Droplets, Frame, Store, UtensilsCrossed, Zap, TreePine, Shield, Flower2, Waves, Factory,
   CircuitBoard, Plug, Mail, Inbox, Send, CreditCard, Phone, Brain,
-  Play, HelpCircle, BookOpen, Handshake, HeadphonesIcon,
+  Play, HelpCircle, BookOpen, Handshake, HeadphonesIcon, Headset, List,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import FlagIcon from "@/components/FlagIcon";
@@ -193,8 +193,17 @@ const Navbar = () => {
           label: fr ? "Applications" : "Applications",
           icon: Layers,
           items: [
-            { label: "Flowentra CRM/Office", desc: fr ? "Gestion commerciale complète." : "Complete business management.", icon: LayoutDashboard, href: "/applications#crm-office", isRoute: true },
-            { label: "Flowentra Service", desc: fr ? "Gestion des interventions terrain." : "Field intervention management.", icon: Wrench, href: "/applications#service", isRoute: true },
+            { label: fr ? "Dashboard" : "Dashboard", desc: fr ? "Votre hub central avec KPIs et widgets personnalisables." : "Your central hub with KPIs and customizable widgets.", icon: LayoutDashboard, href: "/docs#workplace-dashboard", isRoute: true },
+            { label: fr ? "Ventes" : "Sales", desc: fr ? "Pipeline commercial complet de l'offre à la facture." : "Complete commercial pipeline from offer to invoice.", icon: ShoppingCart, href: "/docs#workplace-sales", isRoute: true },
+            { label: fr ? "Achats" : "Purchases", desc: fr ? "Procure-to-Pay avec conformité fiscale." : "Procure-to-Pay with fiscal compliance.", icon: Package, href: "/docs#workplace-purchases", isRoute: true },
+            { label: fr ? "Service" : "Service", desc: fr ? "Interventions terrain, planning et équipes." : "Field service, scheduling and teams.", icon: Wrench, href: "/docs#workplace-service", isRoute: true },
+            { label: fr ? "Projets" : "Projects", desc: fr ? "Gestion de projets et tâches collaboratives." : "Project and collaborative task management.", icon: FolderKanban, href: "/docs#workplace-projects", isRoute: true },
+            { label: fr ? "Ressources Humaines" : "HR", desc: fr ? "Paie, présences, recrutement et performances." : "Payroll, attendance, recruitment and performance.", icon: UserCheck, href: "/docs#workplace-hr", isRoute: true },
+            { label: fr ? "Reporting" : "Reporting", desc: fr ? "Analyses et KPIs cross-domaines." : "Cross-domain analytics and KPIs.", icon: BarChart3, href: "/docs#workplace-reporting", isRoute: true },
+            { label: fr ? "Intégrations" : "Integrations", desc: fr ? "Workflows visuels et API externes." : "Visual workflows and external APIs.", icon: Plug, href: "/docs#workplace-integrations", isRoute: true },
+            { label: fr ? "Référentiels" : "Lookups", desc: fr ? "Données de référence centralisées." : "Centralized reference data.", icon: List, href: "/docs#workplace-lookups", isRoute: true },
+            { label: fr ? "Service Desk" : "Service Desk", desc: fr ? "Support client et gestion des tickets." : "Customer support and ticket management.", icon: Headset, href: "/docs#workplace-service-desk", isRoute: true },
+            { label: fr ? "Administration" : "Administration", desc: fr ? "Utilisateurs, rôles et paramètres système." : "Users, roles and system settings.", icon: Settings2, href: "/docs#workplace-administration", isRoute: true },
           ],
         },
         {
