@@ -210,8 +210,6 @@ export function moduleLabel(code: string): string {
     AUTH: "Authentication",
     DASHBOARD: "Dashboard",
     LOOKUPS: "Lookups",
-    WEBSITEBLDR: "Website Builder",
-    DASHBLDR: "Dashboard Builder",
     ANALYTICS: "Analytics",
     REPORTING: "Reporting",
     AIASSISTANT: "AI Assistant",

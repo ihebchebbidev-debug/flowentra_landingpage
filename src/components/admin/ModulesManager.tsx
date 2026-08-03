@@ -150,7 +150,7 @@ const WORKPLACE_GROUPS = [
     color: "#6b7280",
     suffixes: [
       "SYSTEM", "SETTINGS", "AUTH", "DASHBOARD", "USERS", "PREFERENCES",
-      "ONBOARDING", "AIASSISTANT", "WEBSITEBLDR", "DASHBLDR",
+      "ONBOARDING", "AIASSISTANT",
     ],
   },
 ] as const;
