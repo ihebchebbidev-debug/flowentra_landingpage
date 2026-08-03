@@ -141,7 +141,7 @@ export const modulesApi = {
       method: "PATCH",
       body: JSON.stringify({ isEnabled, cascade }),
     });
-    return normalizeSnapshot(res?.data ?? res, tenant);
+    return normalizeSnapshot(res?.snapshot ?? res?.data?.snapshot ?? res?.data ?? res, tenant);
   },
 
   async bulk(
@@ -154,7 +154,7 @@ export const modulesApi = {
       method: "POST",
       body: JSON.stringify({ codes, isEnabled, cascade }),
     });
-    return normalizeSnapshot(res?.data ?? res, tenant);
+    return normalizeSnapshot(res?.snapshot ?? res?.data?.snapshot ?? res?.data ?? res, tenant);
   },
 
   async broadcast(body: {
