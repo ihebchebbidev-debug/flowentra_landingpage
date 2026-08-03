@@ -213,6 +213,7 @@ export function moduleLabel(code: string): string {
     WEBSITEBLDR: "Website Builder",
     DASHBLDR: "Dashboard Builder",
     ANALYTICS: "Analytics",
+    REPORTING: "Reporting",
     AIASSISTANT: "AI Assistant",
     AUTOMATION: "Automation",
     USERS: "Users",
