@@ -2,7 +2,7 @@ import { type AdminUser } from "@/services/adminApi";
 import logo from "@/assets/flowentra-logo.png";
 import {
   Mail, Inbox, ImageIcon, Bug, ListChecks, type LucideIcon,
-  Eye, LayoutDashboard, Activity, Settings, BookOpen, AtSign, Ticket,
+  Eye, LayoutDashboard, Activity, Settings, BookOpen, AtSign, Ticket, Blocks,
 } from "lucide-react";
 
 // Admin-only panels (not CMS content sections)
@@ -10,12 +10,14 @@ const adminPanels: { key: string; label: string; desc: string; icon: LucideIcon 
   { key: "__docs", label: "Documentation", desc: "How to use this admin panel", icon: BookOpen },
   { key: "__mailbox", label: "Mailbox", desc: "Read OVH mail: inbox, sent, spam", icon: AtSign },
   { key: "__tickets", label: "Tickets", desc: "Support tickets across all tenants", icon: Ticket },
+  { key: "__modules", label: "Modules", desc: "Enable/disable modules per tenant", icon: Blocks },
   { key: "__screenshots", label: "Screenshots", desc: "hero-screenshots & screenshots folders", icon: ImageIcon },
   { key: "__errors", label: "Logs", desc: "JS, API, network and visitor events", icon: Bug },
   { key: "__activity", label: "Activity Logs", desc: "Visitor and action audit trail", icon: ListChecks },
   { key: "__analytics", label: "Analytics", desc: "Visitor stats, page views", icon: Activity },
   { key: "__settings", label: "Site Settings", desc: "Password, maintenance, meta", icon: Settings },
 ];
+
 
 
 interface Props {
