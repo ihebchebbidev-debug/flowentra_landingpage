@@ -93,7 +93,7 @@ const Contact = () => {
     {
       icon: MapPin,
       label: fr ? "Siège Social" : "Headquarters",
-      value: fr ? "Centre, Nabeul, Tunisie" : "Center, Nabeul, Tunisia",
+      value: fr ? "Lac, Tunis, Tunisie" : "Lac, Tunis, Tunisia",
     },
     {
       icon: Clock,
@@ -329,11 +329,11 @@ const Contact = () => {
                 })}
               </div>
 
-              {/* Embedded map Nabeul Center */}
+              {/* Embedded map Lac, Tunis */}
               <div className="rounded-2xl overflow-hidden border border-border shadow-sm aspect-[4/3]">
                 <iframe
                   title={fr ? "Localisation de Flowentra" : "Flowentra Location"}
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=10.7176%2C36.4461%2C10.7576%2C36.4661&layer=mapnik&marker=36.4561%2C10.7376"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=10.2725%2C36.8278%2C10.3125%2C36.8478&layer=mapnik&marker=36.8378%2C10.2925"
                   width="100%"
                   height="100%"
                   style={{ border: 0, display: "block" }}
